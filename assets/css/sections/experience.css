@@ -1,0 +1,44 @@
+/* EXPERIENCE SECTION */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  border-left: 2px solid var(--color-border);
+  padding-left: var(--space-lg);
+  margin-left: var(--space-sm);
+}
+
+.experience-entry {
+  position: relative;
+}
+
+.experience-entry::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--space-lg) * -1 - 6px);
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  background: var(--color-lime);
+  border-radius: 0;
+  box-shadow: 0 0 8px var(--color-lime);
+}
+
+.experience-entry h3 {
+  margin-bottom: var(--space-xs);
+}
+
+.experience-entry span.text-label {
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+
+.experience-entry ul {
+  list-style-type: square;
+  padding-left: var(--space-md);
+}
+
+.experience-entry li {
+  margin-bottom: var(--space-xs);
+  color: var(--color-text-secondary);
+}
