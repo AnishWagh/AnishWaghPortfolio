@@ -1,0 +1,25 @@
+/* ABOUT SECTION */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+@media (min-width: 768px) {
+  .about-grid {
+    grid-template-columns: 3fr 2fr;
+  }
+}
+
+.about-text p {
+  margin-bottom: var(--space-sm);
+}
+
+.profile-image-placeholder {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--color-surface-raised);
+  border: var(--border-width) solid var(--color-teal);
+  box-shadow: var(--shadow-cyan-md);
+  position: relative;
+}

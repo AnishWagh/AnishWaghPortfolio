@@ -1,0 +1,71 @@
+/* BASE SECTION RULES */
+section {
+  padding: var(--space-xl) var(--container-pad);
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+/* HERO SECTION */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  align-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--color-teal);
+  padding: 0.35rem 0.75rem;
+  margin-bottom: 2rem;
+  border-radius: 0;
+}
+
+.badge__dot {
+  width: 8px; height: 8px;
+  background: var(--color-lime);
+  box-shadow: 0 0 8px var(--color-lime);
+  animation: pulse 2s ease-in-out infinite;
+  border-radius: 50%;
+}
+
+.hero__name {
+  margin-bottom: var(--space-sm);
+}
+
+.hero__name span {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+.hero__role {
+  margin-bottom: var(--space-sm);
+}
+
+.hero__tagline {
+  max-width: 600px;
+  margin-bottom: var(--space-md);
+}
+
+.hero__cta {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.hero__backdrop {
+  font-family: var(--font-display);
+  font-size: clamp(6rem, 18vw, 20rem);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(164, 214, 94, 0.08);
+  position: absolute;
+  bottom: -2rem;
+  right: -2rem;
+  user-select: none;
+  pointer-events: none;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  z-index: -1;
+}

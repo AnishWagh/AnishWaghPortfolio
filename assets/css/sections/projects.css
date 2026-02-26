@@ -1,0 +1,41 @@
+/* PROJECTS SECTION */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .projects-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  /* Asymmetric stagger effect */
+  .project-card:nth-child(even) {
+    transform: translateY(var(--space-md));
+  }
+}
+
+.project-thumbnail {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--color-black);
+  border: var(--border-width) solid var(--color-border);
+  margin-bottom: var(--space-sm);
+}
+
+.project-card h3 {
+  margin-bottom: var(--space-xs);
+}
+
+.project-tags {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+  margin: var(--space-sm) 0;
+}
+
+.project-links {
+  display: flex;
+  gap: var(--space-sm);
+}
