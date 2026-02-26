@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deep Dives — Anish Wagh Blog</title>
+  <meta name="description" content="Technical write-ups, system diagrams, flowcharts, and documentation of what I build and how I think.">
+  <link rel="canonical" href="https://anishwagh.github.io/blog.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Deep Dives — Anish Wagh Blog">
+  <meta property="og:description" content="Technical write-ups, system diagrams, flowcharts, and documentation of what I build and how I think.">
+  <meta property="og:image" content="assets/images/og-image.jpg">
+  <meta property="og:url" content="https://anishwagh.github.io/blog.html">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Deep Dives — Anish Wagh Blog">
+  <meta name="twitter:description" content="Technical write-ups and documentation.">
+  <meta name="twitter:image" content="assets/images/og-image.jpg">
+
+  <!-- Fonts: preload display font for LCP -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- CSS: single entry point -->
+  <link rel="stylesheet" href="assets/css/main.css">
+
+  <!-- GSAP: async, non-render-blocking -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+</head>
+<body>
+
+  <div class="cursor"></div>
+
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">AW</a>
+      <div class="nav-links">
+        <a href="index.html#about">About</a>
+        <a href="index.html#projects">Projects</a>
+        <a href="index.html#skills">Skills</a>
+        <a href="index.html#experience">Experience</a>
+        <a href="blog.html" class="active">Blog</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section id="hero" style="min-height: 60vh;">
+      <h1 class="text-hero hero__name">DEEP D<br>IVES</h1>
+      <p class="text-body hero__tagline">System diagrams. Flowcharts. Technical breakdowns. This is how I think about what I build.</p>
+    </section>
+
+    <section id="blog-grid" style="padding-top: 0;">
+      <div class="blog-grid">
+        <!-- Blog Card 1 -->
+        <article class="blog-card card gsap-reveal">
+          <span class="tag">System Design</span>
+          <h3 class="text-h3">Scaling Node.js Microservices</h3>
+          <p class="text-body">[Placeholder: Excerpt about scaling Node.js...]</p>
+          <span class="text-label">5 min read · Oct 12, 2024</span>
+          <a href="#" class="read-link">Read Article →</a>
+        </article>
+
+        <!-- Blog Card 2 -->
+        <article class="blog-card card gsap-reveal">
+          <span class="tag">Architecture</span>
+          <h3 class="text-h3">Event-Driven Data Synchronization</h3>
+          <p class="text-body">[Placeholder: Excerpt about event-driven architectures...]</p>
+          <span class="text-label">8 min read · Nov 05, 2024</span>
+          <a href="#" class="read-link">Read Article →</a>
+        </article>
+
+        <!-- Blog Card 3 -->
+        <article class="blog-card card gsap-reveal">
+          <span class="tag">Frontend</span>
+          <h3 class="text-h3">Advanced GSAP ScrollTriggers</h3>
+          <p class="text-body">[Placeholder: Excerpt about complex animation timelines...]</p>
+          <span class="text-label">6 min read · Dec 18, 2024</span>
+          <a href="#" class="read-link">Read Article →</a>
+        </article>
+
+        <!-- Blog Card 4 -->
+        <article class="blog-card card gsap-reveal">
+          <span class="tag">DevOps</span>
+          <h3 class="text-h3">CI/CD Pipelines for Monorepos</h3>
+          <p class="text-body">[Placeholder: Excerpt about Turborepo and GitHub Actions...]</p>
+          <span class="text-label">7 min read · Jan 22, 2025</span>
+          <a href="#" class="read-link">Read Article →</a>
+        </article>
+
+        <!-- Blog Card 5 -->
+        <article class="blog-card card gsap-reveal">
+          <span class="tag">Database</span>
+          <h3 class="text-h3">Optimizing PostgreSQL Queries</h3>
+          <p class="text-body">[Placeholder: Excerpt about indexing and EXPLAIN ANALYZE...]</p>
+          <span class="text-label">10 min read · Feb 14, 2025</span>
+          <a href="#" class="read-link">Read Article →</a>
+        </article>
+
+        <!-- Blog Card 6 -->
+        <article class="blog-card card gsap-reveal">
+          <span class="tag">Hardware</span>
+          <h3 class="text-h3">Mechatronics: Bridging Hardware and Software</h3>
+          <p class="text-body">[Placeholder: Excerpt about embedded systems...]</p>
+          <span class="text-label">12 min read · Mar 01, 2025</span>
+          <a href="#" class="read-link">Read Article →</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="newsletter">
+      <span class="section-label text-label">STAY IN THE LOOP</span>
+      <h2 class="section-title text-h2 gsap-reveal">SUBSCRIBE</h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p class="text-h3">Get notified when I publish new deep dives.</p>
+        </div>
+        <!-- Wire to Mailchimp or ConvertKit -->
+        <form action="#" method="POST">
+          <input type="email" name="email" placeholder="Email Address" required class="text-body">
+          <button type="submit" class="btn-primary" onclick="event.preventDefault(); alert('Newsletter wiring placeholder.');">Subscribe</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p class="text-label">© 2025 Anish Wagh. Built in the open.</p>
+    <a href="https://github.com/anishwagh" class="text-label">Source Code</a>
+  </footer>
+
+  <script src="assets/js/cursor.js"></script>
+  <script src="assets/js/nav.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
