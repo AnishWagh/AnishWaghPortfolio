@@ -1,0 +1,54 @@
+:root {
+  /* ── PRIMARY ── */
+  --color-lime:   #A4D65E;
+  --color-black:  #000000;
+
+  /* ── SECONDARY ── */
+  --color-cyan:   #00FFFF;
+  --color-teal:   #00CED1;
+
+  /* ── NEUTRAL ── */
+  --color-white:  #FFFFFF;
+
+  /* ── SEMANTIC ── */
+  --color-bg:              var(--color-black);
+  --color-surface:         #0d0d0d;
+  --color-surface-raised:  #111111;
+  --color-border:          #1a1a1a;
+  --color-text-primary:    var(--color-white);
+  --color-text-secondary:  rgba(255, 255, 255, 0.55);
+  --color-heading:         var(--color-lime);
+  --color-subtitle:        var(--color-cyan);
+  --color-interactive:     var(--color-teal);
+
+  /* ── TYPOGRAPHY ── */
+  --font-display: 'Bebas Neue', 'Arial Black', sans-serif;
+  --font-body:    'Space Mono', 'Courier New', monospace;
+
+  /* ── SPACING ── */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  2rem;
+  --space-lg:  4rem;
+  --space-xl:  6rem;
+  --space-2xl: 10rem;
+
+  /* ── LAYOUT ── */
+  --container-max:   1280px;
+  --container-pad:   clamp(1.5rem, 5vw, 5rem);
+  --radius:          0px;      /* HARD RULE: zero always */
+  --border-width:    2px;
+  --border-heavy:    4px;
+
+  /* ── POP ART SHADOWS ── */
+  --shadow-cyan-sm:  4px  4px  0px 0px var(--color-cyan);
+  --shadow-cyan-md:  8px  8px  0px 0px var(--color-cyan);
+  --shadow-cyan-lg:  12px 12px 0px 0px var(--color-cyan);
+  --shadow-lime-md:  8px  8px  0px 0px var(--color-lime);
+  --shadow-teal-sm:  4px  4px  0px 0px var(--color-teal);
+
+  /* ── TRANSITIONS ── */
+  --transition-fast:   0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.3s  cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-spring: 0.5s  cubic-bezier(0.34, 1.56, 0.64, 1);
+}

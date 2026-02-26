@@ -1,0 +1,12 @@
+@import './reset.css';
+@import './variables.css';
+@import './typography.css';
+@import './animations.css';
+@import './components.css';
+@import './sections/hero.css';
+@import './sections/about.css';
+@import './sections/projects.css';
+@import './sections/skills.css';
+@import './sections/experience.css';
+@import './sections/contact.css';
+@import './sections/blog.css';
