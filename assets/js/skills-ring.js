@@ -5,9 +5,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   const skillsData = {
-    outer: ['JavaScript', 'TypeScript', 'Python', 'Node.js', 'SQL', 'Bash'],
-    inner: ['React', 'REST APIs', 'PostgreSQL', 'Docker', 'Git'],
-    core:  ['System Design', 'Architecture', 'CI/CD']
+    outer: ['C++', 'Java', 'Kotlin', 'Zephyr OS', 'Android OS', 'C#', '.NET', 'Python'],
+    inner: ['GTest', 'Cucumber', 'Gradle', 'Git', 'ROS', 'Raspberry Pi', 'STM32', 'SonarQube'],
+    core:  ['System Design', 'Embedded HMI', 'SLAM', 'Automation Arch', '3D Prototyping']
   };
 
   // Position labels around each ring using trigonometry
