@@ -437,23 +437,37 @@
 
     <section id="gallery">
       <div class="section-container">
-        <span class="section-label text-label">GALLERY</span>
+        <span class="section-label text-label">Visual Diary</span>
         <h2 class="section-title text-h2 gsap-reveal">FIELD WORK</h2>
+        <p class="section-subtitle text-body gsap-reveal">Engineering through the lens: a look at my technical adventures and projects.</p>
         
-        <div class="gallery-container">
-          <div class="gallery-3d auto-rotate">
-            <div class="gallery-item-3d">
+        <div class="gallery-coverflow-wrapper">
+          <div class="gallery-coverflow">
+            <div class="gallery-item-3d active" data-index="0">
               <img src="assets/images/oven.png" alt="Engineering Work - Oven Project">
+              <div class="item-overlay"><span class="text-label">KitchenAid Project</span></div>
             </div>
-            <div class="gallery-item-3d">
+            <div class="gallery-item-3d" data-index="1">
               <img src="assets/images/trophie.png" alt="Achievements and Awards">
+              <div class="item-overlay"><span class="text-label">Recognition</span></div>
             </div>
-            <div class="gallery-item-3d">
+            <div class="gallery-item-3d" data-index="2">
               <img src="assets/images/Gemini_Generated_Image_2j6izg2j6izg2j6i.png" alt="Robotics Concept">
+              <div class="item-overlay"><span class="text-label">Robotics Simulation</span></div>
             </div>
-            <div class="gallery-item-3d">
+            <div class="gallery-item-3d" data-index="3">
               <img src="assets/images/Gemini_Generated_Image_5kyj205kyj205kyj.png" alt="Mechatronics Visualization">
+              <div class="item-overlay"><span class="text-label">System Design</span></div>
             </div>
+          </div>
+
+          <div class="gallery-controls">
+            <button class="gallery-btn prev" aria-label="Previous image">
+              <span class="btn-icon">←</span>
+            </button>
+            <button class="gallery-btn next" aria-label="Next image">
+              <span class="btn-icon">→</span>
+            </button>
           </div>
         </div>
       </div>
@@ -498,6 +512,7 @@
 
   <script src="assets/js/cursor.js"></script>
   <script src="assets/js/nav.js"></script>
+  <script src="assets/js/gallery.js"></script>
   <script src="assets/js/contact.js"></script>
   <script src="assets/js/animations.js"></script>
   <script src="assets/js/main.js"></script>

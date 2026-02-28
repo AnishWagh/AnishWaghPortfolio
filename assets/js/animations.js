@@ -221,9 +221,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ── GALLERY SECTION ──
-  const galleryContainer = document.querySelector('.gallery-container');
-  if (galleryContainer) {
-    gsap.from(galleryContainer, {
+  const galleryWrapper = document.querySelector('.gallery-coverflow-wrapper');
+  if (galleryWrapper) {
+    gsap.from(galleryWrapper, {
       scrollTrigger: {
         trigger: '#gallery',
         start: 'top 80%',
