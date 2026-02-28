@@ -45,58 +45,186 @@
   outline: 2px solid var(--color-cyan);
 }
 
-/* NAVIGATION */
-nav {
+/* ── Site Navigation ──────────────────────────────────── */
+.site-nav {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.92);
-  border-bottom: 2px solid var(--color-lime);
-  backdrop-filter: blur(8px);
+  right: 0;
   z-index: 100;
+  border-bottom: 2px solid var(--color-lime);
+  transition: background var(--transition-smooth),
+              box-shadow var(--transition-smooth);
+
+  /* Default: semi-transparent */
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
+
+.site-nav.is-scrolled {
+  background: rgba(0, 0, 0, 0.97);
+  box-shadow: 0 2px 0 var(--color-lime);
+}
+
 .nav-container {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: var(--space-sm) var(--container-pad);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding: 0 var(--container-pad);
+  height: 72px;
 }
+
+/* ── Logo ─────────────────────────────────────────────── */
 .nav-logo {
-  font-family: var(--font-display);
-  font-size: 2rem;
-  color: var(--color-lime);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  margin-right: auto;
 }
+
+.nav-logo-text {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--color-lime);
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.nav-logo-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--color-cyan);
+  border-radius: 50%;
+}
+
+/* ── Desktop Links ────────────────────────────────────── */
 .nav-links {
   display: flex;
+  list-style: none;
   gap: var(--space-md);
+  align-items: center;
 }
-.nav-links a {
+
+.nav-link {
   font-family: var(--font-body);
   font-size: 0.75rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-white);
+  text-decoration: none;
   position: relative;
+  padding-bottom: 4px;
+  transition: color var(--transition-fast);
 }
-.nav-links a::after {
+
+.nav-link::after {
   content: '';
   position: absolute;
-  bottom: -4px;
+  bottom: 0;
   left: 0;
   width: 0;
   height: 2px;
   background: var(--color-cyan);
   transition: width var(--transition-smooth);
 }
-.nav-links a:hover::after, .nav-links a.active::after {
-  width: 100%;
-}
-.nav-links a:hover, .nav-links a.active {
+
+.nav-link:hover,
+.nav-link.is-active {
   color: var(--color-cyan);
 }
+
+.nav-link:hover::after,
+.nav-link.is-active::after {
+  width: 100%;
+}
+
+/* Blog link: lime accent to distinguish it */
+.nav-link--blog {
+  color: var(--color-lime);
+}
+
+.nav-link--blog::after {
+  background: var(--color-lime);
+}
+
+/* ── Nav CTA ──────────────────────────────────────────── */
+.nav-cta {
+  font-size: 0.7rem;
+  padding: 0.4rem 1rem;
+}
+
+/* ── Mobile Toggle (CSS-only checkbox hack) ───────────── */
+.nav-toggle-input {
+  display: none;
+}
+
+.nav-toggle-label {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.nav-toggle-label span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--color-lime);
+  transition: transform var(--transition-smooth),
+              opacity var(--transition-smooth);
+}
+
+.nav-mobile {
+  display: none;
+  position: fixed;
+  top: 72px;
+  left: 0;
+  right: 0;
+  background: var(--color-black);
+  border-bottom: 2px solid var(--color-lime);
+  padding: var(--space-md) var(--container-pad);
+}
+
+.nav-mobile-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* ── Responsive: show mobile nav ─────────────────────── */
+@media (max-width: 768px) {
+  .nav-links,
+  .nav-cta {
+    display: none;
+  }
+
+  .nav-toggle-label {
+    display: flex;
+  }
+
+  /* Open state */
+  .nav-toggle-input:checked ~ .nav-mobile {
+    display: block;
+  }
+
+  /* Hamburger → X animation */
+  .nav-toggle-input:checked ~ .nav-toggle-label span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav-toggle-input:checked ~ .nav-toggle-label span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle-input:checked ~ .nav-toggle-label span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+}
+
 
 /* CARDS */
 .card {
@@ -131,13 +259,13 @@ nav {
 
 /* TAGS */
 .tag {
-  display: inline-block;
-  border: 1px solid var(--color-teal);
   font-family: var(--font-body);
-  font-size: 0.7rem;
-  color: var(--color-teal);
-  padding: 0.2rem 0.5rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  color: var(--color-teal);
+  border: 1px solid var(--color-teal);
+  padding: 2px 8px;
 }
 
 /* CURSOR */
