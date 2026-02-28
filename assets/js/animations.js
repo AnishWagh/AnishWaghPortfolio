@@ -5,15 +5,11 @@
  * GSAP only adds motion on top. If GSAP fails to load,
  * the entire site still renders correctly.
  * 
- * Scroll behaviour: bidirectional — elements reveal scrolling
- * down AND hide again scrolling back up (toggleActions below).
  */
 
 document.addEventListener('DOMContentLoaded', () => {
 
   // ── GSAP GUARD ──────────────────────────────────────────────────
-  // If GSAP or ScrollTrigger failed to load (ad blocker, CDN down,
-  // offline) — do nothing. CSS ensures content is already visible.
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
     console.warn('[Portfolio] GSAP not loaded — static fallback active');
     return;
@@ -23,12 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── SCROLL BEHAVIOUR CONFIG ──────────────────────────────────────
   // toggleActions: "onEnter onLeave onEnterBack onLeaveBack"
-  // "play reverse play reverse" = bidirectional reveal/hide
-  const BIDIRECTIONAL = 'play reverse play reverse';
+  const BIDIRECTIONAL = 'play reverse play reverse'; // Fades in and out (Experience only)
+  const PLAY_ONCE     = 'play none none none';      // Reveal once, then stay
   const SCROLL_START  = 'top 85%';
   const SCROLL_END    = 'top 20%';
 
-  // ── HERO: Character stagger on page load (not scroll-triggered) ──
+  // ── HERO: Character stagger on page load ──
   const heroLetters = document.querySelectorAll('#hero .hero-name span');
   if (heroLetters.length) {
     gsap.from(heroLetters, {
@@ -38,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
       stagger: 0.04,
       ease: 'power3.out',
       delay: 0.3,
-      clearProps: 'all'  // clean up inline styles after animation
+      clearProps: 'all'
     });
   }
 
@@ -69,14 +65,14 @@ document.addEventListener('DOMContentLoaded', () => {
     clearProps: 'all'
   });
 
-  // ── SECTION LABELS ───────────────────────────────────────────────
+  // ── SECTION LABELS ──
   gsap.utils.toArray('.section-label').forEach(el => {
     gsap.from(el, {
       scrollTrigger: {
         trigger: el,
         start: SCROLL_START,
         end: SCROLL_END,
-        toggleActions: BIDIRECTIONAL
+        toggleActions: PLAY_ONCE
       },
       opacity: 0,
       y: 15,
@@ -85,14 +81,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ── SECTION TITLES ───────────────────────────────────────────────
+  // ── SECTION TITLES ──
   gsap.utils.toArray('.section-title').forEach(el => {
     gsap.from(el, {
       scrollTrigger: {
         trigger: el,
         start: SCROLL_START,
         end: SCROLL_END,
-        toggleActions: BIDIRECTIONAL
+        toggleActions: PLAY_ONCE
       },
       x: -70,
       opacity: 0,
@@ -101,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ── ABOUT SECTION ────────────────────────────────────────────────
+  // ── ABOUT SECTION ──
   const aboutText   = document.querySelector('#about .about-text');
   const aboutVisual = document.querySelector('#about .about-visual');
 
@@ -111,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         trigger: '#about',
         start: 'top 78%',
         end: 'top 25%',
-        toggleActions: BIDIRECTIONAL
+        toggleActions: PLAY_ONCE
       },
       x: -60,
       opacity: 0,
@@ -126,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         trigger: '#about',
         start: 'top 78%',
         end: 'top 25%',
-        toggleActions: BIDIRECTIONAL
+        toggleActions: PLAY_ONCE
       },
       x: 60,
       opacity: 0,
@@ -136,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ── PROJECTS SECTION ─────────────────────────────────────────────
+  // ── PROJECTS SECTION ──
   const projectCards = document.querySelectorAll('.project-card');
   projectCards.forEach((card, i) => {
     gsap.from(card, {
@@ -144,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         trigger: card,
         start: 'top 88%',
         end: 'top 30%',
-        toggleActions: BIDIRECTIONAL
+        toggleActions: PLAY_ONCE
       },
       y: 70,
       opacity: 0,
@@ -154,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ── SKILLS SECTION ───────────────────────────────────────────────
+  // ── SKILLS SECTION ──
   const skillCards = document.querySelectorAll('.skill-category-card');
   skillCards.forEach((card, i) => {
     gsap.from(card, {
@@ -162,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
         trigger: card,
         start: 'top 90%',
         end: 'top 35%',
-        toggleActions: BIDIRECTIONAL
+        toggleActions: PLAY_ONCE
       },
       y: 50,
       opacity: 0,
@@ -172,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ── EXPERIENCE SECTION ───────────────────────────────────────────
+  // ── EXPERIENCE SECTION (BIDIRECTIONAL) ──
   const expEntries = document.querySelectorAll('.experience-entry');
   expEntries.forEach((entry, i) => {
     gsap.from(entry, {
@@ -189,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ── CONTACT SECTION ──────────────────────────────────────────────
+  // ── CONTACT SECTION ──
   const contactInfo = document.querySelector('.contact-info');
   const contactForm = document.querySelector('#contact form');
 
@@ -199,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
         trigger: '#contact',
         start: 'top 80%',
         end: 'top 20%',
-        toggleActions: BIDIRECTIONAL
+        toggleActions: PLAY_ONCE
       },
       y: 50,
       opacity: 0,
@@ -214,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
         trigger: '#contact',
         start: 'top 80%',
         end: 'top 20%',
-        toggleActions: BIDIRECTIONAL
+        toggleActions: PLAY_ONCE
       },
       y: 50,
       opacity: 0,
@@ -224,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ── REFRESH ON LOAD (fixes scroll position issues) ───────────────
+  // ── REFRESH ON LOAD ──
   window.addEventListener('load', () => {
     ScrollTrigger.refresh();
   });
