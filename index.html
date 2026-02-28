@@ -53,23 +53,58 @@
 
   <main>
     <section id="hero">
-      <div class="hero__badge">
-        <span class="badge__dot"></span>
-        <span class="text-label">Available for work · 2025</span>
-      </div>
-      <h1 class="text-hero hero__name">
-        <span>A</span><span>N</span><span>I</span><span>S</span><span>H</span><br>
-        <span>W</span><span>A</span><span>G</span><span>H</span>
-      </h1>
-      <p class="text-h3 hero__role">Senior Software Engineer</p>
-      <p class="text-body hero__tagline">Mechatronics Precision. High-Performance Architecture. Software That Doesn't Break.</p>
-      
-      <div class="hero__cta">
-        <a href="#projects" class="btn-primary">See My Work</a>
-        <a href="#contact" class="btn-ghost">Hire Me</a>
+      <div class="hero-container">
+
+        <!-- Left: Text content -->
+        <div class="hero-content">
+
+          <div class="hero-badge">
+            <span class="badge-dot"></span>
+            <span class="badge-text">Available for Work · 2026</span>
+          </div>
+
+          <h1 class="hero-name">
+            <!-- Each letter in its own span for GSAP stagger -->
+            <span class="name-line">
+              <span>A</span><span>N</span><span>I</span><span>S</span><span>H</span>
+            </span>
+            <span class="name-line">
+              <span>W</span><span>A</span><span>G</span><span>H</span>
+            </span>
+          </h1>
+
+          <p class="hero-role">Senior Software Engineer</p>
+          <p class="hero-tagline">
+            Mechatronics Precision. High-Performance Architecture. Software That Doesn't Break.
+          </p>
+
+          <div class="hero-cta">
+            <a href="#projects" class="btn-primary">See My Work</a>
+            <a href="#contact" class="btn-ghost">Hire Me</a>
+          </div>
+
+        </div>
+
+        <!-- Right: Hero photo -->
+        <div class="hero-photo-wrapper">
+          <img
+            src="assets/images/hero photo.png"
+            alt="Anish Wagh — Senior Software Engineer"
+            class="hero-photo"
+            width="480"
+            height="600"
+            loading="eager"
+            fetchpriority="high"
+            onerror="this.parentElement.classList.add('photo-error')"
+          />
+          <!-- Pop Art Mechatronics offset frame -->
+          <div class="hero-photo-frame" aria-hidden="true"></div>
+        </div>
+
       </div>
 
-      <div class="hero__backdrop" aria-hidden="true">ANISH WAGH</div>
+      <!-- Backdrop text -->
+      <div class="hero-backdrop" aria-hidden="true">ANISH WAGH</div>
     </section>
 
     <section id="about">
