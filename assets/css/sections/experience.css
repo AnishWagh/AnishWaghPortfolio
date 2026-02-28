@@ -1,44 +1,135 @@
 /* EXPERIENCE SECTION */
-.timeline {
+.experience-timeline {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xl);
-  border-left: 2px solid var(--color-border);
-  padding-left: var(--space-lg);
-  margin-left: var(--space-sm);
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+  position: relative;
+  padding-bottom: var(--space-xl);
+}
+
+/* Vertical line */
+.experience-timeline::before {
+  content: '';
+  position: absolute;
+  left: 120px;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: var(--color-border);
 }
 
 .experience-entry {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: var(--space-md);
   position: relative;
+  opacity: 1; /* always visible */
 }
 
+/* Timeline dot */
 .experience-entry::before {
   content: '';
   position: absolute;
-  left: calc(var(--space-lg) * -1 - 6px);
+  left: 112px;
   top: 6px;
-  width: 10px;
-  height: 10px;
-  background: var(--color-lime);
-  border-radius: 0;
-  box-shadow: 0 0 8px var(--color-lime);
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--color-lime);
+  background: var(--color-black);
+  z-index: 1;
 }
 
-.experience-entry h3 {
-  margin-bottom: var(--space-xs);
+.experience-meta {
+  padding-top: 4px;
 }
 
-.experience-entry span.text-label {
+.experience-date {
   display: block;
+  text-align: right;
+  padding-right: var(--space-md);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--color-teal);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.experience-company {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--color-lime);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.experience-role {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-cyan);
+  font-weight: 700;
+  letter-spacing: 0.04em;
   margin-bottom: var(--space-sm);
+  text-transform: uppercase;
 }
 
-.experience-entry ul {
-  list-style-type: square;
-  padding-left: var(--space-md);
+.experience-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: var(--space-sm);
+  padding-left: 0;
 }
 
-.experience-entry li {
-  margin-bottom: var(--space-xs);
-  color: var(--color-text-secondary);
+.experience-bullets li {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--color-white);
+  line-height: 1.6;
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+.experience-bullets li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--color-teal);
+}
+
+.experience-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: var(--space-sm);
+}
+
+@media (max-width: 768px) {
+  .experience-timeline::before {
+    display: none;
+  }
+
+  .experience-entry {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .experience-entry::before {
+    display: none;
+  }
+
+  .experience-date {
+    text-align: left;
+    padding-right: 0;
+    margin-bottom: 4px;
+  }
+
+  .experience-company {
+    font-size: 1.5rem;
+  }
+
+  .experience-role {
+    font-size: 0.875rem;
+  }
 }
