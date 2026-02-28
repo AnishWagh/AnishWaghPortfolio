@@ -1,54 +1,107 @@
-/* SKILLS SECTION */
-.rings-container {
+/* ── Skills Section ───────────────────────────────────── */
+#skills {
+  padding: var(--space-xl) var(--container-pad);
+  background: var(--color-surface);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+/* ── Skill Category Card ──────────────────────────────── */
+.skill-category-card {
+  background: var(--color-bg);
+  border: 2px solid var(--color-teal);
+  padding: var(--space-md);
   position: relative;
-  width: 420px;
-  height: 420px;
-  margin: var(--space-xl) auto;
+
+  /* Always visible — no opacity dependency */
+  opacity: 1;
+
+  transition:
+    border-color var(--transition-smooth),
+    box-shadow var(--transition-smooth),
+    transform var(--transition-smooth);
 }
 
-@media (max-width: 480px) {
-  .rings-container {
-    transform: scale(0.7);
-  }
-}
-
-.ring-outer,
-.ring-inner,
-.ring-core {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border-style: solid;
-  border-radius: 50%;
-}
-
-.ring-outer {
-  width: 400px; height: 400px;
-  margin-top: -200px; margin-left: -200px;
-  border-width: var(--border-width);
-  border-color: var(--color-teal);
-  animation: rotate-cw 20s linear infinite;
-}
-
-.ring-inner {
-  width: 280px; height: 280px;
-  margin-top: -140px; margin-left: -140px;
-  border-width: var(--border-width);
-  border-color: var(--color-lime);
-  animation: rotate-ccw 14s linear infinite;
-}
-
-.ring-core {
-  width: 160px; height: 160px;
-  margin-top: -80px; margin-left: -80px;
-  border-width: var(--border-width);
+.skill-category-card:hover {
   border-color: var(--color-cyan);
-  animation: rotate-cw 8s linear infinite;
+  box-shadow: var(--shadow-cyan-md);
+  transform: translate(-4px, -4px);
 }
 
-.ring-label {
-  white-space: nowrap;
-  pointer-events: none;
-  background: var(--color-black);
-  padding: 2px 6px;
+/* Accent card: the Mechatronics card gets lime border */
+.skill-category-card--accent {
+  border-color: var(--color-lime);
+}
+
+.skill-category-card--accent:hover {
+  border-color: var(--color-lime);
+  box-shadow: var(--shadow-lime-md);
+}
+
+/* ── Card Header ──────────────────────────────────────── */
+.skill-category-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.skill-category-icon {
+  font-size: 1.4rem;
+  color: var(--color-lime);
+  line-height: 1;
+}
+
+.skill-category-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.06em;
+  color: var(--color-lime);
+}
+
+/* ── Skill List ───────────────────────────────────────── */
+.skill-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.skill-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+}
+
+.skill-name {
+  color: var(--color-white);
+}
+
+/* ── Proficiency Badges ───────────────────────────────── */
+.skill-level {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border: 1px solid currentColor;
+}
+
+.skill-level--expert     { color: var(--color-lime);  border-color: var(--color-lime); }
+.skill-level--proficient { color: var(--color-cyan);  border-color: var(--color-cyan); }
+.skill-level--learning   { color: var(--color-teal);  border-color: var(--color-teal); }
+
+/* ── Mobile ───────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
 }
