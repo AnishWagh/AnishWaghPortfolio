@@ -37,19 +37,49 @@
   
   <div class="cursor"></div>
 
-  <nav>
-    <div class="nav-container">
-      <a href="#hero" class="nav-logo">AW</a>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#experience">Experience</a>
-        <a href="#blog">Blog</a>
-        <a href="#contact">Contact</a>
+  <header class="site-nav" id="site-nav">
+    <nav class="nav-container" aria-label="Main navigation">
+
+      <!-- Logo -->
+      <a href="#hero" class="nav-logo" aria-label="Anish Wagh — home">
+        <span class="nav-logo-text">AW</span>
+        <span class="nav-logo-dot"></span>
+      </a>
+
+      <!-- Desktop links -->
+      <ul class="nav-links" role="list">
+        <li><a href="#about"      class="nav-link">About</a></li>
+        <li><a href="#projects"   class="nav-link">Projects</a></li>
+        <li><a href="#skills"     class="nav-link">Skills</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#contact"    class="nav-link">Contact</a></li>
+        <li><a href="blog.html"   class="nav-link nav-link--blog">Blog</a></li>
+      </ul>
+
+      <!-- Hire Me CTA -->
+      <a href="#contact" class="nav-cta btn-primary">Hire Me</a>
+
+      <!-- Mobile menu toggle (CSS-only) -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle-input"
+             aria-label="Toggle mobile menu">
+      <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </label>
+
+      <!-- Mobile menu -->
+      <div class="nav-mobile">
+        <ul class="nav-mobile-links" role="list">
+          <li><a href="#about"      class="nav-link">About</a></li>
+          <li><a href="#projects"   class="nav-link">Projects</a></li>
+          <li><a href="#skills"     class="nav-link">Skills</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#contact"    class="nav-link">Contact</a></li>
+          <li><a href="blog.html"   class="nav-link">Blog</a></li>
+        </ul>
       </div>
-    </div>
-  </nav>
+
+    </nav>
+  </header>
 
   <main>
     <section id="hero">

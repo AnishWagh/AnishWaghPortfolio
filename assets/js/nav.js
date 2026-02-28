@@ -1,62 +1,62 @@
-// nav.js — Navigation scroll behaviour and active section highlighting
+/**
+ * nav.js — Navigation behaviour
+ * - Scrolled state (adds background on scroll)
+ * - Active section highlighting via IntersectionObserver
+ * - Mobile menu: close on link click
+ * - Blog link: navigates to blog.html (page link, not anchor)
+ */
 
 document.addEventListener('DOMContentLoaded', () => {
-  const nav = document.querySelector('nav');
-  const navLinks = document.querySelectorAll('.nav-links a');
-  const sections = document.querySelectorAll('section');
 
-  // Handle scroll events for nav styling
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 80) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
-  });
+  const nav       = document.getElementById('site-nav');
+  const navLinks  = document.querySelectorAll('.nav-link[href^="#"]');
+  const toggle    = document.getElementById('nav-toggle');
+  const sections  = document.querySelectorAll('section[id]');
 
-  // Intersection Observer for active section highlighting
+  // ── Scrolled state ────────────────────────────────────────────
+  const onScroll = () => {
+    if (nav) nav.classList.toggle('is-scrolled', window.scrollY > 60);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll(); // run on load
+
+  // ── Active section via IntersectionObserver ───────────────────
   const observerOptions = {
     root: null,
-    rootMargin: '0px',
-    threshold: 0.5 // trigger when section is 50% visible
+    rootMargin: '-40% 0px -55% 0px',
+    threshold: 0
   };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        // Remove active class from all links
-        navLinks.forEach(link => link.classList.remove('active'));
-        
-        // Add active class to corresponding link
-        const id = entry.target.getAttribute('id');
-        const activeLink = document.querySelector(`.nav-links a[href="#${id}"]`);
-        if (activeLink) {
-          activeLink.classList.add('active');
-        }
+      const id   = entry.target.getAttribute('id');
+      const link = document.querySelector(`.nav-link[href="#${id}"]`);
+      if (link) {
+        link.classList.toggle('is-active', entry.isIntersecting);
       }
     });
   }, observerOptions);
 
-  // Observe all sections
-  sections.forEach(section => {
-    if (section.getAttribute('id')) {
-      observer.observe(section);
-    }
+  sections.forEach(section => observer.observe(section));
+
+  // ── Mobile: close menu when a link is clicked ─────────────────
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (toggle) toggle.checked = false;
+    });
   });
 
-  // Smooth scroll for anchor links
+  // ── Smooth scroll for anchor links ───────────────────────────
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
-      const targetId = link.getAttribute('href');
-      if (targetId.startsWith('#')) {
-        e.preventDefault();
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          targetElement.scrollIntoView({
-            behavior: 'smooth'
-          });
-        }
+      const href = link.getAttribute('href');
+      if (!href.startsWith('#')) return; // let blog.html navigate normally
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
   });
+
 });
