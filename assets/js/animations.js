@@ -220,6 +220,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ── GALLERY SECTION ──
+  const galleryContainer = document.querySelector('.gallery-container');
+  if (galleryContainer) {
+    gsap.from(galleryContainer, {
+      scrollTrigger: {
+        trigger: '#gallery',
+        start: 'top 80%',
+        toggleActions: PLAY_ONCE
+      },
+      opacity: 0,
+      scale: 0.9,
+      duration: 1,
+      ease: 'power2.out'
+    });
+  }
+
   // ── REFRESH ON LOAD ──
   window.addEventListener('load', () => {
     ScrollTrigger.refresh();

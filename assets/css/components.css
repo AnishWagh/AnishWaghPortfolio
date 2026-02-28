@@ -1,3 +1,12 @@
+/* ── Section Container ───────────────────────────────── */
+.section-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+  position: relative;
+  width: 100%;
+}
+
 /* BUTTONS */
 .btn-primary {
   font-family: var(--font-body);
