@@ -118,7 +118,7 @@
         <!-- Right: Hero photo -->
         <div class="hero-photo-wrapper">
           <img
-            src="assets/images/hero photo.png"
+            src="assets/images/hero-photo.png"
             alt="Anish Wagh — Senior Software Engineer"
             class="hero-photo"
             width="480"
@@ -167,7 +167,7 @@
           <div class="about-visual gsap-reveal">
             <div class="about-photo-frame">
               <img
-                src="assets/images/hero photo.png"
+                src="assets/images/hero-photo.png"
                 alt="Anish Wagh"
                 class="about-photo"
                 width="400"
@@ -436,50 +436,57 @@
     </section>
 
     <section id="gallery">
-      <span class="section-label text-label">GALLERY</span>
-      <h2 class="section-title text-h2 gsap-reveal">FIELD WORK</h2>
-      <div class="gallery-grid">
-        <div class="gallery-item card gsap-reveal">
-          <img src="assets/images/oven.png" alt="Engineering Work - Oven Project">
-        </div>
-        <div class="gallery-item card gsap-reveal">
-          <img src="assets/images/trophie.png" alt="Achievements and Awards">
-        </div>
-        <div class="gallery-item card gsap-reveal">
-          <img src="assets/images/Gemini_Generated_Image_2j6izg2j6izg2j6i.png" alt="Robotics Concept">
-        </div>
-        <div class="gallery-item card gsap-reveal">
-          <img src="assets/images/Gemini_Generated_Image_5kyj205kyj205kyj.png" alt="Mechatronics Visualization">
+      <div class="section-container">
+        <span class="section-label text-label">GALLERY</span>
+        <h2 class="section-title text-h2 gsap-reveal">FIELD WORK</h2>
+        
+        <div class="gallery-container">
+          <div class="gallery-3d auto-rotate">
+            <div class="gallery-item-3d">
+              <img src="assets/images/oven.png" alt="Engineering Work - Oven Project">
+            </div>
+            <div class="gallery-item-3d">
+              <img src="assets/images/trophie.png" alt="Achievements and Awards">
+            </div>
+            <div class="gallery-item-3d">
+              <img src="assets/images/Gemini_Generated_Image_2j6izg2j6izg2j6i.png" alt="Robotics Concept">
+            </div>
+            <div class="gallery-item-3d">
+              <img src="assets/images/Gemini_Generated_Image_5kyj205kyj205kyj.png" alt="Mechatronics Visualization">
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="contact">
-      <span class="section-label text-label">LET'S BUILD</span>
-      <h2 class="section-title text-h2 gsap-reveal">LET'S BUILD</h2>
+      <div class="section-container">
+        <span class="section-label text-label">LET'S BUILD</span>
+        <h2 class="section-title text-h2 gsap-reveal">LET'S BUILD</h2>
 
-      <div class="contact-grid">
-        <div class="contact-info">
-          <p class="text-h3">Let's build something exceptional.</p>
-          <ul class="text-body">
-            <li><a href="https://github.com/anishwagh" target="_blank" rel="noopener">GitHub</a></li>
-            <li><a href="https://linkedin.com/in/anishwagh" target="_blank" rel="noopener">LinkedIn</a></li>
-            <li><a href="https://twitter.com/anishwagh" target="_blank" rel="noopener">Twitter/X</a></li>
-            <li><a href="mailto:placeholder@example.com">Email</a></li>
-          </ul>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <p class="text-h3">Let's build something exceptional.</p>
+            <ul class="text-body">
+              <li><a href="https://github.com/anishwagh" target="_blank" rel="noopener">GitHub</a></li>
+              <li><a href="https://linkedin.com/in/anishwagh" target="_blank" rel="noopener">LinkedIn</a></li>
+              <li><a href="https://twitter.com/anishwagh" target="_blank" rel="noopener">Twitter/X</a></li>
+              <li><a href="mailto:placeholder@example.com">Email</a></li>
+            </ul>
+          </div>
+          <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <input type="text" name="name" placeholder="Name" required class="text-body">
+            <input type="email" name="email" placeholder="Email" required class="text-body">
+            <select name="budget" class="text-body" required>
+              <option value="" disabled selected>Budget Range</option>
+              <option value="<$5k">&lt;$5k</option>
+              <option value="$5k-$10k">$5k - $10k</option>
+              <option value=">$10k">&gt;$10k</option>
+            </select>
+            <textarea name="message" placeholder="Message" required class="text-body"></textarea>
+            <button type="submit" class="btn-primary">Send It</button>
+          </form>
         </div>
-        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-          <input type="text" name="name" placeholder="Name" required class="text-body">
-          <input type="email" name="email" placeholder="Email" required class="text-body">
-          <select name="budget" class="text-body" required>
-            <option value="" disabled selected>Budget Range</option>
-            <option value="<$5k">&lt;$5k</option>
-            <option value="$5k-$10k">$5k - $10k</option>
-            <option value=">$10k">&gt;$10k</option>
-          </select>
-          <textarea name="message" placeholder="Message" required class="text-body"></textarea>
-          <button type="submit" class="btn-primary">Send It</button>
-        </form>
       </div>
     </section>
   </main>
