@@ -37,222 +37,401 @@
   
   <div class="cursor"></div>
 
-  <nav>
-    <div class="nav-container">
-      <a href="#hero" class="nav-logo">AW</a>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#experience">Experience</a>
-        <a href="#blog">Blog</a>
-        <a href="#contact">Contact</a>
+  <header class="site-nav" id="site-nav">
+    <nav class="nav-container" aria-label="Main navigation">
+
+      <!-- Logo -->
+      <a href="#hero" class="nav-logo" aria-label="Anish Wagh — home">
+        <span class="nav-logo-text">AW</span>
+        <span class="nav-logo-dot"></span>
+      </a>
+
+      <!-- Desktop links -->
+      <ul class="nav-links" role="list">
+        <li><a href="#about"      class="nav-link">About</a></li>
+        <li><a href="#projects"   class="nav-link">Projects</a></li>
+        <li><a href="#skills"     class="nav-link">Skills</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#contact"    class="nav-link">Contact</a></li>
+        <li><a href="blog.html"   class="nav-link nav-link--blog">Blog</a></li>
+      </ul>
+
+      <!-- Hire Me CTA -->
+      <a href="#contact" class="nav-cta btn-primary">Hire Me</a>
+
+      <!-- Mobile menu toggle (CSS-only) -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle-input"
+             aria-label="Toggle mobile menu">
+      <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </label>
+
+      <!-- Mobile menu -->
+      <div class="nav-mobile">
+        <ul class="nav-mobile-links" role="list">
+          <li><a href="#about"      class="nav-link">About</a></li>
+          <li><a href="#projects"   class="nav-link">Projects</a></li>
+          <li><a href="#skills"     class="nav-link">Skills</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#contact"    class="nav-link">Contact</a></li>
+          <li><a href="blog.html"   class="nav-link">Blog</a></li>
+        </ul>
       </div>
-    </div>
-  </nav>
+
+    </nav>
+  </header>
 
   <main>
     <section id="hero">
-      <div class="hero__badge">
-        <span class="badge__dot"></span>
-        <span class="text-label">Available for work · 2025</span>
-      </div>
-      <h1 class="text-hero hero__name">
-        <span>A</span><span>N</span><span>I</span><span>S</span><span>H</span><br>
-        <span>W</span><span>A</span><span>G</span><span>H</span>
-      </h1>
-      <p class="text-h3 hero__role">Senior Software Engineer</p>
-      <p class="text-body hero__tagline">Mechatronics Precision. High-Performance Architecture. Software That Doesn't Break.</p>
-      
-      <div class="hero__cta">
-        <a href="#projects" class="btn-primary">See My Work</a>
-        <a href="#contact" class="btn-ghost">Hire Me</a>
+      <div class="hero-container">
+
+        <!-- Left: Text content -->
+        <div class="hero-content">
+
+          <div class="hero-badge">
+            <span class="badge-dot"></span>
+            <span class="badge-text">Available for Work · 2026</span>
+          </div>
+
+          <h1 class="hero-name">
+            <!-- Each letter in its own span for GSAP stagger -->
+            <span class="name-line">
+              <span>A</span><span>N</span><span>I</span><span>S</span><span>H</span>
+            </span>
+            <span class="name-line">
+              <span>W</span><span>A</span><span>G</span><span>H</span>
+            </span>
+          </h1>
+
+          <p class="hero-role">Senior Software Engineer</p>
+          <p class="hero-tagline">
+            Mechatronics Precision. High-Performance Architecture. Software That Doesn't Break.
+          </p>
+
+          <div class="hero-cta">
+            <a href="#projects" class="btn-primary">See My Work</a>
+            <a href="#contact" class="btn-ghost">Hire Me</a>
+          </div>
+
+        </div>
+
+        <!-- Right: Hero photo -->
+        <div class="hero-photo-wrapper">
+          <img
+            src="assets/images/hero photo.png"
+            alt="Anish Wagh — Senior Software Engineer"
+            class="hero-photo"
+            width="480"
+            height="600"
+            loading="eager"
+            fetchpriority="high"
+            onerror="this.parentElement.classList.add('photo-error')"
+          />
+          <!-- Pop Art Mechatronics offset frame -->
+          <div class="hero-photo-frame" aria-hidden="true"></div>
+        </div>
+
       </div>
 
-      <div class="hero__backdrop" aria-hidden="true">ANISH WAGH</div>
+      <!-- Backdrop text -->
+      <div class="hero-backdrop" aria-hidden="true">ANISH WAGH</div>
     </section>
 
     <section id="about">
-      <span class="section-label text-label">ABOUT ME</span>
-      <h2 class="section-title text-h2 gsap-reveal">ABOUT ME</h2>
-      
-      <div class="about-grid">
-        <div class="about-text text-body gsap-reveal">
-          <p>Based in Pune, India, Anish Wagh is an engineer with a B.Tech. in Mechatronics and Automation Engineering from MIT ADT University. His technical foundation lies in the complex interplay between hardware, software, and user experience, cultivated through his early work on autonomous drones, cleaning robots, and robotic kinematics. Anish approaches technology not just as a set of tools, but as intricate systems to constantly explore, understand, and refine.</p>
-          <p>Professionally, Anish specializes in building robust software for next-generation connected appliances, ranging from scalable Business Logic Layers (BLL) to intuitive Android-based Human-Machine Interfaces (HMI). His technical philosophy is deeply rooted in precision and reliability. He ensures top-tier software quality and long-term maintainability by implementing rigorous pre-release testing, UI automation, and enforcing over 90% unit test coverage across core architectural components.</p>
-          <p>Anish’s professional goals center on architecting unbreakable, highly scalable software systems while expanding his impact in senior engineering roles. He is driven by a commitment to proactive problem-solving, de-risking critical development paths, and accelerating overall product velocity. Ultimately, he is looking to drive breakthrough technical innovations, mentor engineering teams, and deliver seamless systems that align with ambitious organizational goals.</p>
-        </div>
-        <div class="about-visual gsap-reveal">
-          <div class="profile-image-frame">
-            <img src="assets/images/hero photo.png" alt="Anish Wagh" class="about-image">
+      <div class="section-container">
+        <span class="section-label text-label">Who I Am</span>
+        <h2 class="section-title text-h2 gsap-reveal">ABOUT ME</h2>
+
+        <div class="about-grid">
+          <div class="about-text text-body gsap-reveal">
+            <p>Based in Pune, India, Anish Wagh is an engineer with a B.Tech. in Mechatronics and Automation Engineering from MIT ADT University. His technical foundation lies in the complex interplay between hardware, software, and user experience, cultivated through his early work on autonomous drones, cleaning robots, and robotic kinematics. Anish approaches technology not just as a set of tools, but as intricate systems to constantly explore, understand, and refine.</p>
+            <p>Professionally, Anish specializes in building robust software for next-generation connected appliances, ranging from scalable Business Logic Layers (BLL) to intuitive Android-based Human-Machine Interfaces (HMI). His technical philosophy is deeply rooted in precision and reliability. He ensures top-tier software quality and long-term maintainability by implementing rigorous pre-release testing, UI automation, and enforcing over 90% unit test coverage across core architectural components.</p>
+            <p>Anish’s professional goals center on architecting unbreakable, highly scalable software systems while expanding his impact in senior engineering roles. He is driven by a commitment to proactive problem-solving, de-risking critical development paths, and accelerating overall product velocity. Ultimately, he is looking to drive breakthrough technical innovations, mentor engineering teams, and deliver seamless systems that align with ambitious organizational goals.</p>
+
+            <div class="about-stats">
+              <div class="stat">
+                <span class="stat-number">3+</span>
+                <span class="stat-label">Years Experience</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">10+</span>
+                <span class="stat-label">Projects Shipped</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Code Integrity</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-visual gsap-reveal">
+            <div class="about-photo-frame">
+              <img
+                src="assets/images/hero photo.png"
+                alt="Anish Wagh"
+                class="about-photo"
+                width="400"
+                height="500"
+                loading="lazy"
+              />
+              <div class="about-photo-offset" aria-hidden="true"></div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <section id="projects">
-      <span class="section-label text-label">PROJECTS</span>
-      <h2 class="section-title text-h2 gsap-reveal">PROJECTS</h2>
+      <div class="section-container">
+        <span class="section-label text-label">What I've Built</span>
+        <h2 class="section-title text-h2 gsap-reveal">PROJECTS</h2>
 
-      <div class="projects-grid">
-        <!-- Project 1: Robotic Arm -->
-        <article class="project-card card">
+        <div class="projects-grid">
+        <article class="project-card card gsap-reveal">
           <div class="project-thumbnail"></div>
-          <h3 class="text-h3">6 D.O.F Robotic Arm Simulation</h3>
-          <p class="text-body">Simulated a Franka's Panda articulated robotic arm for pick-and-place operations using ROS, GAZEBO, and MoveIt motion planning framework.</p>
-          <div class="project-tags">
-            <span class="tag">ROS</span>
-            <span class="tag">GAZEBO</span>
-            <span class="tag">MoveIt</span>
-            <span class="tag">Kinematics</span>
-          </div>
-          <div class="project-links">
-            <a href="#" class="btn-ghost" data-cursor>Live Demo</a>
-            <a href="#" class="btn-ghost" data-cursor>GitHub</a>
+          <div class="project-content">
+            <div class="project-tags">
+              <span class="tag">ROS</span>
+              <span class="tag">GAZEBO</span>
+              <span class="tag">MoveIt</span>
+              <span class="tag">Kinematics</span>
+            </div>
+            <h3 class="project-title">6 D.O.F Robotic Arm Simulation</h3>
+            <p class="project-desc">Simulated a Franka's Panda articulated robotic arm for pick-and-place operations using ROS, GAZEBO, and MoveIt motion planning framework.</p>
+            <div class="project-links">
+              <a href="#" class="btn-ghost btn-sm" data-cursor>Live Demo</a>
+              <a href="#" class="btn-ghost btn-sm" data-cursor>GitHub</a>
+            </div>
           </div>
         </article>
 
-        <!-- Project 2: Autonomous Drone -->
-        <article class="project-card card">
+        <article class="project-card card gsap-reveal">
           <div class="project-thumbnail"></div>
-          <h3 class="text-h3">Autonomous Drone (Level 4)</h3>
-          <p class="text-body">Engineered an autonomous drone with level 4 autonomy, implementing autopilot software on a Pixhawk flight controller for mission planning.</p>
-          <div class="project-tags">
-            <span class="tag">ROS</span>
-            <span class="tag">Pixhawk</span>
-            <span class="tag">Robotics</span>
-            <span class="tag">Mission Planning</span>
-          </div>
-          <div class="project-links">
-            <a href="#" class="btn-ghost" data-cursor>Live Demo</a>
-            <a href="#" class="btn-ghost" data-cursor>GitHub</a>
+          <div class="project-content">
+            <div class="project-tags">
+              <span class="tag">ROS</span>
+              <span class="tag">Pixhawk</span>
+              <span class="tag">Robotics</span>
+              <span class="tag">Mission Planning</span>
+            </div>
+            <h3 class="project-title">Autonomous Drone (Level 4)</h3>
+            <p class="project-desc">Engineered an autonomous drone with level 4 autonomy, implementing autopilot software on a Pixhawk flight controller for mission planning.</p>
+            <div class="project-links">
+              <a href="#" class="btn-ghost btn-sm" data-cursor>Live Demo</a>
+              <a href="#" class="btn-ghost btn-sm" data-cursor>GitHub</a>
+            </div>
           </div>
         </article>
 
-        <!-- Project 3: Cleaning Robot -->
-        <article class="project-card card">
+        <article class="project-card card gsap-reveal">
           <div class="project-thumbnail"></div>
-          <h3 class="text-h3">Autonomous Cleaning Robot</h3>
-          <p class="text-body">Developed a navigation stack and implemented SLAM techniques within the ROS framework for autonomous indoor cleaning operations.</p>
-          <div class="project-tags">
-            <span class="tag">ROS</span>
-            <span class="tag">SLAM</span>
-            <span class="tag">Mobile Robotics</span>
-            <span class="tag">Algorithms</span>
-          </div>
-          <div class="project-links">
-            <a href="#" class="btn-ghost" data-cursor>Live Demo</a>
-            <a href="#" class="btn-ghost" data-cursor>GitHub</a>
+          <div class="project-content">
+            <div class="project-tags">
+              <span class="tag">ROS</span>
+              <span class="tag">SLAM</span>
+              <span class="tag">Mobile Robotics</span>
+              <span class="tag">Algorithms</span>
+            </div>
+            <h3 class="project-title">Autonomous Cleaning Robot</h3>
+            <p class="project-desc">Developed a navigation stack and implemented SLAM techniques within the ROS framework for autonomous indoor cleaning operations.</p>
+            <div class="project-links">
+              <a href="#" class="btn-ghost btn-sm" data-cursor>Live Demo</a>
+              <a href="#" class="btn-ghost btn-sm" data-cursor>GitHub</a>
+            </div>
           </div>
         </article>
       </div>
     </section>
 
     <section id="skills">
-      <span class="section-label text-label">SKILLS & STACK</span>
-      <h2 class="section-title text-h2 gsap-reveal">SKILLS & STACK</h2>
+      <div class="section-container">
 
-      <div class="rings-container">
-        <div class="ring-outer"></div>
-        <div class="ring-inner"></div>
-        <div class="ring-core"></div>
-      </div>
+        <span class="section-label">What I Work With</span>
+        <h2 class="section-title">SKILLS &amp; STACK</h2>
 
-      <div class="skills-grid">
-        <!-- Badge grid placeholder for later enhancement -->
+        <div class="skills-grid">
+
+          <!-- Category 1: Languages & OS -->
+          <div class="skill-category-card">
+            <div class="skill-category-header">
+              <span class="skill-category-icon">{ }</span>
+              <h3 class="skill-category-title">Core Tech</h3>
+            </div>
+            <ul class="skill-list">
+              <li class="skill-item">
+                <span class="skill-name">C / C++</span>
+                <span class="skill-level skill-level--expert">Expert</span>
+              </li>
+              <li class="skill-item">
+                <span class="skill-name">Java / Kotlin</span>
+                <span class="skill-level skill-level--expert">Expert</span>
+              </li>
+              <li class="skill-item">
+                <span class="skill-name">Zephyr OS</span>
+                <span class="skill-level skill-level--expert">Expert</span>
+              </li>
+              <li class="skill-item">
+                <span class="skill-name">Android AOSP</span>
+                <span class="skill-level skill-level--proficient">Proficient</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Category 2: Frameworks & Testing -->
+          <div class="skill-category-card">
+            <div class="skill-category-header">
+              <span class="skill-category-icon">◈</span>
+              <h3 class="skill-category-title">Frameworks</h3>
+            </div>
+            <ul class="skill-list">
+              <li class="skill-item">
+                <span class="skill-name">Google Test (GTest)</span>
+                <span class="skill-level skill-level--expert">Expert</span>
+              </li>
+              <li class="skill-item">
+                <span class="skill-name">ROS / Gazebo</span>
+                <span class="skill-level skill-level--proficient">Proficient</span>
+              </li>
+              <li class="skill-item">
+                <span class="skill-name">Cucumber / Gherkin</span>
+                <span class="skill-level skill-level--expert">Expert</span>
+              </li>
+              <li class="skill-item">
+                <span class="skill-name">Spring Boot</span>
+                <span class="skill-level skill-level--learning">Learning</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Category 3: Tools & Infrastructure -->
+          <div class="skill-category-card">
+            <div class="skill-category-header">
+              <span class="skill-category-icon">⚙</span>
+              <h3 class="skill-category-title">Infrastructure</h3>
+            </div>
+            <ul class="skill-list">
+              <li class="skill-item">
+                <span class="skill-name">Git / GitHub</span>
+                <span class="skill-level skill-level--expert">Expert</span>
+              </li>
+              <li class="skill-item">
+                <span class="skill-name">Jira / Confluence</span>
+                <span class="skill-level skill-level--expert">Expert</span>
+              </li>
+              <li class="skill-item">
+                <span class="skill-name">SonarQube</span>
+                <span class="skill-level skill-level--proficient">Proficient</span>
+              </li>
+              <li class="skill-item">
+                <span class="skill-name">Docker / CI/CD</span>
+                <span class="skill-level skill-level--learning">Learning</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Category 4: Mechatronics & Hardware -->
+          <div class="skill-category-card skill-category-card--accent">
+            <div class="skill-category-header">
+              <span class="skill-category-icon">⬡</span>
+              <h3 class="skill-category-title">Mechatronics</h3>
+            </div>
+            <ul class="skill-list">
+              <li class="skill-item">
+                <span class="skill-name">System Design</span>
+                <span class="skill-level skill-level--expert">Expert</span>
+              </li>
+              <li class="skill-item">
+                <span class="skill-name">HMI Development</span>
+                <span class="skill-level skill-level--expert">Expert</span>
+              </li>
+              <li class="skill-item">
+                <span class="skill-name">SLAM / Navigation</span>
+                <span class="skill-level skill-level--proficient">Proficient</span>
+              </li>
+              <li class="skill-item">
+                <span class="skill-name">3D Prototyping</span>
+                <span class="skill-level skill-level--proficient">Proficient</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
       </div>
     </section>
 
     <section id="experience">
-      <span class="section-label text-label">EXPERIENCE</span>
-      <h2 class="section-title text-h2 gsap-reveal">EXPERIENCE</h2>
+      <div class="section-container">
+        <span class="section-label text-label">Where I've Worked</span>
+        <h2 class="section-title text-h2 gsap-reveal">EXPERIENCE</h2>
 
-      <div class="timeline">
+        <div class="experience-timeline">
         <!-- Experience 1: Senior Software Engineer -->
-        <div class="experience-entry gsap-reveal">
-          <h3 class="text-h2">Whirlpool Corporation</h3>
-          <p class="text-h3">Senior Software Engineer</p>
-          <span class="text-label">Oct 2025 - Present</span>
-          <ul class="text-body">
-            <li>Achieved high reliability for the Cooking Business Logic Layer (BLL) by attaining over 90% function coverage through 76+ unit tests using Google Test and FFF.</li>
-            <li>Accelerated onboarding for new engineers by creating detailed technical documentation and UML diagrams for ZCore components like View Adapter and Nucleus Facade.</li>
-            <li>Ensured zero production disruption during platform advancement by proactively resolving 8+ critical defects prior to delivery via end-to-end BLL integration.</li>
-          </ul>
-          <div class="project-tags">
-            <span class="tag">C++</span>
-            <span class="tag">Zephyr OS</span>
-            <span class="tag">Google Test</span>
-            <span class="tag">UML</span>
+        <article class="experience-entry gsap-reveal">
+          <div class="experience-meta">
+            <span class="experience-date text-label">Oct 2025 — Present</span>
+            <div class="experience-connector"></div>
           </div>
-        </div>
+          <div class="experience-content">
+            <h3 class="experience-company">Whirlpool Corporation</h3>
+            <p class="experience-role">Senior Software Engineer</p>
+            <ul class="experience-bullets">
+              <li>Achieved high reliability for the Cooking Business Logic Layer (BLL) by attaining over 90% function coverage through 76+ unit tests using Google Test and FFF.</li>
+              <li>Accelerated onboarding for new engineers by creating detailed technical documentation and UML diagrams for ZCore components like View Adapter and Nucleus Facade.</li>
+              <li>Ensured zero production disruption during platform advancement by proactively resolving 8+ critical defects prior to delivery via end-to-end BLL integration.</li>
+            </ul>
+            <div class="experience-tech">
+              <span class="tag">C++</span>
+              <span class="tag">Zephyr OS</span>
+              <span class="tag">Google Test</span>
+              <span class="tag">UML</span>
+            </div>
+          </div>
+        </article>
         <!-- Experience 2: Specialist Software Engineer -->
-        <div class="experience-entry gsap-reveal">
-          <h3 class="text-h2">Whirlpool Corporation</h3>
-          <p class="text-h3">Specialist Software Engineer</p>
-          <span class="text-label">Aug 2023 - Oct 2025</span>
-          <ul class="text-body">
-            <li>Achieved a 30% improvement in testing throughput by creating dedicated bench setups for KitchenAid Wall Ovens (Single, Double, and Combo).</li>
-            <li>Improved UI test reliability by reaching a 92% pass rate across 600+ test cases through enhancement of the UI automation framework.</li>
-            <li>Enhanced user experience for Wave 2 release by reducing recipe initiation steps by 20% through the implementation of the "Menu First Flow".</li>
-          </ul>
-          <div class="project-tags">
-            <span class="tag">Android</span>
-            <span class="tag">Kotlin</span>
-            <span class="tag">Java</span>
-            <span class="tag">Cucumber</span>
+        <article class="experience-entry gsap-reveal">
+          <div class="experience-meta">
+            <span class="experience-date text-label">Aug 2023 — Oct 2025</span>
+            <div class="experience-connector"></div>
           </div>
-        </div>
+          <div class="experience-content">
+            <h3 class="experience-company">Whirlpool Corporation</h3>
+            <p class="experience-role">Specialist Software Engineer</p>
+            <ul class="experience-bullets">
+              <li>Achieved a 30% improvement in testing throughput by creating dedicated bench setups for KitchenAid Wall Ovens (Single, Double, and Combo).</li>
+              <li>Improved UI test reliability by reaching a 92% pass rate across 600+ test cases through enhancement of the UI automation framework.</li>
+              <li>Enhanced user experience for Wave 2 release by reducing recipe initiation steps by 20% through the implementation of the "Menu First Flow".</li>
+            </ul>
+            <div class="experience-tech">
+              <span class="tag">Android</span>
+              <span class="tag">Kotlin</span>
+              <span class="tag">Java</span>
+              <span class="tag">Cucumber</span>
+            </div>
+          </div>
+        </article>
         <!-- Experience 3: Intern -->
-        <div class="experience-entry gsap-reveal">
-          <h3 class="text-h2">Whirlpool Corporation</h3>
-          <p class="text-h3">Software Engineer Intern</p>
-          <span class="text-label">Jan 2023 - Jul 2023</span>
-          <ul class="text-body">
-            <li>Achieved scalable automated functional testing by developing a CSV-driven test execution system for Appliance HMI to Control Unit communication.</li>
-            <li>Minimized turnaround time and eliminated on-site dependency by designing a remote-accessible Raspberry Pi bench setup with real-time camera feed.</li>
-            <li>Automated integration testing for connected appliances using C# and .NET on Raspberry Pi hardware.</li>
-          </ul>
-          <div class="project-tags">
-            <span class="tag">C#</span>
-            <span class="tag">.NET</span>
-            <span class="tag">Raspberry Pi</span>
-            <span class="tag">Automation</span>
+        <article class="experience-entry gsap-reveal">
+          <div class="experience-meta">
+            <span class="experience-date text-label">Jan 2023 — Jul 2023</span>
+            <div class="experience-connector"></div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="blog">
-      <span class="section-label text-label">DEEP DIVES</span>
-      <h2 class="section-title text-h2 gsap-reveal">DEEP DIVES</h2>
-      <p class="text-body">Technical write-ups, system diagrams, flowcharts, and documentation of what I build and how I think.</p>
-
-      <div class="blog-grid">
-        <!-- Blog Card 1: Zephyr OS -->
-        <article class="blog-card card">
-          <span class="tag">Embedded Systems</span>
-          <h3 class="text-h3">Migrating Core Infrastructure to Zephyr OS</h3>
-          <p class="text-body">Strategies for zero-disruption upgrades in connected appliance Business Logic Layers using GTest and OSAL mocking.</p>
-          <a href="#" class="read-link">Read Article →</a>
-        </article>
-        <!-- Blog Card 2: Android Automation -->
-        <article class="blog-card card">
-          <span class="tag">Test Automation</span>
-          <h3 class="text-h3">Scaling Android HMI Automation</h3>
-          <p class="text-body">From Gherkin UI tests to remote Raspberry Pi benches with live camera feeds for global team productivity.</p>
-          <a href="#" class="read-link">Read Article →</a>
-        </article>
-        <!-- Blog Card 3: Robotics -->
-        <article class="blog-card card">
-          <span class="tag">Robotics</span>
-          <h3 class="text-h3">Mastering Motion Planning in ROS</h3>
-          <p class="text-body">Deep dive into simulating 6-DOF articulated arms using MoveIt and implementing SLAM for autonomous navigation.</p>
-          <a href="#" class="read-link">Read Article →</a>
+          <div class="experience-content">
+            <h3 class="experience-company">Whirlpool Corporation</h3>
+            <p class="experience-role">Software Engineer Intern</p>
+            <ul class="experience-bullets">
+              <li>Achieved scalable automated functional testing by developing a CSV-driven test execution system for Appliance HMI to Control Unit communication.</li>
+              <li>Minimized turnaround time and eliminated on-site dependency by designing a remote-accessible Raspberry Pi bench setup with real-time camera feed.</li>
+              <li>Automated integration testing for connected appliances using C# and .NET on Raspberry Pi hardware.</li>
+            </ul>
+            <div class="experience-tech">
+              <span class="tag">C#</span>
+              <span class="tag">.NET</span>
+              <span class="tag">Raspberry Pi</span>
+              <span class="tag">Automation</span>
+            </div>
+          </div>
         </article>
       </div>
-
-      <div class="blog-actions">
-        <a href="blog.html" class="btn-primary">View All Posts</a>
       </div>
     </section>
 
@@ -312,7 +491,6 @@
 
   <script src="assets/js/cursor.js"></script>
   <script src="assets/js/nav.js"></script>
-  <script src="assets/js/skills-ring.js"></script>
   <script src="assets/js/contact.js"></script>
   <script src="assets/js/animations.js"></script>
   <script src="assets/js/main.js"></script>
