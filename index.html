@@ -216,14 +216,14 @@
 
     .image-tiles-wrapper {
       position: relative;
-      width: 220px;
-      height: 220px;
+      width: 275px;
+      height: 275px;
     }
 
     .img-tile {
       position: absolute;
-      width: 200px;
-      height: 200px;
+      width: 250px;
+      height: 250px;
       top: 0;
       left: 0;
       border-radius: 14px;
@@ -255,10 +255,10 @@
     }
 
     /* 4-Tile Fan Positions (Applied by JS via style attribute, but hover states handled here) */
-    .image-tiles-wrapper.is-fanned #tile-1:hover { transform: rotate(-6deg) translate(-245px, 15px) scale(1.05) !important; }
-    .image-tiles-wrapper.is-fanned #tile-2:hover { transform: rotate(4deg) translate(-85px, -10px) scale(1.05) !important; }
-    .image-tiles-wrapper.is-fanned #tile-3:hover { transform: rotate(-4deg) translate(85px, -5px) scale(1.05) !important; }
-    .image-tiles-wrapper.is-fanned #tile-4:hover { transform: rotate(6deg) translate(245px, 10px) scale(1.05) !important; }
+    .image-tiles-wrapper.is-fanned #tile-1:hover { transform: rotate(-6deg) translate(-305px, 15px) scale(1.05) !important; }
+    .image-tiles-wrapper.is-fanned #tile-2:hover { transform: rotate(4deg) translate(-105px, -10px) scale(1.05) !important; }
+    .image-tiles-wrapper.is-fanned #tile-3:hover { transform: rotate(-4deg) translate(105px, -5px) scale(1.05) !important; }
+    .image-tiles-wrapper.is-fanned #tile-4:hover { transform: rotate(6deg) translate(305px, 10px) scale(1.05) !important; }
 
     .tile-caption {
       position: absolute;
@@ -715,23 +715,23 @@
           <div class="image-tiles-wrapper" id="image-tiles-wrapper">
 
             <div class="img-tile" id="tile-1" style="z-index: 40;">
-              <img src="assets/images/oven.png" alt="KitchenAid Project">
-              <span class="tile-caption">KitchenAid Project</span>
+              <img src="assets/images/oven.png" alt="Wall Oven Project">
+              <span class="tile-caption">Wall Oven Project</span>
             </div>
 
             <div class="img-tile" id="tile-2" style="z-index: 30;">
-              <img src="assets/images/trophie.png" alt="Recognition">
-              <span class="tile-caption">Recognition</span>
+              <img src="assets/images/trophie.png" alt="Recognition Trophy">
+              <span class="tile-caption">Recognition Trophy</span>
             </div>
 
             <div class="img-tile" id="tile-3" style="z-index: 20;">
-              <img src="assets/images/Gemini_Generated_Image_2j6izg2j6izg2j6i.png" alt="Robotics Simulation">
-              <span class="tile-caption">Robotics Simulation</span>
+              <img src="assets/images/Gemini_Generated_Image_2j6izg2j6izg2j6i.png" alt="Robotics Arm Simulation">
+              <span class="tile-caption">Robotics Arm Simulation</span>
             </div>
 
             <div class="img-tile" id="tile-4" style="z-index: 10;">
-              <img src="assets/images/Gemini_Generated_Image_5kyj205kyj205kyj.png" alt="Mechatronics Design">
-              <span class="tile-caption">Mechatronics Design</span>
+              <img src="assets/images/Gemini_Generated_Image_5kyj205kyj205kyj.png" alt="Mechatronics System Design">
+              <span class="tile-caption">Mechatronics System Design</span>
             </div>
 
           </div>
@@ -837,10 +837,10 @@
         var isMobile = window.innerWidth <= 640;
 
         var fanConfig = {
-          t1: { rotate: -6, x: isMobile ? -140 : -245, y: 15 },
-          t2: { rotate:  4, x: isMobile ? -50  : -85,  y: -10 },
-          t3: { rotate: -4, x: isMobile ?  50  :  85,  y: -5  },
-          t4: { rotate:  6, x: isMobile ?  140 :  245, y: 10  }
+          t1: { rotate: -6, x: isMobile ? -140 : -305, y: 15 },
+          t2: { rotate:  4, x: isMobile ? -50  : -105, y: -10 },
+          t3: { rotate: -4, x: isMobile ?  50  :  105, y: -5  },
+          t4: { rotate:  6, x: isMobile ?  140 :  305, y: 10  }
         };
 
         function applyTransform(el, rotate, x, y) {
@@ -875,10 +875,10 @@
 
         window.addEventListener('resize', function() {
           isMobile = window.innerWidth <= 640;
-          fanConfig.t1.x = isMobile ? -140 : -245;
-          fanConfig.t2.x = isMobile ? -50  : -85;
-          fanConfig.t3.x = isMobile ?  50  :  85;
-          fanConfig.t4.x = isMobile ?  140 :  245;
+          fanConfig.t1.x = isMobile ? -140 : -305;
+          fanConfig.t2.x = isMobile ? -50  : -105;
+          fanConfig.t3.x = isMobile ?  50  :  105;
+          fanConfig.t4.x = isMobile ?  140 :  305;
         });
       }
 
