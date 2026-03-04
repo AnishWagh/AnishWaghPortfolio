@@ -1,20 +1,20 @@
 /* PROJECTS SECTION */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: var(--space-md);
+  gap: 24px; /* Change 2: gap 24px */
+  grid-template-columns: repeat(3, 1fr); /* Change 2: repeat(3, 1fr) */
   margin-top: var(--space-lg);
 }
 
 .project-card {
-  border: 2px solid var(--color-teal);
   background: var(--color-surface);
+  border: 2px solid var(--color-teal);
+  display: flex;
+  flex-direction: column;
+  opacity: 1; /* always visible */
   transition: border-color var(--transition-smooth),
               box-shadow var(--transition-smooth),
               transform var(--transition-smooth);
-  opacity: 1; /* always visible */
-  display: flex;
-  flex-direction: column;
 }
 
 .project-card:hover {
@@ -24,24 +24,18 @@
 }
 
 .project-thumbnail-placeholder {
-  width: 100%;
-  height: 200px;
-  background: var(--color-surface-raised);
-  border-bottom: 2px solid var(--color-border);
+  display: none; /* Change 2: Remove placeholder */
 }
 
 .project-thumbnail {
-  width: 100%;
-  height: 200px;
-  background: var(--color-surface-raised);
-  border-bottom: 2px solid var(--color-border);
+  display: none; /* Change 2: Remove placeholder */
 }
 
 .project-content {
-  padding: var(--space-md);
+  display: grid; /* Change 2: grid for uniform height */
   flex-grow: 1;
-  display: flex;
-  flex-direction: column;
+  grid-template-rows: auto auto 1fr auto; /* Change 2: pushes buttons to bottom */
+  padding: var(--space-md);
 }
 
 .project-tags {
@@ -52,12 +46,12 @@
 }
 
 .project-title {
+  color: var(--color-lime);
   font-family: var(--font-display);
   font-size: 1.8rem;
-  color: var(--color-lime);
   letter-spacing: 0.04em;
-  margin-bottom: var(--space-xs);
   line-height: 1.1;
+  margin-bottom: var(--space-xs);
 }
 
 .project-desc {
@@ -77,4 +71,16 @@
 .btn-sm {
   font-size: 0.7rem;
   padding: 0.35rem 0.8rem;
+}
+
+@media (max-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
 }

@@ -29,6 +29,275 @@
   <!-- CSS: single entry point -->
   <link rel="stylesheet" href="assets/css/main.css">
 
+  <style>
+    /* ── TIMELINE ─────────────────────────────── */
+    .timeline-container {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px 0 60px;
+    }
+
+    .timeline-track {
+      position: absolute;
+      left: 120px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+    }
+
+    .timeline-line-bg {
+      position: absolute;
+      inset: 0;
+      background: var(--border, #252518);
+      border-radius: 2px;
+    }
+
+    .timeline-line-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(to bottom, transparent, #00d4d4 8%, #00d4d4 92%, transparent);
+      border-radius: 2px;
+      height: 0%;
+      transition: height 0.1s linear;
+    }
+
+    .timeline-entries {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .timeline-entry {
+      display: flex;
+      gap: 0;
+      padding: 48px 0;
+      border-bottom: 1px solid var(--border, #252518);
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .timeline-entry.tl-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .timeline-entry:last-child {
+      border-bottom: none;
+    }
+
+    .timeline-left {
+      width: 120px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      padding-right: 28px;
+      position: relative;
+      padding-top: 4px;
+    }
+
+    .timeline-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--color-text-secondary, #9a9a8a);
+      letter-spacing: 0.08em;
+      line-height: 1.6;
+      text-align: right;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      right: -5px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--color-text-ghost, #3a3a2e);
+      border: 2px solid var(--border, #252518);
+      transition: background 0.4s ease, border-color 0.4s ease, 
+                  box-shadow 0.4s ease;
+    }
+
+    .timeline-entry.tl-visible .timeline-dot {
+      background: #00d4d4;
+      border-color: #00d4d4;
+      box-shadow: 0 0 12px rgba(0, 212, 212, 0.5);
+    }
+
+    .timeline-right {
+      flex: 1;
+      padding-left: 36px;
+    }
+
+    .timeline-company {
+      font-family: 'Space Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-olive-bright, #8fa822);
+      margin: 0 0 4px;
+      letter-spacing: 0.02em;
+    }
+
+    .timeline-role {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: #00d4d4;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin: 0 0 20px;
+    }
+
+    .timeline-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .timeline-bullets li {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: var(--color-text-secondary, #9a9a8a);
+      line-height: 1.75;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .timeline-bullets li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--color-olive, #6b7a1f);
+    }
+
+    .timeline-bullets .hl {
+      color: var(--color-text-primary, #e8e8e0);
+      font-weight: 700;
+    }
+
+    .timeline-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .timeline-tags .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border: 1px solid var(--color-olive-dim, #6b7a1f);
+      color: var(--color-text-secondary, #9a9a8a);
+      border-radius: 2px;
+    }
+
+    /* ── CIRCULAR GALLERY ─────────────────────── */
+    .gallery-subtitle {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: var(--color-text-secondary, #9a9a8a);
+      text-align: center;
+      margin: 0 0 60px;
+      letter-spacing: 0.08em;
+    }
+
+    .circular-gallery-scene {
+      width: 100%;
+      height: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1400px;
+      perspective-origin: center center;
+      overflow: hidden;
+    }
+
+    .circular-gallery-ring {
+      position: relative;
+      width: 260px;
+      height: 360px;
+      transform-style: preserve-3d;
+      /* rotation is set by JS */
+    }
+
+    .cg-card {
+      position: absolute;
+      width: 260px;
+      height: 340px;
+      left: 0;
+      top: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border, #252518);
+      background: var(--bg-accent, #141a09);
+      /* transform (rotateY + translateZ) set in JS */
+      backface-visibility: hidden;
+      transition: border-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .cg-card:hover {
+      border-color: #00d4d4;
+    }
+
+    .cg-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .cg-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 16px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.88));
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .cg-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: #e8e8e0;
+      letter-spacing: 0.05em;
+    }
+
+    .cg-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: #00d4d4;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Mobile */
+    @media (max-width: 640px) {
+      .timeline-track { left: 0; }
+      .timeline-left { width: 0; padding: 0; overflow: hidden; }
+      .timeline-right { padding-left: 20px; }
+      .timeline-entry { padding: 32px 0; }
+
+      .circular-gallery-scene {
+        height: 320px;
+        perspective: 800px;
+      }
+      .circular-gallery-ring { width: 180px; height: 240px; }
+      .cg-card { width: 180px; height: 230px; }
+    }
+  </style>
+
   <!-- GSAP: async, non-render-blocking -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
@@ -128,10 +397,9 @@
             fetchpriority="high"
             onerror="this.parentElement.classList.add('photo-error')"
           />
-          <!-- Pop Art Mechatronics offset frame -->
+          <!-- Pop Art Mechatronics offset frame -->   
           <div class="hero-photo-frame" aria-hidden="true"></div>
         </div>
-
       </div>
 
       <!-- Backdrop text -->
@@ -140,28 +408,33 @@
 
     <section id="about">
       <div class="section-container">
+        <!-- Change 1: Headings always visible (no gsap-reveal) -->
         <span class="section-label text-label">Who I Am</span>
-        <h2 class="section-title text-h2 gsap-reveal">ABOUT ME</h2>
+        <h2 class="section-title text-h2">ABOUT ME</h2>
 
         <div class="about-grid">
           <div class="about-terminal-container">
-            <div class="terminal-window">
-              <div class="terminal-header">
-                <span class="terminal-dot red"></span>
-                <span class="terminal-dot yellow"></span>
-                <span class="terminal-dot green"></span>
-                <span class="terminal-title">bio.sh</span>
-              </div>
-              <div class="terminal-body">
-                <div class="terminal-loader">Last login: Tue Mar 04 08:00:00 on ttys001</div>
-                <p class="typing-text">Based in Pune, India, Anish Wagh is an engineer with a B.Tech. in Mechatronics and Automation Engineering from MIT ADT University. His technical foundation lies in the complex interplay between hardware, software, and user experience, cultivated through his early work on autonomous drones, cleaning robots, and robotic kinematics. Anish approaches technology not just as a set of tools, but as intricate systems to constantly explore, understand, and refine.</p>
-                <p class="typing-text">Professionally, Anish specializes in building robust software for next-generation connected appliances, ranging from scalable Business Logic Layers (BLL) to intuitive Android-based Human-Machine Interfaces (HMI). His technical philosophy is deeply rooted in precision and reliability. He ensures top-tier software quality and long-term maintainability by implementing rigorous pre-release testing, UI automation, and enforcing over 90% unit test coverage across core architectural components.</p>
-                <p class="typing-text">Anish’s professional goals center on architecting unbreakable, highly scalable software systems while expanding his impact in senior engineering roles. He is driven by a commitment to proactive problem-solving, de-risking critical development paths, and accelerating overall product velocity. Ultimately, he is looking to drive breakthrough technical innovations, mentor engineering teams, and deliver seamless systems that align with ambitious organizational goals.</p>
+            <!-- Change 4: Scroll tilt wrapper -->
+            <div class="scroll-tilt-wrapper">
+              <div class="terminal-window scroll-tilt">
+                <div class="terminal-header">
+                  <span class="terminal-dot red"></span>
+                  <span class="terminal-dot yellow"></span>
+                  <span class="terminal-dot green"></span>
+                  <span class="terminal-title">bio.sh</span>
+                </div>
+                <!-- Change 3: First person text + highlights -->
+                <div class="terminal-body">
+                  <div class="terminal-loader">Last login: Wed Mar 04 08:00:00 on ttys001</div>
+                  <p class="typing-text">I'm based in <span class="highlight">Pune, India</span> — an engineer with a <span class="highlight">B.Tech. in Mechatronics and Automation Engineering</span> from MIT ADT University. My foundation is built on the complex interplay between <span class="highlight">hardware, software, and user experience</span>, shaped through early work on autonomous drones, cleaning robots, and robotic kinematics.</p>
+                  <p class="typing-text">I specialize in building robust software for <span class="highlight">next-generation connected appliances</span> — from scalable <span class="highlight">Business Logic Layers (BLL)</span> to intuitive <span class="highlight">Android-based HMIs</span>. I enforce <span class="highlight">90%+ unit test coverage</span> across core architectural components through rigorous pre-release testing and UI automation.</p>
+                  <p class="typing-text">My goals center on architecting <span class="highlight">unbreakable, highly scalable systems</span> while growing into senior leadership roles. I'm driven by <span class="highlight">proactive problem-solving</span>, de-risking critical paths, and accelerating product velocity — ultimately to <span class="highlight">mentor engineering teams</span> and deliver seamless systems that move fast and never break.</p>
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="about-info-row">
+          <div class="about-info-row animate-on-scroll">
             <div class="about-stats">
               <div class="stat">
                 <span class="stat-number">3+</span>
@@ -176,20 +449,6 @@
                 <span class="stat-label">Code Integrity</span>
               </div>
             </div>
-
-            <div class="about-visual gsap-reveal">
-              <div class="about-photo-frame">
-                <img
-                  src="assets/images/hero-photo.png"
-                  alt="Anish Wagh"
-                  class="about-photo"
-                  width="400"
-                  height="500"
-                  loading="lazy"
-                />
-                <div class="about-photo-offset" aria-hidden="true"></div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -197,76 +456,76 @@
 
     <section id="projects">
       <div class="section-container">
+        <!-- Change 1: Headings always visible -->
         <span class="section-label text-label">What I've Built</span>
-        <h2 class="section-title text-h2 gsap-reveal">PROJECTS</h2>
+        <h2 class="section-title text-h2">PROJECTS</h2>
 
         <div class="projects-grid">
-        <article class="project-card card gsap-reveal">
-          <div class="project-thumbnail"></div>
-          <div class="project-content">
-            <div class="project-tags">
-              <span class="tag">ROS</span>
-              <span class="tag">GAZEBO</span>
-              <span class="tag">MoveIt</span>
-              <span class="tag">Kinematics</span>
+          <!-- Change 2: Clean uniform gallery grid (no placeholder) -->
+          <article class="project-card card animate-on-scroll">
+            <div class="project-content">
+              <div class="project-tags">
+                <span class="tag">ROS</span>
+                <span class="tag">GAZEBO</span>
+                <span class="tag">MoveIt</span>
+                <span class="tag">Kinematics</span>
+              </div>
+              <h3 class="project-title">6 D.O.F Robotic Arm Simulation</h3>
+              <p class="project-desc">Simulated a Franka's Panda articulated robotic arm for pick-and-place operations using ROS, GAZEBO, and MoveIt motion planning framework.</p>
+              <div class="project-links">
+                <a href="#" class="btn-ghost btn-sm" data-cursor>Live Demo</a>
+                <a href="#" class="btn-ghost btn-sm" data-cursor>GitHub</a>
+              </div>
             </div>
-            <h3 class="project-title">6 D.O.F Robotic Arm Simulation</h3>
-            <p class="project-desc">Simulated a Franka's Panda articulated robotic arm for pick-and-place operations using ROS, GAZEBO, and MoveIt motion planning framework.</p>
-            <div class="project-links">
-              <a href="#" class="btn-ghost btn-sm" data-cursor>Live Demo</a>
-              <a href="#" class="btn-ghost btn-sm" data-cursor>GitHub</a>
-            </div>
-          </div>
-        </article>
+          </article>
 
-        <article class="project-card card gsap-reveal">
-          <div class="project-thumbnail"></div>
-          <div class="project-content">
-            <div class="project-tags">
-              <span class="tag">ROS</span>
-              <span class="tag">Pixhawk</span>
-              <span class="tag">Robotics</span>
-              <span class="tag">Mission Planning</span>
+          <article class="project-card card animate-on-scroll">
+            <div class="project-content">
+              <div class="project-tags">
+                <span class="tag">ROS</span>
+                <span class="tag">Pixhawk</span>
+                <span class="tag">Robotics</span>
+                <span class="tag">Mission Planning</span>
+              </div>
+              <h3 class="project-title">Autonomous Drone (Level 4)</h3>
+              <p class="project-desc">Engineered an autonomous drone with level 4 autonomy, implementing autopilot software on a Pixhawk flight controller for mission planning.</p>
+              <div class="project-links">
+                <a href="#" class="btn-ghost btn-sm" data-cursor>Live Demo</a>
+                <a href="#" class="btn-ghost btn-sm" data-cursor>GitHub</a>
+              </div>
             </div>
-            <h3 class="project-title">Autonomous Drone (Level 4)</h3>
-            <p class="project-desc">Engineered an autonomous drone with level 4 autonomy, implementing autopilot software on a Pixhawk flight controller for mission planning.</p>
-            <div class="project-links">
-              <a href="#" class="btn-ghost btn-sm" data-cursor>Live Demo</a>
-              <a href="#" class="btn-ghost btn-sm" data-cursor>GitHub</a>
-            </div>
-          </div>
-        </article>
+          </article>
 
-        <article class="project-card card gsap-reveal">
-          <div class="project-thumbnail"></div>
-          <div class="project-content">
-            <div class="project-tags">
-              <span class="tag">ROS</span>
-              <span class="tag">SLAM</span>
-              <span class="tag">Mobile Robotics</span>
-              <span class="tag">Algorithms</span>
+          <article class="project-card card animate-on-scroll">
+            <div class="project-content">
+              <div class="project-tags">
+                <span class="tag">ROS</span>
+                <span class="tag">SLAM</span>
+                <span class="tag">Mobile Robotics</span>
+                <span class="tag">Algorithms</span>
+              </div>
+              <h3 class="project-title">Autonomous Cleaning Robot</h3>
+              <p class="project-desc">Developed a navigation stack and implemented SLAM techniques within the ROS framework for autonomous indoor cleaning operations.</p>
+              <div class="project-links">
+                <a href="#" class="btn-ghost btn-sm" data-cursor>Live Demo</a>
+                <a href="#" class="btn-ghost btn-sm" data-cursor>GitHub</a>
+              </div>
             </div>
-            <h3 class="project-title">Autonomous Cleaning Robot</h3>
-            <p class="project-desc">Developed a navigation stack and implemented SLAM techniques within the ROS framework for autonomous indoor cleaning operations.</p>
-            <div class="project-links">
-              <a href="#" class="btn-ghost btn-sm" data-cursor>Live Demo</a>
-              <a href="#" class="btn-ghost btn-sm" data-cursor>GitHub</a>
-            </div>
-          </div>
-        </article>
+          </article>
+        </div>
       </div>
     </section>
 
     <section id="skills">
       <div class="section-container">
-
+        <!-- Change 1: Headings always visible -->
         <span class="section-label">What I Work With</span>
         <h2 class="section-title">SKILLS &amp; STACK</h2>
 
+        <!-- Change 2: 2x2 balanced grid -->
         <div class="skills-grid">
-
           <!-- Category 1: Languages & OS -->
-          <div class="skill-category-card">
+          <div class="skill-category-card animate-on-scroll">
             <div class="skill-category-header">
               <span class="skill-category-icon">{ }</span>
               <h3 class="skill-category-title">Core Tech</h3>
@@ -292,7 +551,7 @@
           </div>
 
           <!-- Category 2: Frameworks & Testing -->
-          <div class="skill-category-card">
+          <div class="skill-category-card animate-on-scroll">
             <div class="skill-category-header">
               <span class="skill-category-icon">◈</span>
               <h3 class="skill-category-title">Frameworks</h3>
@@ -318,7 +577,7 @@
           </div>
 
           <!-- Category 3: Tools & Infrastructure -->
-          <div class="skill-category-card">
+          <div class="skill-category-card animate-on-scroll">
             <div class="skill-category-header">
               <span class="skill-category-icon">⚙</span>
               <h3 class="skill-category-title">Infrastructure</h3>
@@ -344,7 +603,7 @@
           </div>
 
           <!-- Category 4: Mechatronics & Hardware -->
-          <div class="skill-category-card skill-category-card--accent">
+          <div class="skill-category-card skill-category-card--accent animate-on-scroll">
             <div class="skill-category-header">
               <span class="skill-category-icon">⬡</span>
               <h3 class="skill-category-title">Mechatronics</h3>
@@ -368,120 +627,140 @@
               </li>
             </ul>
           </div>
-
         </div>
       </div>
     </section>
 
     <section id="experience">
       <div class="section-container">
+        <!-- Change 1: Headings always visible -->
         <span class="section-label text-label">Where I've Worked</span>
-        <h2 class="section-title text-h2 gsap-reveal">EXPERIENCE</h2>
+        <h2 class="section-title text-h2">EXPERIENCE</h2>
 
-        <div class="experience-timeline">
-        <!-- Experience 1: Senior Software Engineer -->
-        <article class="experience-entry gsap-reveal">
-          <div class="experience-meta">
-            <span class="experience-date text-label">Oct 2025 — Present</span>
-            <div class="experience-connector"></div>
+        <div class="timeline-container" id="experience-timeline">
+          <div class="timeline-track">
+            <div class="timeline-line-bg"></div>
+            <div class="timeline-line-fill" id="timeline-fill"></div>
           </div>
-          <div class="experience-content">
-            <h3 class="experience-company">Whirlpool Corporation</h3>
-            <p class="experience-role">Senior Software Engineer</p>
-            <ul class="experience-bullets">
-              <li>Achieved high reliability for the Cooking Business Logic Layer (BLL) by attaining over 90% function coverage through 76+ unit tests using Google Test and FFF.</li>
-              <li>Accelerated onboarding for new engineers by creating detailed technical documentation and UML diagrams for ZCore components like View Adapter and Nucleus Facade.</li>
-              <li>Ensured zero production disruption during platform advancement by proactively resolving 8+ critical defects prior to delivery via end-to-end BLL integration.</li>
-            </ul>
-            <div class="experience-tech">
-              <span class="tag">C++</span>
-              <span class="tag">Zephyr OS</span>
-              <span class="tag">Google Test</span>
-              <span class="tag">UML</span>
+
+          <div class="timeline-entries">
+
+            <div class="timeline-entry">
+              <div class="timeline-left">
+                <span class="timeline-date">OCT 2025<br>PRESENT</span>
+                <div class="timeline-dot"></div>
+              </div>
+              <div class="timeline-right">
+                <h3 class="timeline-company">Whirlpool Corporation</h3>
+                <p class="timeline-role">Senior Software Engineer</p>
+                <ul class="timeline-bullets">
+                  <li>Achieved <span class="hl">90%+ function coverage</span> for the Cooking BLL through 76+ unit tests using Google Test and FFF.</li>
+                  <li>Accelerated onboarding by creating detailed <span class="hl">UML diagrams and technical documentation</span> for ZCore components.</li>
+                  <li>Ensured <span class="hl">zero production disruption</span> by resolving 8+ critical defects via end-to-end BLL integration before delivery.</li>
+                </ul>
+                <div class="timeline-tags">
+                  <span class="tag">C++</span>
+                  <span class="tag">Zephyr OS</span>
+                  <span class="tag">Google Test</span>
+                  <span class="tag">UML</span>
+                </div>
+              </div>
             </div>
-          </div>
-        </article>
-        <!-- Experience 2: Specialist Software Engineer -->
-        <article class="experience-entry gsap-reveal">
-          <div class="experience-meta">
-            <span class="experience-date text-label">Aug 2023 — Oct 2025</span>
-            <div class="experience-connector"></div>
-          </div>
-          <div class="experience-content">
-            <h3 class="experience-company">Whirlpool Corporation</h3>
-            <p class="experience-role">Specialist Software Engineer</p>
-            <ul class="experience-bullets">
-              <li>Achieved a 30% improvement in testing throughput by creating dedicated bench setups for KitchenAid Wall Ovens (Single, Double, and Combo).</li>
-              <li>Improved UI test reliability by reaching a 92% pass rate across 600+ test cases through enhancement of the UI automation framework.</li>
-              <li>Enhanced user experience for Wave 2 release by reducing recipe initiation steps by 20% through the implementation of the "Menu First Flow".</li>
-            </ul>
-            <div class="experience-tech">
-              <span class="tag">Android</span>
-              <span class="tag">Kotlin</span>
-              <span class="tag">Java</span>
-              <span class="tag">Cucumber</span>
+
+            <div class="timeline-entry">
+              <div class="timeline-left">
+                <span class="timeline-date">AUG 2023<br>OCT 2025</span>
+                <div class="timeline-dot"></div>
+              </div>
+              <div class="timeline-right">
+                <h3 class="timeline-company">Whirlpool Corporation</h3>
+                <p class="timeline-role">Specialist Software Engineer</p>
+                <ul class="timeline-bullets">
+                  <li>Achieved <span class="hl">30% improvement in testing throughput</span> by building dedicated bench setups for KitchenAid Wall Ovens.</li>
+                  <li>Reached <span class="hl">92% pass rate across 600+ test cases</span> through UI automation framework enhancement.</li>
+                  <li>Reduced recipe initiation steps by <span class="hl">20% via "Menu First Flow"</span> implementation for Wave 2 release.</li>
+                </ul>
+                <div class="timeline-tags">
+                  <span class="tag">Android</span>
+                  <span class="tag">Kotlin</span>
+                  <span class="tag">Java</span>
+                  <span class="tag">Cucumber</span>
+                </div>
+              </div>
             </div>
-          </div>
-        </article>
-        <!-- Experience 3: Intern -->
-        <article class="experience-entry gsap-reveal">
-          <div class="experience-meta">
-            <span class="experience-date text-label">Jan 2023 — Jul 2023</span>
-            <div class="experience-connector"></div>
-          </div>
-          <div class="experience-content">
-            <h3 class="experience-company">Whirlpool Corporation</h3>
-            <p class="experience-role">Software Engineer Intern</p>
-            <ul class="experience-bullets">
-              <li>Achieved scalable automated functional testing by developing a CSV-driven test execution system for Appliance HMI to Control Unit communication.</li>
-              <li>Minimized turnaround time and eliminated on-site dependency by designing a remote-accessible Raspberry Pi bench setup with real-time camera feed.</li>
-              <li>Automated integration testing for connected appliances using C# and .NET on Raspberry Pi hardware.</li>
-            </ul>
-            <div class="experience-tech">
-              <span class="tag">C#</span>
-              <span class="tag">.NET</span>
-              <span class="tag">Raspberry Pi</span>
-              <span class="tag">Automation</span>
+
+            <div class="timeline-entry">
+              <div class="timeline-left">
+                <span class="timeline-date">JAN 2023<br>JUL 2023</span>
+                <div class="timeline-dot"></div>
+              </div>
+              <div class="timeline-right">
+                <h3 class="timeline-company">Whirlpool Corporation</h3>
+                <p class="timeline-role">Software Engineer Intern</p>
+                <ul class="timeline-bullets">
+                  <li>Built a <span class="hl">CSV-driven automated test execution system</span> for Appliance HMI to Control Unit communication.</li>
+                  <li>Designed a <span class="hl">remote-accessible Raspberry Pi bench</span> with real-time camera feed, eliminating on-site dependency.</li>
+                  <li>Automated integration testing for connected appliances using <span class="hl">C# and .NET on Raspberry Pi</span> hardware.</li>
+                </ul>
+                <div class="timeline-tags">
+                  <span class="tag">C#</span>
+                  <span class="tag">.NET</span>
+                  <span class="tag">Raspberry Pi</span>
+                  <span class="tag">Automation</span>
+                </div>
+              </div>
             </div>
+
           </div>
-        </article>
-      </div>
+        </div>
       </div>
     </section>
 
     <section id="gallery">
       <div class="section-container">
+        <!-- Change 1: Headings always visible -->
         <span class="section-label text-label">Visual Diary</span>
-        <h2 class="section-title text-h2 gsap-reveal">FIELD WORK</h2>
-        <p class="section-subtitle text-body gsap-reveal">Engineering through the lens: a look at my technical adventures and projects.</p>
+        <h2 class="section-title text-h2">FIELD WORK</h2>
         
-        <div class="gallery-coverflow-wrapper">
-          <div class="gallery-coverflow">
-            <div class="gallery-item-3d active" data-index="0">
-              <img src="assets/images/oven.png" alt="Engineering Work - Oven Project">
-              <div class="item-overlay"><span class="text-label">KitchenAid Project</span></div>
-            </div>
-            <div class="gallery-item-3d" data-index="1">
-              <img src="assets/images/trophie.png" alt="Achievements and Awards">
-              <div class="item-overlay"><span class="text-label">Recognition</span></div>
-            </div>
-            <div class="gallery-item-3d" data-index="2">
-              <img src="assets/images/Gemini_Generated_Image_2j6izg2j6izg2j6i.png" alt="Robotics Concept">
-              <div class="item-overlay"><span class="text-label">Robotics Simulation</span></div>
-            </div>
-            <div class="gallery-item-3d" data-index="3">
-              <img src="assets/images/Gemini_Generated_Image_5kyj205kyj205kyj.png" alt="Mechatronics Visualization">
-              <div class="item-overlay"><span class="text-label">System Design</span></div>
-            </div>
-          </div>
+        <p class="gallery-subtitle">Engineering through the lens — scroll to rotate</p>
 
-          <div class="gallery-controls">
-            <button class="gallery-btn prev" aria-label="Previous image">
-              <span class="btn-icon">←</span>
-            </button>
-            <button class="gallery-btn next" aria-label="Next image">
-              <span class="btn-icon">→</span>
-            </button>
+        <div class="circular-gallery-scene" id="circular-gallery">
+          <div class="circular-gallery-ring" id="gallery-ring">
+
+            <div class="cg-card">
+              <img src="assets/images/oven.png" alt="KitchenAid Project" loading="lazy">
+              <div class="cg-label">
+                <span class="cg-title">KitchenAid Project</span>
+                <span class="cg-sub">Connected Appliance HMI</span>
+              </div>
+            </div>
+
+            <div class="cg-card">
+              <img src="assets/images/trophie.png" alt="Recognition" loading="lazy">
+              <div class="cg-label">
+                <span class="cg-title">Recognition</span>
+                <span class="cg-sub">Awards & Achievements</span>
+              </div>
+            </div>
+
+            <div class="cg-card">
+              <img src="assets/images/Gemini_Generated_Image_2j6izg2j6izg2j6i.png" 
+                   alt="Robotics Simulation" loading="lazy">
+              <div class="cg-label">
+                <span class="cg-title">Robotics Simulation</span>
+                <span class="cg-sub">6 DOF Arm — ROS & Gazebo</span>
+              </div>
+            </div>
+
+            <div class="cg-card">
+              <img src="assets/images/Gemini_Generated_Image_5kyj205kyj205kyj.png" 
+                   alt="System Design" loading="lazy">
+              <div class="cg-label">
+                <span class="cg-title">System Design</span>
+                <span class="cg-sub">Mechatronics Architecture</span>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -489,11 +768,12 @@
 
     <section id="contact">
       <div class="section-container">
+        <!-- Change 1: Headings always visible -->
         <span class="section-label text-label">LET'S BUILD</span>
-        <h2 class="section-title text-h2 gsap-reveal">LET'S BUILD</h2>
+        <h2 class="section-title text-h2">LET'S BUILD</h2>
 
         <div class="contact-grid">
-          <div class="contact-info">
+          <div class="contact-info animate-on-scroll">
             <p class="text-h3">Let's build something exceptional.</p>
             <ul class="text-body">
               <li><a href="https://github.com/anishwagh" target="_blank" rel="noopener">GitHub</a></li>
@@ -502,7 +782,7 @@
               <li><a href="mailto:placeholder@example.com">Email</a></li>
             </ul>
           </div>
-          <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="animate-on-scroll">
             <input type="text" name="name" placeholder="Name" required class="text-body">
             <input type="email" name="email" placeholder="Email" required class="text-body">
             <select name="budget" class="text-body" required>
@@ -527,9 +807,117 @@
   <script src="assets/js/cursor.js"></script>
   <script src="assets/js/nav.js"></script>
   <script src="assets/js/about-typing.js"></script>
-  <script src="assets/js/gallery.js"></script>
   <script src="assets/js/contact.js"></script>
   <script src="assets/js/animations.js"></script>
   <script src="assets/js/main.js"></script>
+
+  <script>
+    (function() {
+      // ── TIMELINE SCROLL ANIMATION ──────────────────
+      function initTimeline() {
+        var container = document.getElementById('experience-timeline');
+        if (!container) return;
+
+        var fill = document.getElementById('timeline-fill');
+        var entries = document.querySelectorAll('.timeline-entry');
+
+        // Animate fill line based on scroll progress through the timeline container
+        function updateTimeline() {
+          var rect = container.getBoundingClientRect();
+          var containerHeight = container.offsetHeight;
+          var vh = window.innerHeight;
+
+          // Progress: 0 when container top hits viewport bottom, 1 when container bottom hits viewport top
+          var start = rect.top - vh;
+          var end = rect.bottom;
+          var progress = Math.max(0, Math.min(1, -start / (end - start)));
+
+          if (fill) {
+            fill.style.height = (progress * 100) + '%';
+          }
+
+          // Reveal each entry when it's 80% into the viewport
+          entries.forEach(function(entry) {
+            var eRect = entry.getBoundingClientRect();
+            if (eRect.top < vh * 0.85) {
+              entry.classList.add('tl-visible');
+            }
+          });
+        }
+
+        window.addEventListener('scroll', updateTimeline, { passive: true });
+        updateTimeline(); // run once immediately
+      }
+
+      // ── CIRCULAR 3D GALLERY ────────────────────────
+      function initCircularGallery() {
+        var ring = document.getElementById('gallery-ring');
+        if (!ring) return;
+
+        var cards = ring.querySelectorAll('.cg-card');
+        var count = cards.length;
+        var radius = 420; // translateZ distance — controls how spread out the circle is
+        var anglePerCard = 360 / count;
+
+        // Position each card in 3D circle
+        cards.forEach(function(card, i) {
+          var angle = i * anglePerCard;
+          card.style.transform = 'rotateY(' + angle + 'deg) translateZ(' + radius + 'px)';
+          // Adjust opacity based on angle position
+          card.dataset.angle = angle;
+        });
+
+        // Rotation state
+        var currentRotation = 0;
+        var autoSpeed = 0.18;       // degrees per frame auto-rotate
+        var lastScrollY = window.scrollY;
+        var scrollVelocity = 0;
+        var scrollDecay = 0.92;     // how quickly scroll momentum fades
+
+        // Track scroll velocity
+        window.addEventListener('scroll', function() {
+          var delta = window.scrollY - lastScrollY;
+          scrollVelocity = delta * 0.4; // scale scroll to rotation speed
+          lastScrollY = window.scrollY;
+        }, { passive: true });
+
+        // Animation loop
+        function animate() {
+          // Combine auto-rotate with scroll velocity
+          currentRotation += autoSpeed + scrollVelocity;
+          scrollVelocity *= scrollDecay; // decay scroll momentum
+
+          // Apply rotation to the ring
+          ring.style.transform = 'rotateY(' + currentRotation + 'deg)';
+
+          // Update card opacity based on their facing angle
+          // (cards facing camera = full opacity, facing away = dim)
+          cards.forEach(function(card, i) {
+            var cardAngle = i * anglePerCard;
+            // Relative angle to current rotation (normalized 0-360)
+            var rel = ((cardAngle + currentRotation) % 360 + 360) % 360;
+            // 0 = facing camera, 180 = facing away
+            var facing = rel > 180 ? 360 - rel : rel;
+            var opacity = Math.max(0.25, 1 - (facing / 180) * 0.75);
+            card.style.opacity = opacity;
+          });
+
+          requestAnimationFrame(animate);
+        }
+
+        animate();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+          initTimeline();
+          initCircularGallery();
+        });
+      } else {
+        initTimeline();
+        initCircularGallery();
+      }
+    })();
+  </script>
 </body>
 </html>

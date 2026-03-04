@@ -3,39 +3,43 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
-  margin-top: var(--space-lg);
-  position: relative;
+  margin-top: 40px;
+  min-height: 0;
   padding-bottom: var(--space-xl);
+  position: relative;
 }
 
 /* Vertical line */
 .experience-timeline::before {
-  content: '';
-  position: absolute;
-  left: 120px;
-  top: 0; bottom: 0;
-  width: 2px;
   background: var(--color-border);
+  bottom: 0;
+  content: '';
+  height: 100%;
+  left: 120px;
+  position: absolute;
+  top: 0;
+  width: 2px;
 }
 
 .experience-entry {
   display: grid;
-  grid-template-columns: 120px 1fr;
   gap: var(--space-md);
-  position: relative;
+  grid-template-columns: 120px 1fr;
+  min-height: 0;
   opacity: 1; /* always visible */
+  position: relative;
 }
 
 /* Timeline dot */
 .experience-entry::before {
+  background: var(--color-black);
+  border: 2px solid var(--color-lime);
   content: '';
-  position: absolute;
+  height: 18px;
   left: 112px;
+  position: absolute;
   top: 6px;
   width: 18px;
-  height: 18px;
-  border: 2px solid var(--color-lime);
-  background: var(--color-black);
   z-index: 1;
 }
 
@@ -44,29 +48,29 @@
 }
 
 .experience-date {
+  color: var(--color-teal);
   display: block;
-  text-align: right;
-  padding-right: var(--space-md);
   font-family: var(--font-body);
   font-size: 0.75rem;
-  color: var(--color-teal);
   letter-spacing: 0.04em;
+  padding-right: var(--space-md);
+  text-align: right;
   text-transform: uppercase;
 }
 
 .experience-company {
+  color: var(--color-lime);
   font-family: var(--font-display);
   font-size: 2rem;
-  color: var(--color-lime);
   letter-spacing: 0.04em;
   line-height: 1;
   margin-bottom: 4px;
 }
 
 .experience-role {
+  color: var(--color-cyan);
   font-family: var(--font-body);
   font-size: 1rem;
-  color: var(--color-cyan);
   font-weight: 700;
   letter-spacing: 0.04em;
   margin-bottom: var(--space-sm);
@@ -74,10 +78,10 @@
 }
 
 .experience-bullets {
-  list-style: none;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
+  list-style: none;
   margin-bottom: var(--space-sm);
   padding-left: 0;
 }
@@ -92,10 +96,10 @@
 }
 
 .experience-bullets li::before {
-  content: '→';
-  position: absolute;
-  left: 0;
   color: var(--color-teal);
+  content: '→';
+  left: 0;
+  position: absolute;
 }
 
 .experience-tech {
@@ -111,8 +115,8 @@
   }
 
   .experience-entry {
-    grid-template-columns: 1fr;
     gap: var(--space-sm);
+    grid-template-columns: 1fr;
   }
 
   .experience-entry::before {
@@ -120,9 +124,9 @@
   }
 
   .experience-date {
-    text-align: left;
-    padding-right: 0;
     margin-bottom: 4px;
+    padding-right: 0;
+    text-align: left;
   }
 
   .experience-company {

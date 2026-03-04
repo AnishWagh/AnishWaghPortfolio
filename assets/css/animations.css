@@ -16,9 +16,21 @@
 
 .gsap-reveal {
   opacity: 0;
+  transform: translateY(20px);
   visibility: hidden;
 }
 
 .js-enabled .gsap-reveal {
   visibility: visible;
+}
+
+/* Change 4: Scroll Tilt Animation */
+.scroll-tilt {
+  transition: transform 0.1s linear;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.scroll-tilt-wrapper {
+  perspective: 1200px;
+  perspective-origin: center center;
 }

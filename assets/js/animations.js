@@ -21,14 +21,25 @@ document.addEventListener('DOMContentLoaded', () => {
   // toggleActions: "onEnter onLeave onEnterBack onLeaveBack"
   const BIDIRECTIONAL = 'play reverse play reverse'; // Fades in and out (Experience only)
   const PLAY_ONCE     = 'play none none none';      // Reveal once, then stay
-  const SCROLL_START  = 'top 85%';
-  const SCROLL_END    = 'top 20%';
+  const SCROLL_START  = 'top 95%';
+  const SCROLL_END    = 'top 5%';
+
+  // ── GUARANTEED FALLBACK ──
+  setTimeout(function() {
+    document.querySelectorAll('[class*="gsap-reveal"], [class*="animate"], [class*="reveal"], [class*="fade"]')
+      .forEach(function(el) {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+        el.style.visibility = 'visible';
+        el.style.transition = 'none';
+      });
+  }, 1200);
 
   // ── HERO: Character stagger on page load ──
   const heroLetters = document.querySelectorAll('#hero .hero-name span');
   if (heroLetters.length) {
     gsap.from(heroLetters, {
-      y: 100,
+      y: 40,
       opacity: 0,
       duration: 0.8,
       stagger: 0.04,
@@ -39,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   gsap.from('#hero .hero-role', {
-    x: -50,
+    x: -30,
     opacity: 0,
     duration: 0.7,
     ease: 'power3.out',
@@ -48,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   gsap.from('#hero .hero-tagline', {
-    y: 25,
+    y: 20,
     opacity: 0,
     duration: 0.6,
     ease: 'power2.out',
@@ -57,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   gsap.from('#hero .hero-cta', {
-    y: 20,
+    y: 15,
     opacity: 0,
     duration: 0.5,
     ease: 'power2.out',
@@ -65,8 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
     clearProps: 'all'
   });
 
-  // ── SECTION LABELS ──
-  gsap.utils.toArray('.section-label').forEach(el => {
+  // ── SECTION LABELS (NOTE: Removed gsap-reveal from HTML, but keep JS logic for progressive enhancement if class exists) ──
+  gsap.utils.toArray('.section-label.gsap-reveal').forEach(el => {
     gsap.from(el, {
       scrollTrigger: {
         trigger: el,
@@ -82,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ── SECTION TITLES ──
-  gsap.utils.toArray('.section-title').forEach(el => {
+  gsap.utils.toArray('.section-title.gsap-reveal').forEach(el => {
     gsap.from(el, {
       scrollTrigger: {
         trigger: el,
@@ -98,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ── ABOUT SECTION ──
-  const aboutText   = document.querySelector('#about .about-text');
+  const aboutText   = document.querySelector('#about .about-terminal-container');
   const aboutVisual = document.querySelector('#about .about-visual');
 
   if (aboutText) {
@@ -113,22 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
       opacity: 0,
       duration: 0.7,
       ease: 'power3.out'
-    });
-  }
-
-  if (aboutVisual) {
-    gsap.from(aboutVisual, {
-      scrollTrigger: {
-        trigger: '#about',
-        start: 'top 78%',
-        end: 'top 25%',
-        toggleActions: PLAY_ONCE
-      },
-      x: 60,
-      opacity: 0,
-      duration: 0.7,
-      ease: 'power3.out',
-      delay: 0.15
     });
   }
 
@@ -178,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
         end: 'top 25%',
         toggleActions: BIDIRECTIONAL
       },
-      x: i % 2 === 0 ? -55 : 55,
+      x: i % 2 === 0 ? -20 : 20,
       opacity: 0,
       duration: 0.6,
       ease: 'power2.out'
@@ -220,25 +215,54 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ── GALLERY SECTION ──
-  const galleryWrapper = document.querySelector('.gallery-coverflow-wrapper');
-  if (galleryWrapper) {
-    gsap.from(galleryWrapper, {
-      scrollTrigger: {
-        trigger: '#gallery',
-        start: 'top 80%',
-        toggleActions: PLAY_ONCE
-      },
-      opacity: 0,
-      scale: 0.9,
-      duration: 1,
-      ease: 'power2.out'
-    });
-  }
-
   // ── REFRESH ON LOAD ──
   window.addEventListener('load', () => {
     ScrollTrigger.refresh();
   });
 
 });
+
+// ── CHANGE 4: 3D SCROLL TILT ─────────────────────────────────────
+(function() {
+  // 3D scroll tilt — rotates element from rotateX(18deg) to rotateX(0deg) 
+  // as user scrolls element into view. Mimics Aceternity ContainerScroll.
+  function initScrollTilt() {
+    var tilts = document.querySelectorAll('.scroll-tilt');
+    if (!tilts.length) return;
+
+    function updateTilts() {
+      var scrollY = window.scrollY;
+      var vh = window.innerHeight;
+
+      tilts.forEach(function(el) {
+        var rect = el.getBoundingClientRect();
+        // progress: 0 when element top is at viewport bottom, 1 when at viewport top
+        var progress = 1 - (rect.top / vh);
+        progress = Math.max(0, Math.min(1, progress));
+
+        // rotateX goes from 18deg (element entering) to 0deg (element in view)
+        var rotateX = 18 * (1 - progress);
+        // scale goes from 0.92 to 1.0
+        var scale = 0.92 + (0.08 * progress);
+        // slight translateY upward as it comes in
+        var translateY = 30 * (1 - progress);
+
+        el.style.transform = 
+          'rotateX(' + rotateX + 'deg) ' +
+          'scale(' + scale + ') ' +
+          'translateY(' + translateY + 'px)';
+        el.style.opacity = Math.max(0.3, progress * 1.4);
+      });
+    }
+
+    window.addEventListener('scroll', updateTilts, { passive: true });
+    updateTilts(); // run once on load
+  }
+
+  // Run after DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScrollTilt);
+  } else {
+    initScrollTilt();
+  }
+})();

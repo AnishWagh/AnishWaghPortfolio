@@ -3,26 +3,20 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
-  margin-top: var(--space-lg);
+  margin-top: 40px;
 }
 
 .about-terminal-container {
   width: 100%;
+  min-height: 0;
 }
 
 .about-info-row {
-  align-items: flex-start;
+  align-items: center;
   display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
-}
-
-@media (min-width: 768px) {
-  .about-info-row {
-    flex-direction: row;
-  }
+  min-height: 0;
 }
 
 .about-text {
@@ -30,6 +24,7 @@
   flex-direction: column;
   gap: var(--space-md);
   opacity: 1;
+  min-height: 0;
 }
 
 /* TERMINAL WINDOW */
@@ -73,8 +68,14 @@
 
 .terminal-body {
   line-height: 1.8;
-  min-height: 250px;
+  min-height: 0; /* Change 5: Remove min-height */
   padding: 20px;
+}
+
+/* Change 3: highlight styling */
+.terminal-body .highlight {
+  color: #00d4d4;
+  font-weight: 700;
 }
 
 .terminal-loader {
@@ -117,10 +118,11 @@
 .about-stats {
   border-top: 1px solid var(--color-border);
   display: flex;
-  flex: 1;
   gap: var(--space-lg);
+  justify-content: center;
   margin-top: var(--space-md);
   padding-top: var(--space-md);
+  width: 100%;
 }
 
 .stat-number {
@@ -139,48 +141,6 @@
   letter-spacing: 0.08em;
   margin-top: 4px;
   text-transform: uppercase;
-}
-
-.about-visual {
-  flex: 0 0 350px;
-  max-width: 100%;
-}
-
-.about-photo-frame {
-  opacity: 1;
-  position: relative;
-}
-
-.about-photo {
-  aspect-ratio: 1 / 1;
-  border: 2px solid var(--color-teal);
-  display: block;
-  filter: grayscale(100%) contrast(1.1);
-  object-fit: cover;
-  object-position: 50% 25%;
-  position: relative;
-  transition: filter var(--transition-smooth);
-  width: 100%;
-  z-index: 2;
-}
-
-.about-photo-frame:hover .about-photo {
-  filter: grayscale(0%) contrast(1);
-}
-
-.about-photo-offset {
-  border: 2px solid var(--color-cyan);
-  height: 100%;
-  left: 12px;
-  position: absolute;
-  top: 12px;
-  transition: transform var(--transition-smooth);
-  width: 100%;
-  z-index: 1;
-}
-
-.about-photo-frame:hover .about-photo-offset {
-  transform: translate(4px, 4px);
 }
 
 @media (max-width: 768px) {
