@@ -32,6 +32,7 @@
   <!-- GSAP: async, non-render-blocking -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js" defer></script>
 </head>
 <body>
   
@@ -143,11 +144,24 @@
         <h2 class="section-title text-h2 gsap-reveal">ABOUT ME</h2>
 
         <div class="about-grid">
-          <div class="about-text text-body gsap-reveal">
-            <p>Based in Pune, India, Anish Wagh is an engineer with a B.Tech. in Mechatronics and Automation Engineering from MIT ADT University. His technical foundation lies in the complex interplay between hardware, software, and user experience, cultivated through his early work on autonomous drones, cleaning robots, and robotic kinematics. Anish approaches technology not just as a set of tools, but as intricate systems to constantly explore, understand, and refine.</p>
-            <p>Professionally, Anish specializes in building robust software for next-generation connected appliances, ranging from scalable Business Logic Layers (BLL) to intuitive Android-based Human-Machine Interfaces (HMI). His technical philosophy is deeply rooted in precision and reliability. He ensures top-tier software quality and long-term maintainability by implementing rigorous pre-release testing, UI automation, and enforcing over 90% unit test coverage across core architectural components.</p>
-            <p>Anish’s professional goals center on architecting unbreakable, highly scalable software systems while expanding his impact in senior engineering roles. He is driven by a commitment to proactive problem-solving, de-risking critical development paths, and accelerating overall product velocity. Ultimately, he is looking to drive breakthrough technical innovations, mentor engineering teams, and deliver seamless systems that align with ambitious organizational goals.</p>
+          <div class="about-terminal-container">
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span class="terminal-dot red"></span>
+                <span class="terminal-dot yellow"></span>
+                <span class="terminal-dot green"></span>
+                <span class="terminal-title">bio.sh</span>
+              </div>
+              <div class="terminal-body">
+                <div class="terminal-loader">Last login: Tue Mar 04 08:00:00 on ttys001</div>
+                <p class="typing-text">Based in Pune, India, Anish Wagh is an engineer with a B.Tech. in Mechatronics and Automation Engineering from MIT ADT University. His technical foundation lies in the complex interplay between hardware, software, and user experience, cultivated through his early work on autonomous drones, cleaning robots, and robotic kinematics. Anish approaches technology not just as a set of tools, but as intricate systems to constantly explore, understand, and refine.</p>
+                <p class="typing-text">Professionally, Anish specializes in building robust software for next-generation connected appliances, ranging from scalable Business Logic Layers (BLL) to intuitive Android-based Human-Machine Interfaces (HMI). His technical philosophy is deeply rooted in precision and reliability. He ensures top-tier software quality and long-term maintainability by implementing rigorous pre-release testing, UI automation, and enforcing over 90% unit test coverage across core architectural components.</p>
+                <p class="typing-text">Anish’s professional goals center on architecting unbreakable, highly scalable software systems while expanding his impact in senior engineering roles. He is driven by a commitment to proactive problem-solving, de-risking critical development paths, and accelerating overall product velocity. Ultimately, he is looking to drive breakthrough technical innovations, mentor engineering teams, and deliver seamless systems that align with ambitious organizational goals.</p>
+              </div>
+            </div>
+          </div>
 
+          <div class="about-info-row">
             <div class="about-stats">
               <div class="stat">
                 <span class="stat-number">3+</span>
@@ -162,19 +176,19 @@
                 <span class="stat-label">Code Integrity</span>
               </div>
             </div>
-          </div>
 
-          <div class="about-visual gsap-reveal">
-            <div class="about-photo-frame">
-              <img
-                src="assets/images/hero-photo.png"
-                alt="Anish Wagh"
-                class="about-photo"
-                width="400"
-                height="500"
-                loading="lazy"
-              />
-              <div class="about-photo-offset" aria-hidden="true"></div>
+            <div class="about-visual gsap-reveal">
+              <div class="about-photo-frame">
+                <img
+                  src="assets/images/hero-photo.png"
+                  alt="Anish Wagh"
+                  class="about-photo"
+                  width="400"
+                  height="500"
+                  loading="lazy"
+                />
+                <div class="about-photo-offset" aria-hidden="true"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -512,6 +526,7 @@
 
   <script src="assets/js/cursor.js"></script>
   <script src="assets/js/nav.js"></script>
+  <script src="assets/js/about-typing.js"></script>
   <script src="assets/js/gallery.js"></script>
   <script src="assets/js/contact.js"></script>
   <script src="assets/js/animations.js"></script>
