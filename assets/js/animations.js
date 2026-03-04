@@ -4,7 +4,6 @@
  * ARCHITECTURE RULE: All content is visible by default (CSS).
  * GSAP only adds motion on top. If GSAP fails to load,
  * the entire site still renders correctly.
- * 
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -12,23 +11,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── GSAP GUARD ──────────────────────────────────────────────────
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
     console.warn('[Portfolio] GSAP not loaded — static fallback active');
+    // Fallback is handled by main.js and CSS
     return;
   }
 
   gsap.registerPlugin(ScrollTrigger);
 
   // ── SCROLL BEHAVIOUR CONFIG ──────────────────────────────────────
-  // toggleActions: "onEnter onLeave onEnterBack onLeaveBack"
-  const BIDIRECTIONAL = 'play reverse play reverse'; // Fades in and out (Experience only)
-  const PLAY_ONCE     = 'play none none none';      // Reveal once, then stay
-  const SCROLL_START  = 'top 85%';
-  const SCROLL_END    = 'top 20%';
+  // threshold: 0.05 equivalent via start positioning
+  const SCROLL_START  = 'top 95%'; // Fires earlier
+  const PLAY_ONCE     = 'play none none none';
 
   // ── HERO: Character stagger on page load ──
   const heroLetters = document.querySelectorAll('#hero .hero-name span');
   if (heroLetters.length) {
     gsap.from(heroLetters, {
-      y: 100,
+      y: 40,
       opacity: 0,
       duration: 0.8,
       stagger: 0.04,
@@ -39,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   gsap.from('#hero .hero-role', {
-    x: -50,
+    x: -30,
     opacity: 0,
     duration: 0.7,
     ease: 'power3.out',
@@ -48,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   gsap.from('#hero .hero-tagline', {
-    y: 25,
+    y: 20,
     opacity: 0,
     duration: 0.6,
     ease: 'power2.out',
@@ -57,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   gsap.from('#hero .hero-cta', {
-    y: 20,
+    y: 15,
     opacity: 0,
     duration: 0.5,
     ease: 'power2.out',
@@ -65,176 +63,37 @@ document.addEventListener('DOMContentLoaded', () => {
     clearProps: 'all'
   });
 
-  // ── SECTION LABELS ──
-  gsap.utils.toArray('.section-label').forEach(el => {
+  // ── GENERAL SCROLL REVEALS ──
+  gsap.utils.toArray('.animate-on-scroll').forEach(el => {
     gsap.from(el, {
       scrollTrigger: {
         trigger: el,
         start: SCROLL_START,
-        end: SCROLL_END,
-        toggleActions: PLAY_ONCE
+        toggleActions: PLAY_ONCE,
+        onEnter: () => el.classList.add('is-visible')
       },
       opacity: 0,
-      y: 15,
-      duration: 0.4,
-      ease: 'power2.out'
-    });
-  });
-
-  // ── SECTION TITLES ──
-  gsap.utils.toArray('.section-title').forEach(el => {
-    gsap.from(el, {
-      scrollTrigger: {
-        trigger: el,
-        start: SCROLL_START,
-        end: SCROLL_END,
-        toggleActions: PLAY_ONCE
-      },
-      x: -70,
-      opacity: 0,
-      duration: 0.65,
-      ease: 'power3.out'
-    });
-  });
-
-  // ── ABOUT SECTION ──
-  const aboutText   = document.querySelector('#about .about-text');
-  const aboutVisual = document.querySelector('#about .about-visual');
-
-  if (aboutText) {
-    gsap.from(aboutText, {
-      scrollTrigger: {
-        trigger: '#about',
-        start: 'top 78%',
-        end: 'top 25%',
-        toggleActions: PLAY_ONCE
-      },
-      x: -60,
-      opacity: 0,
-      duration: 0.7,
-      ease: 'power3.out'
-    });
-  }
-
-  if (aboutVisual) {
-    gsap.from(aboutVisual, {
-      scrollTrigger: {
-        trigger: '#about',
-        start: 'top 78%',
-        end: 'top 25%',
-        toggleActions: PLAY_ONCE
-      },
-      x: 60,
-      opacity: 0,
-      duration: 0.7,
-      ease: 'power3.out',
-      delay: 0.15
-    });
-  }
-
-  // ── PROJECTS SECTION ──
-  const projectCards = document.querySelectorAll('.project-card');
-  projectCards.forEach((card, i) => {
-    gsap.from(card, {
-      scrollTrigger: {
-        trigger: card,
-        start: 'top 88%',
-        end: 'top 30%',
-        toggleActions: PLAY_ONCE
-      },
-      y: 70,
-      opacity: 0,
+      y: 20,
       duration: 0.6,
-      delay: i * 0.1,
       ease: 'power2.out'
     });
   });
 
-  // ── SKILLS SECTION ──
-  const skillCards = document.querySelectorAll('.skill-category-card');
-  skillCards.forEach((card, i) => {
-    gsap.from(card, {
-      scrollTrigger: {
-        trigger: card,
-        start: 'top 90%',
-        end: 'top 35%',
-        toggleActions: PLAY_ONCE
-      },
-      y: 50,
-      opacity: 0,
-      duration: 0.5,
-      delay: i * 0.08,
-      ease: 'power2.out'
-    });
-  });
-
-  // ── EXPERIENCE SECTION (BIDIRECTIONAL) ──
+  // ── EXPERIENCE SECTION (REDUCED TRANSLATE) ──
   const expEntries = document.querySelectorAll('.experience-entry');
   expEntries.forEach((entry, i) => {
     gsap.from(entry, {
       scrollTrigger: {
         trigger: entry,
-        start: 'top 88%',
-        end: 'top 25%',
-        toggleActions: BIDIRECTIONAL
+        start: 'top 90%',
+        toggleActions: PLAY_ONCE
       },
-      x: i % 2 === 0 ? -55 : 55,
+      x: i % 2 === 0 ? -20 : 20, // Reduced from 55/60
       opacity: 0,
       duration: 0.6,
       ease: 'power2.out'
     });
   });
-
-  // ── CONTACT SECTION ──
-  const contactInfo = document.querySelector('.contact-info');
-  const contactForm = document.querySelector('#contact form');
-
-  if (contactInfo) {
-    gsap.from(contactInfo, {
-      scrollTrigger: {
-        trigger: '#contact',
-        start: 'top 80%',
-        end: 'top 20%',
-        toggleActions: PLAY_ONCE
-      },
-      y: 50,
-      opacity: 0,
-      duration: 0.6,
-      ease: 'power2.out'
-    });
-  }
-
-  if (contactForm) {
-    gsap.from(contactForm, {
-      scrollTrigger: {
-        trigger: '#contact',
-        start: 'top 80%',
-        end: 'top 20%',
-        toggleActions: PLAY_ONCE
-      },
-      y: 50,
-      opacity: 0,
-      duration: 0.6,
-      delay: 0.15,
-      ease: 'power2.out'
-    });
-  }
-
-  // ── GALLERY SECTION ──
-  const galleryWrapper = document.querySelector('.gallery-coverflow-wrapper');
-  if (galleryWrapper) {
-    gsap.from(galleryWrapper, {
-      scrollTrigger: {
-        trigger: '#gallery',
-        start: 'top 80%',
-        toggleActions: PLAY_ONCE
-      },
-      opacity: 0,
-      scale: 0.9,
-      duration: 1,
-      ease: 'power2.out'
-    });
-  }
 
   // ── REFRESH ON LOAD ──
   window.addEventListener('load', () => {

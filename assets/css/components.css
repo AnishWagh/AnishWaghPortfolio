@@ -76,6 +76,33 @@
   box-shadow: 0 2px 0 var(--color-lime);
 }
 
+/* SECTION DIVIDERS & PADDING */
+section {
+  border-top: 1px solid var(--color-border);
+  padding: 80px 0;
+}
+
+section:nth-of-type(odd) {
+  background: var(--color-bg);
+}
+
+section:nth-of-type(even) {
+  background: var(--color-surface);
+}
+
+#skills, #experience {
+  padding: 64px 0;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: 48px 0;
+  }
+  #skills, #experience {
+    padding: 64px 0;
+  }
+}
+
 .nav-container {
   display: flex;
   align-items: center;
@@ -285,7 +312,7 @@
 /* SECTION TITLES */
 .section-title {
   display: inline-block;
-  margin-bottom: var(--space-xl);
+  margin-bottom: 40px;
   padding-right: 20px;
   position: relative;
   text-shadow: 4px 4px 0px var(--color-cyan);
@@ -306,10 +333,10 @@
   color: var(--color-cyan);
   display: block;
   font-family: var(--font-body);
-  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.05em;
-  margin-bottom: var(--space-sm);
+  margin-bottom: 4px;
   text-transform: uppercase;
 }
 

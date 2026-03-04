@@ -83,18 +83,18 @@
   </header>
 
   <main>
-    <section id="hero">
+    <section id="hero" class="animate-on-scroll">
       <div class="hero-container">
 
         <!-- Left: Text content -->
         <div class="hero-content">
 
-          <div class="hero-badge">
+          <div class="hero-badge animate-on-scroll">
             <span class="badge-dot"></span>
             <span class="badge-text">Available for Work · 2026</span>
           </div>
 
-          <h1 class="hero-name">
+          <h1 class="hero-name animate-on-scroll">
             <!-- Each letter in its own span for GSAP stagger -->
             <span class="name-line">
               <span>A</span><span>N</span><span>I</span><span>S</span><span>H</span>
@@ -104,32 +104,24 @@
             </span>
           </h1>
 
-          <p class="hero-role">Senior Software Engineer</p>
-          <p class="hero-tagline">
+          <p class="hero-role animate-on-scroll">Senior Software Engineer</p>
+          <p class="hero-tagline animate-on-scroll">
             Mechatronics Precision. High-Performance Architecture. Software That Doesn't Break.
           </p>
 
-          <div class="hero-cta">
+          <div class="hero-cta animate-on-scroll">
             <a href="#projects" class="btn-primary">See My Work</a>
             <a href="#contact" class="btn-ghost">Hire Me</a>
           </div>
 
         </div>
 
-        <!-- Right: Hero photo -->
-        <div class="hero-photo-wrapper">
-          <img
-            src="assets/images/hero-photo.png"
-            alt="Anish Wagh — Senior Software Engineer"
-            class="hero-photo"
-            width="480"
-            height="600"
-            loading="eager"
-            fetchpriority="high"
-            onerror="this.parentElement.classList.add('photo-error')"
-          />
-          <!-- Pop Art Mechatronics offset frame -->
-          <div class="hero-photo-frame" aria-hidden="true"></div>
+        <!-- Right: Hero photo integrated into geometric art -->
+        <div class="hero-photo-wrapper animate-on-scroll">
+          <!-- Pop Art Mechatronics offset frame - now contains the photo as background -->
+          <div class="hero-photo-frame" aria-hidden="true">
+            <div class="hero-photo-internal"></div>
+          </div>
         </div>
 
       </div>
@@ -138,13 +130,13 @@
       <div class="hero-backdrop" aria-hidden="true">ANISH WAGH</div>
     </section>
 
-    <section id="about">
+    <section id="about" class="animate-on-scroll">
       <div class="section-container">
-        <span class="section-label text-label">Who I Am</span>
-        <h2 class="section-title text-h2 gsap-reveal">ABOUT ME</h2>
+        <span class="section-label text-label animate-on-scroll">Who I Am</span>
+        <h2 class="section-title text-h2 gsap-reveal animate-on-scroll">ABOUT ME</h2>
 
         <div class="about-grid">
-          <div class="about-terminal-container">
+          <div class="about-terminal-container animate-on-scroll">
             <div class="terminal-window">
               <div class="terminal-header">
                 <span class="terminal-dot red"></span>
@@ -162,22 +154,22 @@
           </div>
 
           <div class="about-info-row">
-            <div class="about-stats">
+            <div class="about-stats animate-on-scroll">
               <div class="stat">
-                <span class="stat-number">3+</span>
+                <span class="stat-number" data-target="3" data-suffix="+">0+</span>
                 <span class="stat-label">Years Experience</span>
               </div>
               <div class="stat">
-                <span class="stat-number">10+</span>
+                <span class="stat-number" data-target="10" data-suffix="+">0+</span>
                 <span class="stat-label">Projects Shipped</span>
               </div>
               <div class="stat">
-                <span class="stat-number">100%</span>
+                <span class="stat-number" data-target="100" data-suffix="%">0%</span>
                 <span class="stat-label">Code Integrity</span>
               </div>
             </div>
 
-            <div class="about-visual gsap-reveal">
+            <div class="about-visual gsap-reveal animate-on-scroll">
               <div class="about-photo-frame">
                 <img
                   src="assets/images/hero-photo.png"
@@ -195,13 +187,13 @@
       </div>
     </section>
 
-    <section id="projects">
+    <section id="projects" class="animate-on-scroll">
       <div class="section-container">
-        <span class="section-label text-label">What I've Built</span>
-        <h2 class="section-title text-h2 gsap-reveal">PROJECTS</h2>
+        <span class="section-label text-label animate-on-scroll">What I've Built</span>
+        <h2 class="section-title text-h2 gsap-reveal animate-on-scroll">PROJECTS</h2>
 
         <div class="projects-grid">
-        <article class="project-card card gsap-reveal">
+        <article class="project-card card gsap-reveal animate-on-scroll">
           <div class="project-thumbnail"></div>
           <div class="project-content">
             <div class="project-tags">
@@ -219,7 +211,7 @@
           </div>
         </article>
 
-        <article class="project-card card gsap-reveal">
+        <article class="project-card card gsap-reveal animate-on-scroll">
           <div class="project-thumbnail"></div>
           <div class="project-content">
             <div class="project-tags">
@@ -237,7 +229,7 @@
           </div>
         </article>
 
-        <article class="project-card card gsap-reveal">
+        <article class="project-card card gsap-reveal animate-on-scroll">
           <div class="project-thumbnail"></div>
           <div class="project-content">
             <div class="project-tags">
@@ -257,114 +249,162 @@
       </div>
     </section>
 
-    <section id="skills">
+    <section id="skills" class="animate-on-scroll">
       <div class="section-container">
 
-        <span class="section-label">What I Work With</span>
-        <h2 class="section-title">SKILLS &amp; STACK</h2>
+        <span class="section-label animate-on-scroll">What I Work With</span>
+        <h2 class="section-title animate-on-scroll">SKILLS &amp; STACK</h2>
 
         <div class="skills-grid">
 
           <!-- Category 1: Languages & OS -->
-          <div class="skill-category-card">
+          <div class="skill-category-card animate-on-scroll">
             <div class="skill-category-header">
               <span class="skill-category-icon">{ }</span>
               <h3 class="skill-category-title">Core Tech</h3>
             </div>
             <ul class="skill-list">
               <li class="skill-item">
-                <span class="skill-name">C / C++</span>
-                <span class="skill-level skill-level--expert">Expert</span>
+                <div class="skill-info">
+                  <span class="skill-name">C / C++</span>
+                  <span class="skill-level skill-level--expert">Expert</span>
+                </div>
+                <div class="skill-bar"><div class="skill-bar-fill" data-width="95%"></div></div>
               </li>
               <li class="skill-item">
-                <span class="skill-name">Java / Kotlin</span>
-                <span class="skill-level skill-level--expert">Expert</span>
+                <div class="skill-info">
+                  <span class="skill-name">Java / Kotlin</span>
+                  <span class="skill-level skill-level--expert">Expert</span>
+                </div>
+                <div class="skill-bar"><div class="skill-bar-fill" data-width="90%"></div></div>
               </li>
               <li class="skill-item">
-                <span class="skill-name">Zephyr OS</span>
-                <span class="skill-level skill-level--expert">Expert</span>
+                <div class="skill-info">
+                  <span class="skill-name">Zephyr OS</span>
+                  <span class="skill-level skill-level--expert">Expert</span>
+                </div>
+                <div class="skill-bar"><div class="skill-bar-fill" data-width="85%"></div></div>
               </li>
               <li class="skill-item">
-                <span class="skill-name">Android AOSP</span>
-                <span class="skill-level skill-level--proficient">Proficient</span>
+                <div class="skill-info">
+                  <span class="skill-name">Android AOSP</span>
+                  <span class="skill-level skill-level--proficient">Proficient</span>
+                </div>
+                <div class="skill-bar"><div class="skill-bar-fill" data-width="80%"></div></div>
               </li>
             </ul>
           </div>
 
           <!-- Category 2: Frameworks & Testing -->
-          <div class="skill-category-card">
+          <div class="skill-category-card animate-on-scroll">
             <div class="skill-category-header">
               <span class="skill-category-icon">◈</span>
               <h3 class="skill-category-title">Frameworks</h3>
             </div>
             <ul class="skill-list">
               <li class="skill-item">
-                <span class="skill-name">Google Test (GTest)</span>
-                <span class="skill-level skill-level--expert">Expert</span>
+                <div class="skill-info">
+                  <span class="skill-name">Google Test (GTest)</span>
+                  <span class="skill-level skill-level--expert">Expert</span>
+                </div>
+                <div class="skill-bar"><div class="skill-bar-fill" data-width="92%"></div></div>
               </li>
               <li class="skill-item">
-                <span class="skill-name">ROS / Gazebo</span>
-                <span class="skill-level skill-level--proficient">Proficient</span>
+                <div class="skill-info">
+                  <span class="skill-name">ROS / Gazebo</span>
+                  <span class="skill-level skill-level--proficient">Proficient</span>
+                </div>
+                <div class="skill-bar"><div class="skill-bar-fill" data-width="88%"></div></div>
               </li>
               <li class="skill-item">
-                <span class="skill-name">Cucumber / Gherkin</span>
-                <span class="skill-level skill-level--expert">Expert</span>
+                <div class="skill-info">
+                  <span class="skill-name">Cucumber / Gherkin</span>
+                  <span class="skill-level skill-level--expert">Expert</span>
+                </div>
+                <div class="skill-bar"><div class="skill-bar-fill" data-width="90%"></div></div>
               </li>
               <li class="skill-item">
-                <span class="skill-name">Spring Boot</span>
-                <span class="skill-level skill-level--learning">Learning</span>
+                <div class="skill-info">
+                  <span class="skill-name">Spring Boot</span>
+                  <span class="skill-level skill-level--learning">Learning</span>
+                </div>
+                <div class="skill-bar"><div class="skill-bar-fill" data-width="40%"></div></div>
               </li>
             </ul>
           </div>
 
           <!-- Category 3: Tools & Infrastructure -->
-          <div class="skill-category-card">
+          <div class="skill-category-card animate-on-scroll">
             <div class="skill-category-header">
               <span class="skill-category-icon">⚙</span>
               <h3 class="skill-category-title">Infrastructure</h3>
             </div>
             <ul class="skill-list">
               <li class="skill-item">
-                <span class="skill-name">Git / GitHub</span>
-                <span class="skill-level skill-level--expert">Expert</span>
+                <div class="skill-info">
+                  <span class="skill-name">Git / GitHub</span>
+                  <span class="skill-level skill-level--expert">Expert</span>
+                </div>
+                <div class="skill-bar"><div class="skill-bar-fill" data-width="95%"></div></div>
               </li>
               <li class="skill-item">
-                <span class="skill-name">Jira / Confluence</span>
-                <span class="skill-level skill-level--expert">Expert</span>
+                <div class="skill-info">
+                  <span class="skill-name">Jira / Confluence</span>
+                  <span class="skill-level skill-level--expert">Expert</span>
+                </div>
+                <div class="skill-bar"><div class="skill-bar-fill" data-width="90%"></div></div>
               </li>
               <li class="skill-item">
-                <span class="skill-name">SonarQube</span>
-                <span class="skill-level skill-level--proficient">Proficient</span>
+                <div class="skill-info">
+                  <span class="skill-name">SonarQube</span>
+                  <span class="skill-level skill-level--proficient">Proficient</span>
+                </div>
+                <div class="skill-bar"><div class="skill-bar-fill" data-width="75%"></div></div>
               </li>
               <li class="skill-item">
-                <span class="skill-name">Docker / CI/CD</span>
-                <span class="skill-level skill-level--learning">Learning</span>
+                <div class="skill-info">
+                  <span class="skill-name">Docker / CI/CD</span>
+                  <span class="skill-level skill-level--learning">Learning</span>
+                </div>
+                <div class="skill-bar"><div class="skill-bar-fill" data-width="50%"></div></div>
               </li>
             </ul>
           </div>
 
           <!-- Category 4: Mechatronics & Hardware -->
-          <div class="skill-category-card skill-category-card--accent">
+          <div class="skill-category-card skill-category-card--accent animate-on-scroll">
             <div class="skill-category-header">
               <span class="skill-category-icon">⬡</span>
               <h3 class="skill-category-title">Mechatronics</h3>
             </div>
             <ul class="skill-list">
               <li class="skill-item">
-                <span class="skill-name">System Design</span>
-                <span class="skill-level skill-level--expert">Expert</span>
+                <div class="skill-info">
+                  <span class="skill-name">System Design</span>
+                  <span class="skill-level skill-level--expert">Expert</span>
+                </div>
+                <div class="skill-bar"><div class="skill-bar-fill" data-width="92%"></div></div>
               </li>
               <li class="skill-item">
-                <span class="skill-name">HMI Development</span>
-                <span class="skill-level skill-level--expert">Expert</span>
+                <div class="skill-info">
+                  <span class="skill-name">HMI Development</span>
+                  <span class="skill-level skill-level--expert">Expert</span>
+                </div>
+                <div class="skill-bar"><div class="skill-bar-fill" data-width="94%"></div></div>
               </li>
               <li class="skill-item">
-                <span class="skill-name">SLAM / Navigation</span>
-                <span class="skill-level skill-level--proficient">Proficient</span>
+                <div class="skill-info">
+                  <span class="skill-name">SLAM / Navigation</span>
+                  <span class="skill-level skill-level--proficient">Proficient</span>
+                </div>
+                <div class="skill-bar"><div class="skill-bar-fill" data-width="85%"></div></div>
               </li>
               <li class="skill-item">
-                <span class="skill-name">3D Prototyping</span>
-                <span class="skill-level skill-level--proficient">Proficient</span>
+                <div class="skill-info">
+                  <span class="skill-name">3D Prototyping</span>
+                  <span class="skill-level skill-level--proficient">Proficient</span>
+                </div>
+                <div class="skill-bar"><div class="skill-bar-fill" data-width="80%"></div></div>
               </li>
             </ul>
           </div>
@@ -373,14 +413,14 @@
       </div>
     </section>
 
-    <section id="experience">
+    <section id="experience" class="animate-on-scroll">
       <div class="section-container">
-        <span class="section-label text-label">Where I've Worked</span>
-        <h2 class="section-title text-h2 gsap-reveal">EXPERIENCE</h2>
+        <span class="section-label text-label animate-on-scroll">Where I've Worked</span>
+        <h2 class="section-title text-h2 gsap-reveal animate-on-scroll">EXPERIENCE</h2>
 
         <div class="experience-timeline">
         <!-- Experience 1: Senior Software Engineer -->
-        <article class="experience-entry gsap-reveal">
+        <article class="experience-entry gsap-reveal animate-on-scroll">
           <div class="experience-meta">
             <span class="experience-date text-label">Oct 2025 — Present</span>
             <div class="experience-connector"></div>
@@ -402,7 +442,7 @@
           </div>
         </article>
         <!-- Experience 2: Specialist Software Engineer -->
-        <article class="experience-entry gsap-reveal">
+        <article class="experience-entry gsap-reveal animate-on-scroll">
           <div class="experience-meta">
             <span class="experience-date text-label">Aug 2023 — Oct 2025</span>
             <div class="experience-connector"></div>
@@ -424,7 +464,7 @@
           </div>
         </article>
         <!-- Experience 3: Intern -->
-        <article class="experience-entry gsap-reveal">
+        <article class="experience-entry gsap-reveal animate-on-scroll">
           <div class="experience-meta">
             <span class="experience-date text-label">Jan 2023 — Jul 2023</span>
             <div class="experience-connector"></div>
@@ -449,28 +489,28 @@
       </div>
     </section>
 
-    <section id="gallery">
+    <section id="gallery" class="animate-on-scroll">
       <div class="section-container">
-        <span class="section-label text-label">Visual Diary</span>
-        <h2 class="section-title text-h2 gsap-reveal">FIELD WORK</h2>
-        <p class="section-subtitle text-body gsap-reveal">Engineering through the lens: a look at my technical adventures and projects.</p>
+        <span class="section-label text-label animate-on-scroll">Visual Diary</span>
+        <h2 class="section-title text-h2 gsap-reveal animate-on-scroll">FIELD WORK</h2>
+        <p class="section-subtitle text-body gsap-reveal animate-on-scroll">Engineering through the lens: a look at my technical adventures and projects.</p>
         
-        <div class="gallery-coverflow-wrapper">
+        <div class="gallery-coverflow-wrapper animate-on-scroll">
           <div class="gallery-coverflow">
             <div class="gallery-item-3d active" data-index="0">
-              <img src="assets/images/oven.png" alt="Engineering Work - Oven Project">
+              <img src="assets/images/oven.png" alt="Engineering Work - Oven Project" loading="lazy">
               <div class="item-overlay"><span class="text-label">KitchenAid Project</span></div>
             </div>
             <div class="gallery-item-3d" data-index="1">
-              <img src="assets/images/trophie.png" alt="Achievements and Awards">
+              <img src="assets/images/trophie.png" alt="Achievements and Awards" loading="lazy">
               <div class="item-overlay"><span class="text-label">Recognition</span></div>
             </div>
             <div class="gallery-item-3d" data-index="2">
-              <img src="assets/images/Gemini_Generated_Image_2j6izg2j6izg2j6i.png" alt="Robotics Concept">
+              <img src="assets/images/Gemini_Generated_Image_2j6izg2j6izg2j6i.png" alt="Robotics Concept" loading="lazy">
               <div class="item-overlay"><span class="text-label">Robotics Simulation</span></div>
             </div>
             <div class="gallery-item-3d" data-index="3">
-              <img src="assets/images/Gemini_Generated_Image_5kyj205kyj205kyj.png" alt="Mechatronics Visualization">
+              <img src="assets/images/Gemini_Generated_Image_5kyj205kyj205kyj.png" alt="Mechatronics Visualization" loading="lazy">
               <div class="item-overlay"><span class="text-label">System Design</span></div>
             </div>
           </div>
@@ -487,13 +527,13 @@
       </div>
     </section>
 
-    <section id="contact">
+    <section id="contact" class="animate-on-scroll">
       <div class="section-container">
-        <span class="section-label text-label">LET'S BUILD</span>
-        <h2 class="section-title text-h2 gsap-reveal">LET'S BUILD</h2>
+        <span class="section-label text-label animate-on-scroll">LET'S BUILD</span>
+        <h2 class="section-title text-h2 gsap-reveal animate-on-scroll">LET'S BUILD</h2>
 
         <div class="contact-grid">
-          <div class="contact-info">
+          <div class="contact-info animate-on-scroll">
             <p class="text-h3">Let's build something exceptional.</p>
             <ul class="text-body">
               <li><a href="https://github.com/anishwagh" target="_blank" rel="noopener">GitHub</a></li>
@@ -502,7 +542,7 @@
               <li><a href="mailto:placeholder@example.com">Email</a></li>
             </ul>
           </div>
-          <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="animate-on-scroll">
             <input type="text" name="name" placeholder="Name" required class="text-body">
             <input type="email" name="email" placeholder="Email" required class="text-body">
             <select name="budget" class="text-body" required>

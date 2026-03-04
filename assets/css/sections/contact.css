@@ -38,20 +38,33 @@ form {
 form input,
 form select,
 form textarea {
-  width: 100%;
+  appearance: none;
   background: var(--color-black);
   border: var(--border-width) solid var(--color-teal);
-  color: var(--color-white);
-  padding: var(--space-sm);
   border-radius: 0;
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  height: 52px;
+  margin-bottom: 24px;
   outline: none;
+  padding: 0 var(--space-sm);
   transition: all var(--transition-fast);
-  appearance: none;
+  width: 100%;
 }
 
 form textarea {
+  height: auto;
   min-height: 150px;
+  padding: var(--space-sm);
   resize: vertical;
+}
+
+form select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2300CED1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-position: right 15px center;
+  background-repeat: no-repeat;
+  cursor: pointer;
 }
 
 form input:focus,

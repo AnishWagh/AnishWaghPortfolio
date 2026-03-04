@@ -76,14 +76,40 @@
 
 .skill-item {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   font-family: var(--font-body);
   font-size: 0.875rem;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.skill-info {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .skill-name {
   color: var(--color-white);
+}
+
+.skill-bar {
+  background: var(--color-border);
+  height: 4px;
+  position: relative;
+  width: 100%;
+}
+
+.skill-bar-fill {
+  background: var(--color-lime);
+  height: 100%;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 0%;
+}
+
+.skill-category-card--accent .skill-bar-fill {
+  background: var(--color-cyan);
 }
 
 /* ── Proficiency Badges ───────────────────────────────── */
