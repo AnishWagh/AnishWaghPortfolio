@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Anish Wagh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RESET & ROOT ───────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0a0a08;
+      --bg-alt:      #141a09;
+      --olive:       #8fa822;
+      --olive-dim:   #6b7a1f;
+      --cyan:        #00d4d4;
+      --text:        #e8e8e0;
+      --text-muted:  #9a9a8a;
+      --ghost:       #3a3a2e;
+      --border:      #252518;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Mono', monospace;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ─────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 56px;
+      background: rgba(10,10,8,0.92);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      color: var(--olive);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover { color: var(--cyan); }
+    .nav-back-arrow { transition: transform 0.2s; }
+    .nav-back:hover .nav-back-arrow { transform: translateX(-4px); }
+
+    /* ── PAGE HEADER ─────────────────────────────── */
+    .page-header {
+      padding: 120px 32px 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .page-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 16px;
+    }
+
+    .page-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(60px, 10vw, 120px);
+      color: var(--text);
+      line-height: 0.9;
+      margin-bottom: 24px;
+    }
+
+    .page-title span { color: var(--olive); }
+
+    .page-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 480px;
+    }
+
+    /* ── SPLINE HERO ─────────────────────────────── */
+    .spline-section {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto 80px;
+      padding: 0 32px;
+    }
+
+    .spline-card {
+      width: 100%;
+      height: 500px;
+      background: #0d0d0b;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .spline-card canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .spline-overlay-text {
+      position: absolute;
+      top: 40px;
+      left: 48px;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .spline-overlay-text h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .spline-overlay-text p {
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+
+    /* Spotlight sweep effect (CSS only — no React needed) */
+    .spline-card::after {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: -10%;
+      width: 50%;
+      height: 140%;
+      background: linear-gradient(
+        105deg,
+        transparent 40%,
+        rgba(143, 168, 34, 0.06) 50%,
+        transparent 60%
+      );
+      pointer-events: none;
+      animation: spotlight-sweep 6s ease-in-out infinite;
+    }
+
+    @keyframes spotlight-sweep {
+      0%   { transform: translateX(-100%); }
+      100% { transform: translateX(400%); }
+    }
+
+    /* ── ALL PROJECTS GRID ───────────────────────── */
+    .projects-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px 120px;
+    }
+
+    .projects-section-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 40px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .proj-card {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 32px 28px 28px;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 16px;
+      transition: border-color 0.3s ease, transform 0.3s ease,
+                  box-shadow 0.3s ease;
+    }
+
+    .proj-card:hover {
+      border-color: var(--cyan);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(0, 212, 212, 0.1);
+    }
+
+    .proj-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .proj-tag {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border: 1px solid var(--olive-dim);
+      color: var(--text-muted);
+      border-radius: 2px;
+    }
+
+    .proj-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      color: var(--olive);
+      letter-spacing: 0.03em;
+      line-height: 1.1;
+    }
+
+    .proj-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    .proj-links {
+      display: flex;
+      gap: 10px;
+    }
+
+    .proj-btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      text-decoration: none;
+      border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .proj-btn:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    /* ── FOOTER ──────────────────────────────────── */
+    .page-footer {
+      border-top: 1px solid var(--border);
+      padding: 32px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--ghost);
+      letter-spacing: 0.08em;
+    }
+
+    .page-footer a {
+      color: var(--cyan);
+      text-decoration: none;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 900px) {
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .projects-grid { grid-template-columns: 1fr; }
+      .spline-card { height: 320px; }
+      .spline-overlay-text h2 { font-size: 32px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">AW</a>
+    <a href="index.html#projects" class="nav-back">
+      <span class="nav-back-arrow">←</span>
+      <span>Back to Portfolio</span>
+    </a>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <p class="page-eyebrow">Full Project Archive</p>
+    <h1 class="page-title">ALL <span>PROJECTS</span></h1>
+    <p class="page-desc">
+      Every build — from embedded firmware and robotic simulations
+      to Android HMI systems and automated test frameworks.
+      Built with precision, tested to 90%+ coverage.
+    </p>
+  </header>
+
+  <!-- SPLINE 3D INTERACTIVE HERO -->
+  <section class="spline-section">
+    <div class="spline-card" id="spline-card">
+      <div class="spline-overlay-text">
+        <h2>INTERACTIVE</h2>
+        <p>Drag to explore · Built in 3D</p>
+      </div>
+      <!-- Spline vanilla JS embed — works on GitHub Pages, no npm needed -->
+      <script type="module">
+        import { Application } from 'https://unpkg.com/@splinetool/runtime@1.9.28/build/runtime.js';
+        const canvas = document.createElement('canvas');
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        document.getElementById('spline-card').appendChild(canvas);
+        const app = new Application(canvas);
+        app.load('https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode').catch(function() {
+          // Graceful fallback if Spline fails to load
+          document.getElementById('spline-card').style.background =
+            'linear-gradient(135deg, #141a09 0%, #0a0a08 100%)';
+        });
+      </script>
+    </div>
+  </section>
+
+  <!-- ALL PROJECTS GRID -->
+  <section class="projects-section">
+    <p class="projects-section-label">All Projects — Robotics · Embedded · HMI · Automation</p>
+
+    <div class="projects-grid">
+
+      <!-- Project 1 -->
+      <div class="proj-card">
+        <div class="proj-tags">
+          <span class="proj-tag">ROS</span>
+          <span class="proj-tag">Gazebo</span>
+          <span class="proj-tag">MoveIt</span>
+          <span class="proj-tag">Kinematics</span>
+        </div>
+        <h3 class="proj-name">6 D.O.F Robotic Arm Simulation</h3>
+        <p class="proj-desc">
+          Simulated a Franka Panda articulated robotic arm for pick-and-place
+          operations using ROS, Gazebo, and MoveIt motion planning framework.
+        </p>
+        <div class="proj-links">
+          <a href="#" class="proj-btn">Live Demo</a>
+          <a href="#" class="proj-btn">GitHub</a>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="proj-card">
+        <div class="proj-tags">
+          <span class="proj-tag">ROS</span>
+          <span class="proj-tag">Pixhawk</span>
+          <span class="proj-tag">Robotics</span>
+          <span class="proj-tag">Mission Planning</span>
+        </div>
+        <h3 class="proj-name">Autonomous Drone (Level 4)</h3>
+        <p class="proj-desc">
+          Engineered an autonomous drone with Level 4 autonomy, implementing
+          autopilot software on a Pixhawk flight controller for mission planning.
+        </p>
+        <div class="proj-links">
+          <a href="#" class="proj-btn">Live Demo</a>
+          <a href="#" class="proj-btn">GitHub</a>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="proj-card">
+        <div class="proj-tags">
+          <span class="proj-tag">ROS</span>
+          <span class="proj-tag">SLAM</span>
+          <span class="proj-tag">Mobile Robotics</span>
+          <span class="proj-tag">Algorithms</span>
+        </div>
+        <h3 class="proj-name">Autonomous Cleaning Robot</h3>
+        <p class="proj-desc">
+          Developed a navigation stack and implemented SLAM techniques within
+          the ROS framework for autonomous indoor cleaning operations.
+        </p>
+        <div class="proj-links">
+          <a href="#" class="proj-btn">Live Demo</a>
+          <a href="#" class="proj-btn">GitHub</a>
+        </div>
+      </div>
+
+      <!-- Project 4 — ADD YOUR ADDITIONAL PROJECTS BELOW -->
+      <!-- Copy a .proj-card block and fill in your details -->
+      <!-- Example placeholder: -->
+      <div class="proj-card">
+        <div class="proj-tags">
+          <span class="proj-tag">Android</span>
+          <span class="proj-tag">Kotlin</span>
+          <span class="proj-tag">HMI</span>
+        </div>
+        <h3 class="proj-name">Connected Appliance HMI</h3>
+        <p class="proj-desc">
+          Designed and built Android-based Human Machine Interface for
+          KitchenAid Wall Ovens, reducing recipe initiation steps by 20%
+          via Menu First Flow implementation.
+        </p>
+        <div class="proj-links">
+          <a href="#" class="proj-btn">Details</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-tags">
+          <span class="proj-tag">C++</span>
+          <span class="proj-tag">Zephyr OS</span>
+          <span class="proj-tag">Google Test</span>
+        </div>
+        <h3 class="proj-name">Cooking BLL — Unit Test Framework</h3>
+        <p class="proj-desc">
+          Achieved 90%+ function coverage for the Cooking Business Logic Layer
+          through 76+ unit tests using Google Test and FFF mocking framework.
+        </p>
+        <div class="proj-links">
+          <a href="#" class="proj-btn">Details</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-tags">
+          <span class="proj-tag">C#</span>
+          <span class="proj-tag">.NET</span>
+          <span class="proj-tag">Raspberry Pi</span>
+          <span class="proj-tag">Automation</span>
+        </div>
+        <h3 class="proj-name">Remote HMI Test Bench</h3>
+        <p class="proj-desc">
+          Designed a remote-accessible Raspberry Pi bench setup with real-time
+          camera feed, eliminating on-site dependency for appliance integration
+          testing.
+        </p>
+        <div class="proj-links">
+          <a href="#" class="proj-btn">Details</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="page-footer">
+    © 2025 Anish Wagh. Built in the open. &nbsp;·&nbsp;
+    <a href="index.html">← Back to Portfolio</a>
+  </footer>
+
+</body>
+</html>
