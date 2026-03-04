@@ -285,6 +285,74 @@
       .timeline-right { padding-left: 20px; }
       .timeline-entry { padding: 32px 0; }
     }
+/* ── EXPLORE MORE ──────────────────────────── */
+.explore-more-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 56px;
+}
+
+.explore-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 36px;
+  border: 1px solid #8fa822;
+  color: #8fa822;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.explore-more-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #8fa822;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+}
+
+.explore-more-btn:hover::before {
+  transform: scaleX(1);
+}
+
+.explore-more-btn:hover {
+  color: #0a0a08;
+  border-color: #8fa822;
+}
+
+.explore-more-label,
+.explore-more-arrow {
+  position: relative;
+  z-index: 1;
+}
+
+.explore-more-arrow {
+  transition: transform 0.3s ease;
+}
+
+.explore-more-btn:hover .explore-more-arrow {
+  transform: translateX(6px);
+}
+
+.explore-more-sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: #4a4a3a;
+  letter-spacing: 0.08em;
+  margin: 0;
+}
   </style>
 
   <!-- GSAP: async, non-render-blocking -->
@@ -501,6 +569,14 @@
               </div>
             </div>
           </article>
+        </div>
+
+        <div class="explore-more-wrapper">
+          <a href="projects.html" class="explore-more-btn">
+            <span class="explore-more-label">EXPLORE MORE</span>
+            <span class="explore-more-arrow">→</span>
+          </a>
+          <p class="explore-more-sub">4+ more projects — embedded systems, robotics & HMI</p>
         </div>
       </div>
     </section>
