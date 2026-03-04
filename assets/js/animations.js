@@ -235,21 +235,21 @@ document.addEventListener('DOMContentLoaded', () => {
       tilts.forEach(function(el) {
         var rect = el.getBoundingClientRect();
         
-        // Progress starts when top enters viewport (progress 0)
-        // and completes when bottom enters viewport (progress 1).
-        // This ensures it is perfectly flat as soon as the whole element is visible.
-        var progress = (vh - rect.top) / rect.height;
+        // "In-between" logic: Flattens when the element is mostly in view 
+        // (reaches 100% progress when bottom is ~15% from the screen bottom).
+        var progress = (vh * 0.85 - rect.top) / rect.height;
         progress = Math.max(0, Math.min(1, progress));
 
-        var rotateX = 18 * (1 - progress);
-        var scale = 0.92 + (0.08 * progress);
-        var translateY = 30 * (1 - progress);
+        // Subtler values: 12deg max rotation, 0.95 base scale, 20px translation
+        var rotateX = 12 * (1 - progress);
+        var scale = 0.95 + (0.05 * progress);
+        var translateY = 20 * (1 - progress);
 
         el.style.transform = 
           'rotateX(' + rotateX + 'deg) ' +
           'scale(' + scale + ') ' +
           'translateY(' + translateY + 'px)';
-        el.style.opacity = Math.max(0.4, progress);
+        el.style.opacity = Math.max(0.5, progress);
       });
     }
 
