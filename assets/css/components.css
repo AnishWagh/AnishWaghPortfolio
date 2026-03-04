@@ -76,33 +76,6 @@
   box-shadow: 0 2px 0 var(--color-lime);
 }
 
-/* SECTION DIVIDERS & PADDING */
-section {
-  border-top: 1px solid var(--color-border);
-  padding: 80px 0;
-}
-
-section:nth-of-type(odd) {
-  background: var(--color-bg);
-}
-
-section:nth-of-type(even) {
-  background: var(--color-surface);
-}
-
-#skills, #experience {
-  padding: 64px 0;
-}
-
-@media (max-width: 768px) {
-  section {
-    padding: 48px 0;
-  }
-  #skills, #experience {
-    padding: 64px 0;
-  }
-}
-
 .nav-container {
   display: flex;
   align-items: center;
@@ -312,7 +285,7 @@ section:nth-of-type(even) {
 /* SECTION TITLES */
 .section-title {
   display: inline-block;
-  margin-bottom: 40px;
+  margin-bottom: var(--space-xl);
   padding-right: 20px;
   position: relative;
   text-shadow: 4px 4px 0px var(--color-cyan);
@@ -333,10 +306,10 @@ section:nth-of-type(even) {
   color: var(--color-cyan);
   display: block;
   font-family: var(--font-body);
-  font-size: 10px;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
   font-weight: 700;
   letter-spacing: 0.05em;
-  margin-bottom: 4px;
+  margin-bottom: var(--space-sm);
   text-transform: uppercase;
 }
 

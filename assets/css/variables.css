@@ -28,14 +28,14 @@
   /* ── SPACING ── */
   --space-xs:  0.5rem;
   --space-sm:  1rem;
-  --space-md:  1.5rem;
-  --space-lg:  3rem;
-  --space-xl:  4rem;
-  --space-2xl: 6rem;
+  --space-md:  2rem;
+  --space-lg:  4rem;
+  --space-xl:  6rem;
+  --space-2xl: 10rem;
 
   /* ── LAYOUT ── */
-  --container-max:   1100px;
-  --container-pad:   24px;
+  --container-max:   1600px;
+  --container-pad:   clamp(1.5rem, 5vw, 5rem);
   --radius:          0px;      /* HARD RULE: zero always */
   --border-width:    2px;
   --border-heavy:    4px;
