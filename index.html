@@ -116,13 +116,21 @@
 
         </div>
 
-        <!-- Right: Hero photo integrated into geometric art -->
+        <!-- Right: Hero photo -->
         <div class="hero-photo-wrapper">
-          <div class="hero-photo-frame" aria-hidden="true">
-            <div class="hero-photo-internal"></div>
-          </div>
-        </div>
-      </div>
+          <img
+            src="assets/images/hero-photo.png"
+            alt="Anish Wagh — Senior Software Engineer"
+            class="hero-photo"
+            width="480"
+            height="600"
+            loading="eager"
+            fetchpriority="high"
+            onerror="this.parentElement.classList.add('photo-error')"
+          />
+          <!-- Pop Art Mechatronics offset frame -->   
+          <div class="hero-photo-frame" aria-hidden="true"></div>
+        </div>      </div>
 
       <!-- Backdrop text -->
       <div class="hero-backdrop" aria-hidden="true">ANISH WAGH</div>
