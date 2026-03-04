@@ -235,11 +235,10 @@ document.addEventListener('DOMContentLoaded', () => {
       tilts.forEach(function(el) {
         var rect = el.getBoundingClientRect();
         
-        // Complete the animation when the BOTTOM of the element
-        // reaches 40% from the top of the viewport (not center).
-        // This makes it flatten much earlier — well before the user
-        // scrolls past to the next section.
-        var progress = (vh * 0.6 - rect.top) / (rect.height + vh * 0.6);
+        // Progress starts when top enters viewport (progress 0)
+        // and completes when bottom enters viewport (progress 1).
+        // This ensures it is perfectly flat as soon as the whole element is visible.
+        var progress = (vh - rect.top) / rect.height;
         progress = Math.max(0, Math.min(1, progress));
 
         var rotateX = 18 * (1 - progress);
