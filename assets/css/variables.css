@@ -34,7 +34,7 @@
   --space-2xl: 10rem;
 
   /* ── LAYOUT ── */
-  --container-max:   1280px;
+  --container-max:   1600px;
   --container-pad:   clamp(1.5rem, 5vw, 5rem);
   --radius:          0px;      /* HARD RULE: zero always */
   --border-width:    2px;
