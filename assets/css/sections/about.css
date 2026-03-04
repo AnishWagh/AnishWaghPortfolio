@@ -8,6 +8,7 @@
 
 .about-terminal-container {
   width: 100%;
+  min-height: 0;
 }
 
 .about-info-row {
@@ -15,6 +16,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
+  min-height: 0;
 }
 
 .about-text {
@@ -22,6 +24,7 @@
   flex-direction: column;
   gap: var(--space-md);
   opacity: 1;
+  min-height: 0;
 }
 
 /* TERMINAL WINDOW */
@@ -65,8 +68,14 @@
 
 .terminal-body {
   line-height: 1.8;
-  min-height: 250px;
+  min-height: 0; /* Change 5: Remove min-height */
   padding: 20px;
+}
+
+/* Change 3: highlight styling */
+.terminal-body .highlight {
+  color: #00d4d4;
+  font-weight: 700;
 }
 
 .terminal-loader {

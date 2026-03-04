@@ -6,8 +6,8 @@
 
 .skills-grid {
   display: grid;
-  gap: var(--space-md);
-  grid-template-columns: repeat(2, 1fr);
+  gap: 24px; /* Change 2: gap 24px */
+  grid-template-columns: repeat(2, 1fr); /* Change 2: 2x2 grid */
   margin-top: 40px;
 }
 
@@ -22,6 +22,8 @@
     border-color var(--transition-smooth),
     box-shadow var(--transition-smooth),
     transform var(--transition-smooth);
+  align-self: stretch; /* Change 2: equal height */
+  height: 100%; /* Change 2: equal height */
 }
 
 .skill-category-card:hover {

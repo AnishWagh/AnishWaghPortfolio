@@ -78,6 +78,7 @@
 section {
   border-top: 1px solid var(--color-border);
   padding: 80px 0;
+  min-height: 0; /* Change 5: Remove min-height */
 }
 
 section:nth-of-type(odd) {
@@ -311,6 +312,10 @@ section:nth-of-type(even) {
   padding-right: 20px;
   position: relative;
   text-shadow: 4px 4px 0px var(--color-cyan);
+  /* Change 1: Always visible */
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
 }
 .section-title::after {
   background: var(--color-lime);
@@ -333,6 +338,10 @@ section:nth-of-type(even) {
   letter-spacing: 0.05em;
   margin-bottom: 4px;
   text-transform: uppercase;
+  /* Change 1: Always visible */
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
 }
 
 /* SCROLLBAR */
