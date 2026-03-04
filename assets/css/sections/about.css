@@ -21,8 +21,8 @@
 }
 
 .about-text p {
+  line-height: 1.8;
   margin-bottom: var(--space-sm);
-  line-height: 1.7;
 }
 
 .about-stats {
@@ -57,15 +57,16 @@
 }
 
 .about-photo {
-  display: block;
-  width: 100%;
   aspect-ratio: 1 / 1;
-  object-fit: cover;
   border: 2px solid var(--color-teal);
-  position: relative;
-  z-index: 2;
+  display: block;
   filter: grayscale(100%) contrast(1.1);
+  object-fit: cover;
+  object-position: 50% 25%;
+  position: relative;
   transition: filter var(--transition-smooth);
+  width: 100%;
+  z-index: 2;
 }
 
 .about-photo-frame:hover .about-photo {

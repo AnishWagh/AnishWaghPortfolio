@@ -25,22 +25,17 @@
 }
 
 .hero-photo {
-  display: block;
-  width: 100%;
-  max-width: 420px;
-  height: auto;
   aspect-ratio: 4 / 5;
+  border: 2px solid var(--color-teal);
+  display: block;
+  height: auto;
+  max-width: 420px;
   object-fit: cover;
-  object-position: top center;
-
-  /* Always visible — no opacity dependency */
+  object-position: 50% 25%;
   opacity: 1;
   position: relative;
+  width: 100%;
   z-index: 2;
-
-  /* Pop Art Mechatronics: no border radius */
-  border-radius: 0;
-  border: 2px solid var(--color-teal);
 }
 
 /* Pop Art offset frame behind the photo */
@@ -112,16 +107,17 @@
 
 /* ── Hero Name ────────────────────────────────────────── */
 .hero-name {
-  font-family: var(--font-display);
-  font-size: clamp(5rem, 11vw, 11rem);
-  line-height: 0.88;
-  letter-spacing: 0.02em;
   color: var(--color-lime);
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 10vw, 10rem);
+  letter-spacing: 0.02em;
+  line-height: 0.9;
   margin-bottom: var(--space-sm);
 }
 
 .name-line {
   display: block;
+  white-space: nowrap;
 }
 
 .hero-name span {
@@ -140,10 +136,10 @@
 }
 
 .hero-tagline {
-  font-family: var(--font-body);
-  font-size: clamp(0.875rem, 1.4vw, 1rem);
   color: var(--color-text-secondary);
-  line-height: 1.7;
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
+  line-height: 1.8;
   max-width: 480px;
   margin-bottom: var(--space-md);
 }

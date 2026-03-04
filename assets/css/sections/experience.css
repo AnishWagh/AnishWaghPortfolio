@@ -83,10 +83,10 @@
 }
 
 .experience-bullets li {
-  font-family: var(--font-body);
-  font-size: 0.875rem;
   color: var(--color-white);
-  line-height: 1.6;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: 1.7;
   padding-left: 1.25rem;
   position: relative;
 }

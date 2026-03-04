@@ -61,12 +61,12 @@
 }
 
 .project-desc {
-  font-family: var(--font-body);
-  font-size: 0.875rem;
   color: var(--color-text-secondary);
-  line-height: 1.6;
-  margin-bottom: var(--space-md);
   flex-grow: 1;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  margin-bottom: var(--space-md);
 }
 
 .project-links {
