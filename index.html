@@ -30,6 +30,12 @@
   <link rel="stylesheet" href="assets/css/main.css">
 
   <style>
+    /* CHANGE 2: Keyword highlights in terminal */
+    .terminal-body .hl {
+      color: #00d4d4;
+      font-weight: 700;
+    }
+
     /* ── TIMELINE ─────────────────────────────── */
     .timeline-container {
       position: relative;
@@ -198,103 +204,86 @@
       border-radius: 2px;
     }
 
-    /* ── CIRCULAR GALLERY ─────────────────────── */
-    .gallery-subtitle {
-      font-family: 'Space Mono', monospace;
-      font-size: 12px;
-      color: var(--color-text-secondary, #9a9a8a);
-      text-align: center;
-      margin: 0 0 60px;
-      letter-spacing: 0.08em;
-    }
-
-    .circular-gallery-scene {
+    /* ── IMAGE TILES ───────────────────────────── */
+    .image-tiles-scene {
       width: 100%;
-      height: 480px;
       display: flex;
       align-items: center;
       justify-content: center;
-      perspective: 1400px;
-      perspective-origin: center center;
-      overflow: hidden;
+      padding: 80px 0 120px;
+      overflow: visible;
     }
 
-    .circular-gallery-ring {
+    .image-tiles-wrapper {
       position: relative;
-      width: 260px;
-      height: 360px;
-      transform-style: preserve-3d;
-      /* rotation is set by JS */
+      width: 275px;
+      height: 275px;
     }
 
-    .cg-card {
+    .img-tile {
       position: absolute;
-      width: 260px;
-      height: 340px;
-      left: 0;
+      width: 250px;
+      height: 250px;
       top: 0;
-      border-radius: 12px;
+      left: 0;
+      border-radius: 14px;
       overflow: hidden;
-      border: 1px solid var(--border, #252518);
-      background: var(--bg-accent, #141a09);
-      /* transform (rotateY + translateZ) set in JS */
-      backface-visibility: hidden;
-      transition: border-color 0.3s ease;
+      background: #1a1a12;
+      border: 2px solid var(--border, #252518);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
       cursor: pointer;
+      transform: rotate(0deg) translate(0px, 0px);
+      transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  box-shadow 0.3s ease,
+                  border-color 0.3s ease;
     }
 
-    .cg-card:hover {
-      border-color: #00d4d4;
-    }
-
-    .cg-card img {
+    .img-tile img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      padding: 6px;
+      border-radius: 12px;
+      box-sizing: border-box;
     }
 
-    .cg-label {
+    .img-tile:hover {
+      border-color: #00d4d4;
+      box-shadow: 0 16px 48px rgba(0, 212, 212, 0.2);
+      z-index: 100 !important; /* Bring to front on hover */
+    }
+
+    /* 4-Tile Fan Positions (Applied by JS via style attribute, but hover states handled here) */
+    .image-tiles-wrapper.is-fanned #tile-1:hover { transform: rotate(-6deg) translate(-305px, 15px) scale(1.05) !important; }
+    .image-tiles-wrapper.is-fanned #tile-2:hover { transform: rotate(4deg) translate(-105px, -10px) scale(1.05) !important; }
+    .image-tiles-wrapper.is-fanned #tile-3:hover { transform: rotate(-4deg) translate(105px, -5px) scale(1.05) !important; }
+    .image-tiles-wrapper.is-fanned #tile-4:hover { transform: rotate(6deg) translate(305px, 10px) scale(1.05) !important; }
+
+    .tile-caption {
       position: absolute;
-      bottom: 0;
+      bottom: 10px;
       left: 0;
       right: 0;
-      padding: 12px 16px;
-      background: linear-gradient(transparent, rgba(0,0,0,0.88));
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
-    .cg-title {
-      font-family: 'Space Mono', monospace;
-      font-size: 13px;
-      font-weight: 700;
-      color: #e8e8e0;
-      letter-spacing: 0.05em;
-    }
-
-    .cg-sub {
+      text-align: center;
       font-family: 'Space Mono', monospace;
       font-size: 10px;
-      color: #00d4d4;
       letter-spacing: 0.1em;
       text-transform: uppercase;
+      color: #00d4d4;
+      background: linear-gradient(transparent, rgba(0,0,0,0.75));
+      padding: 20px 8px 8px;
+      pointer-events: none;
     }
 
     /* Mobile */
     @media (max-width: 640px) {
+      .image-tiles-wrapper { width: 160px; height: 160px; }
+      .img-tile { width: 155px; height: 155px; }
       .timeline-track { left: 0; }
       .timeline-left { width: 0; padding: 0; overflow: hidden; }
       .timeline-right { padding-left: 20px; }
       .timeline-entry { padding: 32px 0; }
-
-      .circular-gallery-scene {
-        height: 320px;
-        perspective: 800px;
-      }
-      .circular-gallery-ring { width: 180px; height: 240px; }
-      .cg-card { width: 180px; height: 230px; }
     }
   </style>
 
@@ -423,12 +412,12 @@
                   <span class="terminal-dot green"></span>
                   <span class="terminal-title">bio.sh</span>
                 </div>
-                <!-- Change 3: First person text + highlights -->
+                <!-- CHANGE 2: Keyword highlights in terminal text -->
                 <div class="terminal-body">
                   <div class="terminal-loader">Last login: Wed Mar 04 08:00:00 on ttys001</div>
-                  <p class="typing-text">I'm based in <span class="highlight">Pune, India</span> — an engineer with a <span class="highlight">B.Tech. in Mechatronics and Automation Engineering</span> from MIT ADT University. My foundation is built on the complex interplay between <span class="highlight">hardware, software, and user experience</span>, shaped through early work on autonomous drones, cleaning robots, and robotic kinematics.</p>
-                  <p class="typing-text">I specialize in building robust software for <span class="highlight">next-generation connected appliances</span> — from scalable <span class="highlight">Business Logic Layers (BLL)</span> to intuitive <span class="highlight">Android-based HMIs</span>. I enforce <span class="highlight">90%+ unit test coverage</span> across core architectural components through rigorous pre-release testing and UI automation.</p>
-                  <p class="typing-text">My goals center on architecting <span class="highlight">unbreakable, highly scalable systems</span> while growing into senior leadership roles. I'm driven by <span class="highlight">proactive problem-solving</span>, de-risking critical paths, and accelerating product velocity — ultimately to <span class="highlight">mentor engineering teams</span> and deliver seamless systems that move fast and never break.</p>
+                  <p class="typing-text">I'm based in <span class="hl">Pune, India</span> — an engineer with a <span class="hl">B.Tech. in Mechatronics and Automation Engineering</span> from MIT ADT University. My foundation is built on the complex interplay between <span class="hl">hardware, software, and user experience</span>, shaped through early work on <span class="hl">autonomous drones</span>, cleaning robots, and robotic kinematics.</p>
+                  <p class="typing-text">I specialize in building robust software for <span class="hl">next-generation connected appliances</span> — from scalable <span class="hl">Business Logic Layers (BLL)</span> to intuitive <span class="hl">Android-based HMIs</span>. I enforce <span class="hl">90%+ unit test coverage</span> across core architectural components through rigorous pre-release testing and UI automation.</p>
+                  <p class="typing-text">My goals center on architecting <span class="hl">unbreakable, highly scalable systems</span> while growing into senior leadership roles. I'm driven by <span class="hl">proactive problem-solving</span>, de-risking critical paths, and accelerating product velocity — ultimately to <span class="hl">mentor engineering teams</span> and deliver seamless systems that move fast and never break.</p>
                 </div>
               </div>
             </div>
@@ -722,43 +711,27 @@
         <span class="section-label text-label">Visual Diary</span>
         <h2 class="section-title text-h2">FIELD WORK</h2>
         
-        <p class="gallery-subtitle">Engineering through the lens — scroll to rotate</p>
+        <div class="image-tiles-scene" id="image-tiles-scene">
+          <div class="image-tiles-wrapper" id="image-tiles-wrapper">
 
-        <div class="circular-gallery-scene" id="circular-gallery">
-          <div class="circular-gallery-ring" id="gallery-ring">
-
-            <div class="cg-card">
-              <img src="assets/images/oven.png" alt="KitchenAid Project" loading="lazy">
-              <div class="cg-label">
-                <span class="cg-title">KitchenAid Project</span>
-                <span class="cg-sub">Connected Appliance HMI</span>
-              </div>
+            <div class="img-tile" id="tile-1" style="z-index: 40;">
+              <img src="assets/images/oven.png" alt="Oven">
+              <span class="tile-caption">KitchenAid Project</span>
             </div>
 
-            <div class="cg-card">
-              <img src="assets/images/trophie.png" alt="Recognition" loading="lazy">
-              <div class="cg-label">
-                <span class="cg-title">Recognition</span>
-                <span class="cg-sub">Awards & Achievements</span>
-              </div>
+            <div class="img-tile" id="tile-2" style="z-index: 30;">
+              <img src="assets/images/trophie.png" alt="Trophie">
+              <span class="tile-caption">Leadership</span>
             </div>
 
-            <div class="cg-card">
-              <img src="assets/images/Gemini_Generated_Image_2j6izg2j6izg2j6i.png" 
-                   alt="Robotics Simulation" loading="lazy">
-              <div class="cg-label">
-                <span class="cg-title">Robotics Simulation</span>
-                <span class="cg-sub">6 DOF Arm — ROS & Gazebo</span>
-              </div>
+            <div class="img-tile" id="tile-3" style="z-index: 20;">
+              <img src="assets/images/Captain.png" alt="Captain">
+              <span class="tile-caption">Best Player</span>
             </div>
 
-            <div class="cg-card">
-              <img src="assets/images/Gemini_Generated_Image_5kyj205kyj205kyj.png" 
-                   alt="System Design" loading="lazy">
-              <div class="cg-label">
-                <span class="cg-title">System Design</span>
-                <span class="cg-sub">Mechatronics Architecture</span>
-              </div>
+            <div class="img-tile" id="tile-4" style="z-index: 10;">
+              <img src="assets/images/TarangEngagement2024.png" alt="Tarang Engagement 2024">
+              <span class="tile-caption">Engagement Recognition</span>
             </div>
 
           </div>
@@ -769,17 +742,17 @@
     <section id="contact">
       <div class="section-container">
         <!-- Change 1: Headings always visible -->
-        <span class="section-label text-label">LET'S BUILD</span>
-        <h2 class="section-title text-h2">LET'S BUILD</h2>
+        <span class="section-label text-label">LET'S Connect</span>
+        <h2 class="section-title text-h2">Get In Touch</h2>
 
         <div class="contact-grid">
           <div class="contact-info animate-on-scroll">
             <p class="text-h3">Let's build something exceptional.</p>
             <ul class="text-body">
-              <li><a href="https://github.com/anishwagh" target="_blank" rel="noopener">GitHub</a></li>
+              <li><a href="https://github.com/AnishWagh" target="_blank" rel="noopener">GitHub</a></li>
               <li><a href="https://linkedin.com/in/anishwagh" target="_blank" rel="noopener">LinkedIn</a></li>
-              <li><a href="https://twitter.com/anishwagh" target="_blank" rel="noopener">Twitter/X</a></li>
-              <li><a href="mailto:placeholder@example.com">Email</a></li>
+              <li><a href="https://discordapp.com/users/700930455398252634" target="_blank" rel="noopener">Discord</a></li>
+              <li><a href="mailto:anish.wagh2002@example.com">Email</a></li>
             </ul>
           </div>
           <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="animate-on-scroll">
@@ -849,73 +822,74 @@
         updateTimeline(); // run once immediately
       }
 
-      // ── CIRCULAR 3D GALLERY ────────────────────────
-      function initCircularGallery() {
-        var ring = document.getElementById('gallery-ring');
-        if (!ring) return;
+      // ── IMAGE TILES FAN ANIMATION (4-TILE SUPPORT) ──────────────────
+      function initImageTiles() {
+        var wrapper = document.getElementById('image-tiles-wrapper');
+        var scene   = document.getElementById('image-tiles-scene');
+        var t1 = document.getElementById('tile-1');
+        var t2 = document.getElementById('tile-2');
+        var t3 = document.getElementById('tile-3');
+        var t4 = document.getElementById('tile-4');
 
-        var cards = ring.querySelectorAll('.cg-card');
-        var count = cards.length;
-        var radius = 420; // translateZ distance — controls how spread out the circle is
-        var anglePerCard = 360 / count;
+        if (!wrapper || !t1 || !t2 || !t3 || !t4) return;
 
-        // Position each card in 3D circle
-        cards.forEach(function(card, i) {
-          var angle = i * anglePerCard;
-          card.style.transform = 'rotateY(' + angle + 'deg) translateZ(' + radius + 'px)';
-          // Adjust opacity based on angle position
-          card.dataset.angle = angle;
-        });
+        var fanned = false;
+        var isMobile = window.innerWidth <= 640;
 
-        // Rotation state
-        var currentRotation = 0;
-        var autoSpeed = 0.18;       // degrees per frame auto-rotate
-        var lastScrollY = window.scrollY;
-        var scrollVelocity = 0;
-        var scrollDecay = 0.92;     // how quickly scroll momentum fades
+        var fanConfig = {
+          t1: { rotate: -6, x: isMobile ? -140 : -305, y: 15 },
+          t2: { rotate:  4, x: isMobile ? -50  : -105, y: -10 },
+          t3: { rotate: -4, x: isMobile ?  50  :  105, y: -5  },
+          t4: { rotate:  6, x: isMobile ?  140 :  305, y: 10  }
+        };
 
-        // Track scroll velocity
-        window.addEventListener('scroll', function() {
-          var delta = window.scrollY - lastScrollY;
-          scrollVelocity = delta * 0.4; // scale scroll to rotation speed
-          lastScrollY = window.scrollY;
-        }, { passive: true });
-
-        // Animation loop
-        function animate() {
-          // Combine auto-rotate with scroll velocity
-          currentRotation += autoSpeed + scrollVelocity;
-          scrollVelocity *= scrollDecay; // decay scroll momentum
-
-          // Apply rotation to the ring
-          ring.style.transform = 'rotateY(' + currentRotation + 'deg)';
-
-          // Update card opacity based on their facing angle
-          // (cards facing camera = full opacity, facing away = dim)
-          cards.forEach(function(card, i) {
-            var cardAngle = i * anglePerCard;
-            // Relative angle to current rotation (normalized 0-360)
-            var rel = ((cardAngle + currentRotation) % 360 + 360) % 360;
-            // 0 = facing camera, 180 = facing away
-            var facing = rel > 180 ? 360 - rel : rel;
-            var opacity = Math.max(0.25, 1 - (facing / 180) * 0.75);
-            card.style.opacity = opacity;
-          });
-
-          requestAnimationFrame(animate);
+        function applyTransform(el, rotate, x, y) {
+          el.style.transform = 'rotate(' + rotate + 'deg) translate(' + x + 'px, ' + y + 'px)';
         }
 
-        animate();
+        function fanOut() {
+          if (fanned) return;
+          fanned = true;
+          wrapper.classList.add('is-fanned');
+          setTimeout(function() { applyTransform(t1, fanConfig.t1.rotate, fanConfig.t1.x, fanConfig.t1.y); }, 0);
+          setTimeout(function() { applyTransform(t2, fanConfig.t2.rotate, fanConfig.t2.x, fanConfig.t2.y); }, 80);
+          setTimeout(function() { applyTransform(t3, fanConfig.t3.rotate, fanConfig.t3.x, fanConfig.t3.y); }, 160);
+          setTimeout(function() { applyTransform(t4, fanConfig.t4.rotate, fanConfig.t4.x, fanConfig.t4.y); }, 240);
+        }
+
+        function fanIn() {
+          if (!fanned) return;
+          fanned = false;
+          wrapper.classList.remove('is-fanned');
+          [t1, t2, t3, t4].forEach(function(t) { applyTransform(t, 0, 0, 0); });
+        }
+
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) fanOut();
+            else fanIn();
+          });
+        }, { threshold: 0.35 });
+
+        observer.observe(scene);
+
+        window.addEventListener('resize', function() {
+          isMobile = window.innerWidth <= 640;
+          fanConfig.t1.x = isMobile ? -140 : -305;
+          fanConfig.t2.x = isMobile ? -50  : -105;
+          fanConfig.t3.x = isMobile ?  50  :  105;
+          fanConfig.t4.x = isMobile ?  140 :  305;
+        });
       }
 
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function() {
           initTimeline();
-          initCircularGallery();
+          initImageTiles();
         });
       } else {
         initTimeline();
-        initCircularGallery();
+        initImageTiles();
       }
     })();
   </script>

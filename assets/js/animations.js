@@ -222,10 +222,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-// ── CHANGE 4: 3D SCROLL TILT ─────────────────────────────────────
+// ── CHANGE 1: REFINED 3D SCROLL TILT ─────────────────────────────────────
 (function() {
-  // 3D scroll tilt — rotates element from rotateX(18deg) to rotateX(0deg) 
-  // as user scrolls element into view. Mimics Aceternity ContainerScroll.
   function initScrollTilt() {
     var tilts = document.querySelectorAll('.scroll-tilt');
     if (!tilts.length) return;
@@ -236,22 +234,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
       tilts.forEach(function(el) {
         var rect = el.getBoundingClientRect();
-        // progress: 0 when element top is at viewport bottom, 1 when at viewport top
-        var progress = 1 - (rect.top / vh);
+        
+        // "In-between" logic: Flattens when the element is mostly in view 
+        // (reaches 100% progress when bottom is ~15% from the screen bottom).
+        var progress = (vh * 0.85 - rect.top) / rect.height;
         progress = Math.max(0, Math.min(1, progress));
 
-        // rotateX goes from 18deg (element entering) to 0deg (element in view)
-        var rotateX = 18 * (1 - progress);
-        // scale goes from 0.92 to 1.0
-        var scale = 0.92 + (0.08 * progress);
-        // slight translateY upward as it comes in
-        var translateY = 30 * (1 - progress);
+        // Subtler values: 12deg max rotation, 0.95 base scale, 20px translation
+        var rotateX = 12 * (1 - progress);
+        var scale = 0.95 + (0.05 * progress);
+        var translateY = 20 * (1 - progress);
 
         el.style.transform = 
           'rotateX(' + rotateX + 'deg) ' +
           'scale(' + scale + ') ' +
           'translateY(' + translateY + 'px)';
-        el.style.opacity = Math.max(0.3, progress * 1.4);
+        el.style.opacity = Math.max(0.5, progress);
       });
     }
 

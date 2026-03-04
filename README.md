@@ -1,69 +1,70 @@
 # Anish Wagh — Portfolio
 
-[![Live Site](https://img.shields.io/badge/Live_Site-anishwagh.github.io-A4D65E?style=for-the-badge)](https://anishwagh.github.io)
+Personal portfolio built from scratch — every pixel, animation, and line of
+code written by hand. No frameworks, no templates.
 
-Pop Art Mechatronics themed personal portfolio built for GitHub Pages.
+**Live:** [anishwagh.github.io/AnishWaghPortfolio](https://anishwagh.github.io/AnishWaghPortfolio)
 
-## Tech Stack
+---
 
-| Technology | Usage |
+## What's Inside
+
+A single-page portfolio for a Senior Software Engineer specialising in
+connected appliance software, Android HMI development, and embedded systems.
+Built with a "Pop Art Mechatronics" aesthetic — monospace typography, olive and
+cyan on near-black, and deliberate motion design.
+
+---
+
+## Built With
+
+| Layer | Choice |
 |---|---|
-| **HTML5** | Semantic structure, accessibility |
-| **CSS3** | Custom variables, animations, grid/flexbox (no framework) |
-| **Vanilla JS** | Core interactivity, Intersection Observers, Formspree API |
-| **GSAP 3** | ScrollTrigger animations, character split effects |
-| **GitHub Actions** | Automated CI/CD pipeline |
-| **GitHub Pages** | Static hosting |
+| Structure | HTML5 — semantic, accessible |
+| Styling | CSS3 — custom properties, grid, flexbox. Zero frameworks. |
+| Interactivity | Vanilla JavaScript — IntersectionObserver, scroll-driven animations |
+| Motion | GSAP 3 + ScrollTrigger for character-split and entrance effects |
+| Hosting | GitHub Pages |
+| CI/CD | GitHub Actions — auto-deploys on push to `main` |
 
-## Local Development
+---
 
-This is a static site with zero build step.
+## Running Locally
 
-1. Clone the repository
-2. Open `index.html` in your browser.
-
-No `npm install`, no `build` required.
-
-## Folder Structure
-
+Zero build step. Clone and open.
+```bash
+git clone https://github.com/anishwagh/AnishWaghPortfolio.git
+cd AnishWaghPortfolio
+open index.html
 ```
-portfolio-website/
-├── index.html           # Main portfolio page
-├── blog.html            # Deep dives / articles index
+
+---
+
+## Project Structure
+AnishWaghPortfolio/
+├── index.html              ← Everything lives here
+├── blog.html               ← Writing & articles
 ├── assets/
-│   ├── css/             # Modular CSS architecture
-│   ├── js/              # Modular JavaScript (GSAP, Contact, Nav)
-│   └── images/          # WebP optimized assets
-└── .github/workflows/   # GitHub Actions deploy script
-```
+│   ├── css/                ← Modular stylesheets
+│   ├── js/                 ← Scroll animations, nav, contact
+│   └── images/             ← Optimised assets
+└── .github/
+└── workflows/          ← Deploy pipeline
 
-## How to Update Content
+---
 
-- **Hero & About**: Edit `index.html` directly in the respective `<section>` tags.
-- **Projects**: Edit the `.project-card` elements in `index.html`. Add thumbnails to `assets/images/projects/`.
-- **Skills Ring**: Edit the `skillsData` object in `assets/js/skills-ring.js`.
-- **Experience**: Edit the `.experience-entry` blocks in `index.html`.
-- **Contact Form**: Update the `action` attribute on the `<form>` in `index.html` with your Formspree ID.
+## Updating Content
 
-## Formspree Setup
+| Section | Where to edit |
+|---|---|
+| Hero & About | `index.html` — find the `<section id="hero">` and `<section id="about">` tags |
+| Projects | `.project-card` elements in `index.html` |
+| Experience | `.timeline-entry` blocks in `index.html` |
+| Skills | `assets/js/skills-ring.js` — edit the `skillsData` object |
+| Contact | Update the `action` attribute on the `<form>` tag with your endpoint |
 
-1. Sign up for a free account at [Formspree](https://formspree.io/).
-2. Create a new form and copy its endpoint ID.
-3. In `index.html`, replace `YOUR_FORM_ID` in `<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">` with your actual ID.
-
-## GitHub Pages Deployment
-
-The site uses a GitHub Actions workflow to deploy automatically to GitHub Pages.
-
-1. Go to your repository **Settings**.
-2. Navigate to **Pages** on the left sidebar.
-3. Under **Source**, select **GitHub Actions**.
-4. Push any changes to the `main` branch. The action will run and deploy your site within a few minutes.
-
-## Design System
-
-The site adheres to a strict "Pop Art Mechatronics" design system. For rules regarding typography, colors, animations, and components, consult the internal `.gemini/skills/web-developer/SKILLS.md` document.
+---
 
 ## License
 
-MIT License.
+MIT — use freely, credit appreciated.
