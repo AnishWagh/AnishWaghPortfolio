@@ -21,14 +21,25 @@ document.addEventListener('DOMContentLoaded', () => {
   // toggleActions: "onEnter onLeave onEnterBack onLeaveBack"
   const BIDIRECTIONAL = 'play reverse play reverse'; // Fades in and out (Experience only)
   const PLAY_ONCE     = 'play none none none';      // Reveal once, then stay
-  const SCROLL_START  = 'top 85%';
-  const SCROLL_END    = 'top 20%';
+  const SCROLL_START  = 'top 95%';
+  const SCROLL_END    = 'top 5%';
+
+  // ── GUARANTEED FALLBACK ──
+  setTimeout(function() {
+    document.querySelectorAll('[class*="gsap-reveal"], [class*="animate"], [class*="reveal"], [class*="fade"]')
+      .forEach(function(el) {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+        el.style.visibility = 'visible';
+        el.style.transition = 'none';
+      });
+  }, 1200);
 
   // ── HERO: Character stagger on page load ──
   const heroLetters = document.querySelectorAll('#hero .hero-name span');
   if (heroLetters.length) {
     gsap.from(heroLetters, {
-      y: 100,
+      y: 40,
       opacity: 0,
       duration: 0.8,
       stagger: 0.04,
@@ -39,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   gsap.from('#hero .hero-role', {
-    x: -50,
+    x: -30,
     opacity: 0,
     duration: 0.7,
     ease: 'power3.out',
@@ -48,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   gsap.from('#hero .hero-tagline', {
-    y: 25,
+    y: 20,
     opacity: 0,
     duration: 0.6,
     ease: 'power2.out',
@@ -57,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   gsap.from('#hero .hero-cta', {
-    y: 20,
+    y: 15,
     opacity: 0,
     duration: 0.5,
     ease: 'power2.out',
@@ -98,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ── ABOUT SECTION ──
-  const aboutText   = document.querySelector('#about .about-text');
+  const aboutText   = document.querySelector('#about .about-terminal-container');
   const aboutVisual = document.querySelector('#about .about-visual');
 
   if (aboutText) {
@@ -178,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         end: 'top 25%',
         toggleActions: BIDIRECTIONAL
       },
-      x: i % 2 === 0 ? -55 : 55,
+      x: i % 2 === 0 ? -20 : 20,
       opacity: 0,
       duration: 0.6,
       ease: 'power2.out'

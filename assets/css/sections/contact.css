@@ -1,8 +1,9 @@
 /* CONTACT SECTION */
 .contact-grid {
   display: grid;
-  grid-template-columns: 1fr;
   gap: var(--space-xl);
+  grid-template-columns: 1fr;
+  margin-top: 32px; /* reduced from 40px to match title margin */
 }
 
 @media (min-width: 768px) {
@@ -11,11 +12,15 @@
   }
 }
 
+.contact-info .text-h3 {
+  margin-bottom: 40px;
+}
+
 .contact-info ul {
-  margin-top: var(--space-md);
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
+  margin-top: var(--space-md);
 }
 
 .contact-info a {
@@ -38,15 +43,15 @@ form {
 form input,
 form select,
 form textarea {
-  width: 100%;
+  appearance: none;
   background: var(--color-black);
   border: var(--border-width) solid var(--color-teal);
-  color: var(--color-white);
-  padding: var(--space-sm);
   border-radius: 0;
+  color: var(--color-white);
   outline: none;
+  padding: var(--space-sm);
   transition: all var(--transition-fast);
-  appearance: none;
+  width: 100%;
 }
 
 form textarea {
@@ -63,7 +68,7 @@ form textarea:focus {
 }
 
 .form-success {
-  padding: var(--space-md);
   border: 2px solid var(--color-lime);
+  padding: var(--space-md);
   text-align: center;
 }
