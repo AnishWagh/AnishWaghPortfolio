@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <style>
     /* ── RESET & ROOT ───────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; cursor: none; }
 
     :root {
       --bg:          #0a0a08;
@@ -31,6 +31,33 @@
       font-family: 'Space Mono', monospace;
       min-height: 100vh;
       overflow-x: hidden;
+    }
+
+    /* ── CURSOR ─────────────────────────────────── */
+    .cursor {
+      position: fixed;
+      top: -8px;
+      left: -8px;
+      width: 16px;
+      height: 16px;
+      background: var(--olive);
+      border: 2px solid var(--olive);
+      pointer-events: none;
+      z-index: 9999;
+      will-change: transform;
+      transition:
+        width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+        height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+        background 0.3s ease,
+        border-color 0.3s ease;
+    }
+    .cursor.is-hovering {
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      border-color: var(--cyan);
+      top: -20px;
+      left: -20px;
     }
 
     /* ── NAV ─────────────────────────────────────── */
@@ -73,111 +100,11 @@
     .nav-back-arrow { transition: transform 0.2s; }
     .nav-back:hover .nav-back-arrow { transform: translateX(-4px); }
 
-    /* ── PAGE HEADER ─────────────────────────────── */
-    .page-header {
-      padding: 120px 32px 60px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .page-eyebrow {
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 16px;
-    }
-
-    .page-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(60px, 10vw, 120px);
-      color: var(--text);
-      line-height: 0.9;
-      margin-bottom: 24px;
-    }
-
-    .page-title span { color: var(--olive); }
-
-    .page-desc {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.8;
-      max-width: 480px;
-    }
-
-    /* ── SPLINE HERO ─────────────────────────────── */
-    .spline-section {
-      width: 100%;
-      max-width: 1100px;
-      margin: 0 auto 80px;
-      padding: 0 32px;
-    }
-
-    .spline-card {
-      width: 100%;
-      height: 500px;
-      background: #0d0d0b;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .spline-card canvas {
-      width: 100% !important;
-      height: 100% !important;
-    }
-
-    .spline-overlay-text {
-      position: absolute;
-      top: 40px;
-      left: 48px;
-      z-index: 10;
-      pointer-events: none;
-    }
-
-    .spline-overlay-text h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 48px;
-      color: var(--text);
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .spline-overlay-text p {
-      font-size: 12px;
-      color: var(--text-muted);
-      letter-spacing: 0.08em;
-    }
-
-    /* Spotlight sweep effect (CSS only — no React needed) */
-    .spline-card::after {
-      content: '';
-      position: absolute;
-      top: -40%;
-      left: -10%;
-      width: 50%;
-      height: 140%;
-      background: linear-gradient(
-        105deg,
-        transparent 40%,
-        rgba(143, 168, 34, 0.06) 50%,
-        transparent 60%
-      );
-      pointer-events: none;
-      animation: spotlight-sweep 6s ease-in-out infinite;
-    }
-
-    @keyframes spotlight-sweep {
-      0%   { transform: translateX(-100%); }
-      100% { transform: translateX(400%); }
-    }
-
     /* ── ALL PROJECTS GRID ───────────────────────── */
     .projects-section {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 0 32px 120px;
+      padding: 80px 32px 120px;
     }
 
     .projects-section-label {
@@ -192,6 +119,12 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
+    }
+
+    /* When exactly 4 cards: make last card span from col 1 of row 2
+       centered under the gap between cols 1 and 2 above */
+    .proj-card:last-child:nth-child(3n+1) {
+      grid-column: 2;
     }
 
     .proj-card {
@@ -280,20 +213,138 @@
       text-decoration: none;
     }
 
+    /* ── PROJECTS HERO (merged header + robot) ── */
+    .projects-hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Robot fills the full hero area */
+    .hero-spline-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .hero-spline-bg canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    /* Gradient overlay — dark on left so text is readable,
+       transparent on right so robot is fully visible */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(
+        to right,
+        rgba(10, 10, 8, 0.92) 0%,
+        rgba(10, 10, 8, 0.75) 40%,
+        rgba(10, 10, 8, 0.15) 65%,
+        rgba(10, 10, 8, 0.0)  100%
+      );
+      pointer-events: none;
+    }
+
+    /* Text content — sits on top of overlay on the left side */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 520px;
+      padding: 0 0 0 clamp(24px, 5vw, 80px);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .page-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--cyan, #00d4d4);
+      margin: 0;
+    }
+
+    .page-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(64px, 10vw, 120px);
+      color: var(--text, #e8e8e0);
+      line-height: 0.88;
+      margin: 0;
+      letter-spacing: 0.02em;
+    }
+
+    .page-title span {
+      color: var(--olive, #8fa822);
+    }
+
+    .page-desc {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      color: var(--text-muted, #9a9a8a);
+      line-height: 1.85;
+      max-width: 400px;
+      margin: 0;
+    }
+
+    .hero-scroll-hint {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--ghost, #3a3a2e);
+      letter-spacing: 0.1em;
+      margin: 0;
+      animation: hint-pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes hint-pulse {
+      0%, 100% { opacity: 0.4; }
+      50%       { opacity: 1;   }
+    }
+
+    /* Mobile: stack vertically, robot behind full width */
+    @media (max-width: 640px) {
+      .projects-hero { height: 80vh; min-height: 500px; }
+      .hero-overlay {
+        background: linear-gradient(
+          to bottom,
+          rgba(10,10,8,0.0)  0%,
+          rgba(10,10,8,0.85) 55%,
+          rgba(10,10,8,0.97) 100%
+        );
+      }
+      .hero-content {
+        position: absolute;
+        bottom: 48px;
+        left: 0;
+        padding: 0 24px;
+        max-width: 100%;
+      }
+    }
+
     /* ── RESPONSIVE ──────────────────────────────── */
     @media (max-width: 900px) {
       .projects-grid { grid-template-columns: repeat(2, 1fr); }
+      .proj-card:last-child:nth-child(3n+1) { grid-column: auto; }
     }
 
     @media (max-width: 600px) {
       .projects-grid { grid-template-columns: 1fr; }
-      .spline-card { height: 320px; }
-      .spline-overlay-text h2 { font-size: 32px; }
     }
   </style>
 </head>
 
 <body>
+
+  <div class="cursor"></div>
 
   <!-- NAV -->
   <nav class="nav">
@@ -304,40 +355,62 @@
     </a>
   </nav>
 
-  <!-- PAGE HEADER -->
-  <header class="page-header">
-    <p class="page-eyebrow">Full Project Archive</p>
-    <h1 class="page-title">ALL <span>PROJECTS</span></h1>
-    <p class="page-desc">
-      Every build — from embedded firmware and robotic simulations
-      to Android HMI systems and automated test frameworks.
-      Built with precision, tested to 90%+ coverage.
-    </p>
-  </header>
+  <section class="projects-hero" id="projects-hero">
 
-  <!-- SPLINE 3D INTERACTIVE HERO -->
-  <section class="spline-section">
-    <div class="spline-card" id="spline-card">
-      <div class="spline-overlay-text">
-        <h2>INTERACTIVE</h2>
-        <p>Drag to explore · Built in 3D</p>
-      </div>
-      <!-- Spline vanilla JS embed — works on GitHub Pages, no npm needed -->
-      <script type="module">
-        import { Application } from 'https://unpkg.com/@splinetool/runtime@1.9.28/build/runtime.js';
-        const canvas = document.createElement('canvas');
-        canvas.style.width = '100%';
-        canvas.style.height = '100%';
-        document.getElementById('spline-card').appendChild(canvas);
-        const app = new Application(canvas);
-        app.load('https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode').catch(function() {
-          // Graceful fallback if Spline fails to load
-          document.getElementById('spline-card').style.background =
-            'linear-gradient(135deg, #141a09 0%, #0a0a08 100%)';
-        });
-      </script>
+    <!-- Robot lives here as full background -->
+    <div class="hero-spline-bg" id="spline-card">
+      <!-- Spline canvas injected by JS below -->
     </div>
+
+    <!-- Dark gradient overlay so text is readable over robot -->
+    <div class="hero-overlay"></div>
+
+    <!-- Text content floated to left, robot visible on right -->
+    <div class="hero-content">
+      <p class="page-eyebrow">Full Project Archive</p>
+      <h1 class="page-title">ALL <span>PROJECTS</span></h1>
+      <p class="page-desc">
+        Every build — from embedded firmware and robotic simulations
+        to Android HMI systems and automated test frameworks.
+        Built with precision, tested to 90%+ coverage.
+      </p>
+      <p class="hero-scroll-hint">↓ &nbsp; Scroll to explore</p>
+    </div>
+
   </section>
+
+  <!-- Spline module script — inject canvas into hero bg -->
+  <script type="module">
+    import { Application } from
+      'https://unpkg.com/@splinetool/runtime@1.9.28/build/runtime.js';
+
+    const container = document.getElementById('spline-card');
+    const canvas = document.createElement('canvas');
+    canvas.style.width  = '100%';
+    canvas.style.height = '100%';
+    container.appendChild(canvas);
+
+    const app = new Application(canvas);
+
+    app.load('https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode')
+      .then(function () {
+        // Forward global mouse position to Spline canvas
+        // so robot reacts to cursor anywhere on the page
+        document.addEventListener('mousemove', function (e) {
+          const synthetic = new MouseEvent('mousemove', {
+            clientX: e.clientX,
+            clientY: e.clientY,
+            bubbles: true,
+            cancelable: true
+          });
+          canvas.dispatchEvent(synthetic);
+        });
+      })
+      .catch(function () {
+        container.style.background =
+          'linear-gradient(135deg, #141a09 0%, #0a0a08 100%)';
+      });
+  </script>
 
   <!-- ALL PROJECTS GRID -->
   <section class="projects-section">
@@ -352,11 +425,13 @@
           <span class="proj-tag">Gazebo</span>
           <span class="proj-tag">MoveIt</span>
           <span class="proj-tag">Kinematics</span>
+          <span class="proj-tag">C++</span>
         </div>
         <h3 class="proj-name">6 D.O.F Robotic Arm Simulation</h3>
         <p class="proj-desc">
           Simulated a Franka Panda articulated robotic arm for pick-and-place
-          operations using ROS, Gazebo, and MoveIt motion planning framework.
+          operations. Implemented forward and inverse kinematics using ROS,
+          Gazebo, and the MoveIt motion planning framework.
         </p>
         <div class="proj-links">
           <a href="#" class="proj-btn">Live Demo</a>
@@ -369,13 +444,14 @@
         <div class="proj-tags">
           <span class="proj-tag">ROS</span>
           <span class="proj-tag">Pixhawk</span>
-          <span class="proj-tag">Robotics</span>
+          <span class="proj-tag">ArduPilot</span>
           <span class="proj-tag">Mission Planning</span>
         </div>
         <h3 class="proj-name">Autonomous Drone (Level 4)</h3>
         <p class="proj-desc">
-          Engineered an autonomous drone with Level 4 autonomy, implementing
-          autopilot software on a Pixhawk flight controller for mission planning.
+          Engineered an autonomous drone with Level 4 autonomy. Implemented
+          autopilot software on a Pixhawk flight controller, enabling
+          fully autonomous mission planning and execution.
         </p>
         <div class="proj-links">
           <a href="#" class="proj-btn">Live Demo</a>
@@ -388,13 +464,14 @@
         <div class="proj-tags">
           <span class="proj-tag">ROS</span>
           <span class="proj-tag">SLAM</span>
-          <span class="proj-tag">Mobile Robotics</span>
-          <span class="proj-tag">Algorithms</span>
+          <span class="proj-tag">Navigation Stack</span>
+          <span class="proj-tag">Python</span>
         </div>
         <h3 class="proj-name">Autonomous Cleaning Robot</h3>
         <p class="proj-desc">
-          Developed a navigation stack and implemented SLAM techniques within
-          the ROS framework for autonomous indoor cleaning operations.
+          Developed a full navigation stack and implemented SLAM techniques
+          within the ROS framework. The robot maps unknown environments
+          and cleans autonomously without human intervention.
         </p>
         <div class="proj-links">
           <a href="#" class="proj-btn">Live Demo</a>
@@ -402,57 +479,23 @@
         </div>
       </div>
 
-      <!-- Project 4 — ADD YOUR ADDITIONAL PROJECTS BELOW -->
-      <!-- Copy a .proj-card block and fill in your details -->
-      <!-- Example placeholder: -->
+      <!-- Project 4 -->
       <div class="proj-card">
         <div class="proj-tags">
-          <span class="proj-tag">Android</span>
-          <span class="proj-tag">Kotlin</span>
-          <span class="proj-tag">HMI</span>
+          <span class="proj-tag">Mechatronics</span>
+          <span class="proj-tag">Kinematics</span>
+          <span class="proj-tag">3D Printing</span>
+          <span class="proj-tag">Embedded C</span>
         </div>
-        <h3 class="proj-name">Connected Appliance HMI</h3>
+        <h3 class="proj-name">Underactuated Walking Robot</h3>
         <p class="proj-desc">
-          Designed and built Android-based Human Machine Interface for
-          KitchenAid Wall Ovens, reducing recipe initiation steps by 20%
-          via Menu First Flow implementation.
+          Designed and developed a biologically-inspired underactuated walking
+          robot from the ground up — mechanical design, kinematic analysis,
+          3D-printed chassis, and embedded motor control firmware.
         </p>
         <div class="proj-links">
           <a href="#" class="proj-btn">Details</a>
-        </div>
-      </div>
-
-      <div class="proj-card">
-        <div class="proj-tags">
-          <span class="proj-tag">C++</span>
-          <span class="proj-tag">Zephyr OS</span>
-          <span class="proj-tag">Google Test</span>
-        </div>
-        <h3 class="proj-name">Cooking BLL — Unit Test Framework</h3>
-        <p class="proj-desc">
-          Achieved 90%+ function coverage for the Cooking Business Logic Layer
-          through 76+ unit tests using Google Test and FFF mocking framework.
-        </p>
-        <div class="proj-links">
-          <a href="#" class="proj-btn">Details</a>
-        </div>
-      </div>
-
-      <div class="proj-card">
-        <div class="proj-tags">
-          <span class="proj-tag">C#</span>
-          <span class="proj-tag">.NET</span>
-          <span class="proj-tag">Raspberry Pi</span>
-          <span class="proj-tag">Automation</span>
-        </div>
-        <h3 class="proj-name">Remote HMI Test Bench</h3>
-        <p class="proj-desc">
-          Designed a remote-accessible Raspberry Pi bench setup with real-time
-          camera feed, eliminating on-site dependency for appliance integration
-          testing.
-        </p>
-        <div class="proj-links">
-          <a href="#" class="proj-btn">Details</a>
+          <a href="#" class="proj-btn">GitHub</a>
         </div>
       </div>
 
@@ -465,5 +508,6 @@
     <a href="index.html">← Back to Portfolio</a>
   </footer>
 
+  <script src="assets/js/cursor.js"></script>
 </body>
 </html>
