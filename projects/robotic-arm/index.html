@@ -105,15 +105,6 @@
       position: relative; /* Ensure relative for absolute canvas */
     }
 
-    #spline-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-    }
-
     .hero-overlay {
       position: absolute;
       inset: 0;
@@ -397,7 +388,11 @@
 
   <!-- HERO SECTION -->
   <section class="hero">
-    <canvas id="spline-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;"></canvas>
+    <iframe 
+      src='https://my.spline.design/robotarm-FQDq7fXaX5ij8xSDOfD5jQYj/' 
+      frameborder='0' 
+      style='position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;border:none;pointer-events:none;'
+    ></iframe>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <a href="../../projects.html" class="back-link">← PROJECTS</a>
@@ -514,14 +509,6 @@
 
   <!-- SCRIPTS -->
   <script src="../../assets/js/cursor.js"></script>
-  
-  <!-- Spline Runtime -->
-  <script type="module">
-    import { Application } from 'https://unpkg.com/@splinetool/runtime@1.9.28/build/runtime.js';
-    const canvas = document.getElementById('spline-canvas');
-    const app = new Application(canvas);
-    app.load('https://prod.spline.design/FQDq7fXaX5ij8xSDOfD5jQYj/scene.splinecode');
-  </script>
 
   <!-- Stats Counter Animation -->
   <script>
