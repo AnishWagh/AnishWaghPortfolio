@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robotic Arm Simulation — Anish Wagh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  
+  <!-- CSS: single entry point -->
+  <link rel="stylesheet" href="../../assets/css/main.css">
+
+  <style>
+    /* ── RESET & ROOT ───────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; cursor: none; }
+
+    :root {
+      --bg:          #0a0a08;
+      --bg-alt:      #141a09;
+      --olive:       #8fa822;
+      --olive-dim:   #6b7a1f;
+      --cyan:        #00d4d4;
+      --text:        #e8e8e0;
+      --text-muted:  #9a9a8a;
+      --ghost:       #3a3a2e;
+      --border:      #252518;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Mono', monospace;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── CURSOR ─────────────────────────────────── */
+    .cursor {
+      position: fixed;
+      top: -8px;
+      left: -8px;
+      width: 16px;
+      height: 16px;
+      background: var(--olive);
+      border: 2px solid var(--olive);
+      pointer-events: none;
+      z-index: 9999;
+      will-change: transform;
+      transition:
+        width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+        height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+        background 0.3s ease,
+        border-color 0.3s ease;
+    }
+    .cursor.is-hovering {
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      border-color: var(--cyan);
+      top: -20px;
+      left: -20px;
+    }
+
+    /* ── GLOBAL SECTION STYLING ─────────────────── */
+    section {
+      padding: 80px 5vw;
+      min-height: 0;
+      position: relative;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--olive);
+      margin-bottom: 1.5rem;
+      display: block;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 2rem;
+    }
+
+    p {
+      line-height: 1.8;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── HERO SECTION ────────────────────────────── */
+    .hero {
+      height: 100vh;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    #spline-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(10,10,8,0.92) 0%, rgba(10,10,8,0.5) 55%, transparent 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding-left: 5vw;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--cyan);
+      text-decoration: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .back-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--cyan);
+      transition: width 0.3s ease;
+    }
+
+    .back-link:hover::after {
+      width: 100%;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 8vw, 7rem);
+      color: var(--text);
+      line-height: 0.9;
+      margin-bottom: 1.5rem;
+    }
+
+    .tag-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    .tag {
+      padding: 4px 12px;
+      border: 1px solid var(--olive);
+      color: var(--olive);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .hero-one-liner {
+      font-size: 1.1rem;
+      max-width: 500px;
+      color: var(--text);
+    }
+
+    /* ── OVERVIEW SECTION ───────────────────────── */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .specs-card {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .spec-item {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+    }
+
+    .spec-item:last-child {
+      border-bottom: none;
+    }
+
+    .spec-label {
+      color: var(--olive);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+
+    .spec-value {
+      color: var(--text);
+      font-size: 0.85rem;
+      text-align: right;
+    }
+
+    /* ── BREAKDOWN SECTION ──────────────────────── */
+    .breakdown-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .breakdown-card {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      position: relative;
+      transition: border-color 0.3s ease;
+    }
+
+    .breakdown-card:hover {
+      border-color: var(--cyan);
+    }
+
+    .breakdown-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 0;
+      background: var(--cyan);
+      transition: height 0.3s ease;
+    }
+
+    .breakdown-card:hover::before {
+      height: 100%;
+    }
+
+    .card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--olive);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .card-bullets {
+      list-style: none;
+    }
+
+    .card-bullets li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .card-bullets li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--cyan);
+    }
+
+    /* ── RESULTS SECTION ────────────────────────── */
+    .results {
+      background: #0d0d0b;
+      text-align: center;
+    }
+
+    .stats-row {
+      display: flex;
+      justify-content: center;
+      gap: 6rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .stat-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      color: var(--olive);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ghost);
+    }
+
+    .results-text {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* ── FOOTER NAV ─────────────────────────────── */
+    .footer-nav {
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 60px 5vw;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 24px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.3s ease;
+    }
+
+    .btn-prev {
+      color: var(--olive);
+      border-color: var(--olive);
+    }
+
+    .btn-prev:hover {
+      background: var(--olive);
+      color: var(--bg);
+    }
+
+    .btn-next {
+      color: var(--cyan);
+      border-color: var(--cyan);
+    }
+
+    .btn-next:hover {
+      background: var(--cyan);
+      color: var(--bg);
+    }
+
+    .copyright {
+      font-size: 0.7rem;
+      color: var(--ghost);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── RESPONSIVE ────────────────────────────── */
+    @media (max-width: 900px) {
+      .overview-grid, .breakdown-grid {
+        grid-template-columns: 1fr;
+      }
+      .stats-row {
+        flex-direction: column;
+        gap: 3rem;
+      }
+      .footer-nav {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor"></div>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <canvas id="spline-canvas"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <a href="../../projects.html" class="back-link">← PROJECTS</a>
+      <h1 class="hero-title">6 D.O.F ROBOTIC<br>ARM SIMULATION</h1>
+      <div class="tag-row">
+        <span class="tag">ROS</span>
+        <span class="tag">Gazebo</span>
+        <span class="tag">MoveIt</span>
+      </div>
+      <p class="hero-one-liner">6-DOF serial manipulator simulated in ROS/Gazebo with full MoveIt motion planning pipeline</p>
+    </div>
+  </section>
+
+  <!-- OVERVIEW SECTION -->
+  <section id="overview">
+    <div class="overview-grid">
+      <div class="overview-text">
+        <span class="section-label">/ OVERVIEW</span>
+        <h2 class="section-title">INTEGRATED<br>SIMULATION</h2>
+        <p>This project implements a complete simulation environment for a 6 Degree-of-Freedom serial robotic arm using ROS (Robot Operating System) and Gazebo. The arm is modelled using URDF with accurate joint limits, inertial parameters, and collision geometry derived from a real hardware design.</p>
+        <p>MoveIt serves as the motion planning framework — enabling inverse kinematics solving, collision-aware trajectory generation, and execution via the ROS control interface. The simulation validates path planning algorithms before any hardware deployment, dramatically reducing iteration time.</p>
+      </div>
+      <div class="specs-card">
+        <div class="spec-item">
+          <span class="spec-label">DOF</span>
+          <span class="spec-value">6</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Simulation</span>
+          <span class="spec-value">Gazebo 11</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Planning</span>
+          <span class="spec-value">MoveIt 1.x</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">ROS Version</span>
+          <span class="spec-value">ROS Noetic</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">IK Solver</span>
+          <span class="spec-value">KDL / TRAC-IK</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Status</span>
+          <span class="spec-value">Simulation Complete</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BREAKDOWN SECTION -->
+  <section id="breakdown">
+    <span class="section-label">/ TECHNICAL BREAKDOWN</span>
+    <h2 class="section-title">SYSTEM ARCHITECTURE</h2>
+    <div class="breakdown-grid">
+      <div class="breakdown-card">
+        <h3 class="card-title">URDF Modelling</h3>
+        <ul class="card-bullets">
+          <li>Parametric joint definitions</li>
+          <li>Accurate inertial tensors</li>
+          <li>Collision mesh optimization</li>
+          <li>Visual + collision separation</li>
+        </ul>
+      </div>
+      <div class="breakdown-card">
+        <h3 class="card-title">MoveIt Pipeline</h3>
+        <ul class="card-bullets">
+          <li>SRDF configuration</li>
+          <li>Planning scene setup</li>
+          <li>Constraint-aware IK</li>
+          <li>Trajectory smoothing</li>
+        </ul>
+      </div>
+      <div class="breakdown-card">
+        <h3 class="card-title">ROS Control</h3>
+        <ul class="card-bullets">
+          <li>Joint trajectory controller</li>
+          <li>PID tuning in Gazebo</li>
+          <li>Real-time state publishing</li>
+          <li>Actionlib interface</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS SECTION -->
+  <section class="results">
+    <div class="stats-row">
+      <div class="stat-item">
+        <span class="stat-value" data-target="6" data-suffix=" DOF">0 DOF</span>
+        <span class="stat-label">Degrees of Freedom</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" data-target="200" data-suffix="ms">0ms</span>
+        <span class="stat-label">Avg. Planning Time</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" data-target="100" data-suffix="%">0%</span>
+        <span class="stat-label">Collision-Free Trajectories</span>
+      </div>
+    </div>
+    <div class="results-text">
+      <p>"The simulation environment successfully validated the motion planning pipeline across 50+ test trajectories, with zero collisions detected in constrained environments. Ready for hardware-in-the-loop testing."</p>
+    </div>
+  </section>
+
+  <!-- FOOTER NAV -->
+  <footer class="footer-nav">
+    <a href="../../projects.html" class="nav-btn btn-prev">← BACK TO PROJECTS</a>
+    <span class="copyright">ANISH WAGH — MECHATRONICS ENGINEER</span>
+    <a href="#" class="nav-btn btn-next">NEXT PROJECT →</a>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="../../assets/js/cursor.js"></script>
+  
+  <!-- Spline Runtime -->
+  <script type="module">
+    import { Application } from 'https://unpkg.com/@splinetool/runtime@1.9.28/build/runtime.js';
+    const app = new Application(document.getElementById('spline-canvas'));
+    app.load('https://prod.spline.design/919785ac-dd6c-46a5-bd43-8873073cba4d/scene.splinecode');
+  </script>
+
+  <!-- Stats Counter Animation -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const animateCounter = (el) => {
+        const target = parseInt(el.dataset.target);
+        if (isNaN(target)) return;
+        
+        const duration = 1500;
+        const frameRate = 1000 / 60;
+        const totalFrames = Math.round(duration / frameRate);
+        let currentFrame = 0;
+        
+        const suffix = el.dataset.suffix || '';
+        
+        const timer = setInterval(() => {
+          currentFrame++;
+          const progress = currentFrame / totalFrames;
+          const easedProgress = 1 - (1 - progress) * (1 - progress);
+          const current = Math.round(easedProgress * target);
+          
+          if (currentFrame >= totalFrames) {
+            el.textContent = target + suffix;
+            clearInterval(timer);
+          } else {
+            el.textContent = current + suffix;
+          }
+        }, frameRate);
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.querySelectorAll('.stat-value').forEach(el => {
+              if (!el.classList.contains('counted')) {
+                el.classList.add('counted');
+                animateCounter(el);
+              }
+            });
+          }
+        });
+      }, { threshold: 0.2 });
+
+      observer.observe(document.querySelector('.results'));
+    });
+  </script>
+</body>
+</html>
