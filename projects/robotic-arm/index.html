@@ -311,6 +311,10 @@
       line-height: 1;
     }
 
+    .stat-value.counted {
+      /* prevent snapping during count */
+    }
+
     .stat-label {
       font-family: 'Space Mono', monospace;
       font-size: 0.75rem;
@@ -395,13 +399,28 @@
 
   <!-- HERO SECTION -->
   <section class="hero" id="hero">
-    <iframe 
-      src='https://my.spline.design/robotarm-FQDq7fXaX5ij8xSDOfD5jQYj/' 
-      frameborder='0' 
-      style='position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;border:none;'
-    ></iframe>
-    <!-- FIX 3 — Hide Spline Watermark -->
-    <div style="position:absolute;bottom:0;right:0;width:220px;height:50px;background:#0a0a08;z-index:5;"></div>
+    <div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;">
+      <iframe 
+        src='https://my.spline.design/robotarm-FQDq7fXaX5ij8xSDOfD5jQYj/' 
+        frameborder='0' 
+        style='position:absolute;top:0;left:0;width:100%;height:100%;border:none;'
+      ></iframe>
+      <div id="spline-cover" style="
+        position:absolute;
+        top:0;left:0;
+        width:100%;height:100%;
+        z-index:2;
+        background:transparent;
+        cursor:none;
+      "></div>
+      <div style="
+        position:absolute;
+        bottom:0;right:0;
+        width:220px;height:50px;
+        background:#0a0a08;
+        z-index:6;
+      "></div>
+    </div>
     <div class="hero-overlay"></div>
     <div class="hero-content" style="pointer-events: none;">
       <a href="../../projects.html" class="back-link" style="pointer-events: auto;">← PROJECTS</a>
@@ -519,16 +538,18 @@
   <!-- SCRIPTS -->
   <script src="../../assets/js/cursor.js"></script>
 
-  <!-- Stats Counter Animation & FIX 2 — Prevent Scroll Hijacking -->
+  <!-- Stats Counter Animation & FIXES -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Prevent Spline iframe from capturing scroll
-      const hero = document.getElementById('hero');
-      if (hero) {
-        hero.addEventListener('wheel', function(e) {
+      // FIXES — Prevent Scroll Hijacking & Handle Cover div
+      const splineCover = document.getElementById('spline-cover');
+      if (splineCover) {
+        splineCover.addEventListener('wheel', function(e) {
           e.preventDefault();
           window.scrollBy({ top: e.deltaY * 1.5, behavior: 'smooth' });
         }, { passive: false });
+
+        splineCover.style.cursor = 'none';
       }
 
       const animateCounter = (el) => {
