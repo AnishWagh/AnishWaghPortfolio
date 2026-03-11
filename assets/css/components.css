@@ -181,17 +181,58 @@ section:nth-of-type(even) {
   box-shadow: 0 0 12px var(--color-lime);
 }
 .nav-link--blog {
-  color: var(--color-lime);
+  color: #8fa822;
+  border: 1px solid #8fa822;
+  border-radius: 3px;
+  padding: 3px 10px;
+  letter-spacing: 2px;
+  transition: all 0.2s ease;
+}
+
+.nav-link--blog::before {
+  content: "● ";
+  color: #8fa822;
+  font-size: 0.5rem;
+  vertical-align: middle;
+  animation: blink 1.2s infinite;
+}
+
+.nav-link--blog:hover {
+  background: #8fa822;
+  color: #0a0a08;
+  text-shadow: none;
 }
 
 .nav-link--blog::after {
-  background: var(--color-lime);
+  display: none; /* Remove the underline animation for the pill */
 }
 
 /* ── Nav CTA ──────────────────────────────────────────── */
 .nav-cta {
-  font-size: 0.7rem;
-  padding: 0.4rem 1rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  padding: 8px 20px;
+  border: 1px solid var(--color-olive);
+  color: var(--color-olive);
+  background: transparent;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  box-shadow: none;
+  display: inline-flex;
+  width: auto;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-cta:hover {
+  background: var(--color-olive);
+  color: var(--color-black);
+  transform: none;
+  box-shadow: none;
+  outline: none;
 }
 
 /* ── Mobile Toggle (CSS-only checkbox hack) ───────────── */
