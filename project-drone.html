@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autonomous Drone (Level 4) | Anish Wagh</title>
+  
+  <!-- Base Styles -->
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="assets/css/typography.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #0a0a08;
+      --olive: #8fa822;
+      --cyan: #00d4d4;
+      --text: #e8e8e0;
+      --text-muted: #9a9a8a;
+      --border: #252518;
+    }
+    
+    body { 
+      background-color: var(--bg); 
+      color: var(--text); 
+      font-family: 'Space Mono', monospace; 
+      line-height: 1.6;
+    }
+    
+    section { 
+      padding: 6rem 0; 
+      border-bottom: 1px solid var(--border); 
+    }
+    
+    .nav-minimal {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem var(--container-pad);
+      position: absolute;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      box-sizing: border-box;
+    }
+    
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--olive);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+    
+    .nav-back {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-back:hover {
+      color: var(--cyan);
+    }
+    
+    .hero-section {
+      height: 65vh;
+      min-height: 500px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 var(--container-pad);
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('assets/images/projects/drone.jpg') center/cover no-repeat;
+      overflow: hidden;
+    }
+    
+    .hero-title { 
+      font-family: 'Bebas Neue', sans-serif; 
+      font-size: clamp(3.5rem, 10vw, 6.5rem); 
+      color: #fff; 
+      margin-bottom: 1.5rem; 
+      line-height: 0.85; 
+      max-width: 900px;
+    }
+    
+    .tag-pills { 
+      display: flex; 
+      flex-wrap: wrap;
+      gap: 0.75rem; 
+      margin-bottom: 3rem; 
+    }
+    
+    .tag-pill { 
+      border: 1px solid var(--cyan); 
+      color: var(--cyan); 
+      padding: 4px 14px; 
+      font-size: 0.75rem; 
+      text-transform: uppercase; 
+      letter-spacing: 0.1em;
+    }
+    
+    .hero-btns { 
+      display: flex; 
+      flex-wrap: wrap;
+      gap: 1.5rem; 
+    }
+    
+    .btn-hero { 
+      padding: 14px 28px; 
+      text-decoration: none; 
+      font-family: 'Space Mono', monospace; 
+      font-size: 0.85rem; 
+      text-transform: uppercase; 
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      letter-spacing: 0.1em;
+    }
+    
+    .btn-olive { 
+      border: 1px solid var(--olive); 
+      color: var(--olive); 
+    }
+    
+    .btn-olive:hover { 
+      background: var(--olive); 
+      color: var(--bg); 
+    }
+    
+    .btn-secondary-back { 
+      border: 1px solid var(--text-muted); 
+      color: var(--text-muted); 
+    }
+    
+    .btn-secondary-back:hover { 
+      border-color: #fff; 
+      color: #fff; 
+    }
+    
+    .grid-layout { 
+      display: grid; 
+      grid-template-columns: 280px 1fr; 
+      gap: 5rem; 
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--container-pad);
+    }
+    
+    .section-label { 
+      font-family: 'Bebas Neue', sans-serif; 
+      font-size: 1.8rem; 
+      color: var(--olive); 
+      letter-spacing: 0.1em; 
+      line-height: 1;
+    }
+    
+    .content-block p { 
+      margin-bottom: 2rem; 
+      color: var(--text-muted); 
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    
+    .tech-item { 
+      margin-bottom: 3rem; 
+    }
+    
+    .tech-name { 
+      color: var(--cyan); 
+      font-weight: 700; 
+      margin-bottom: 0.75rem; 
+      display: block; 
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+    }
+    
+    .resource-card { 
+      border: 1px solid var(--olive); 
+      padding: 2.5rem; 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      margin-bottom: 4rem; 
+      background: rgba(143, 168, 34, 0.03);
+    }
+    
+    .resource-header { 
+      display: flex; 
+      align-items: center; 
+      gap: 2rem; 
+    }
+    
+    .icon-folder { 
+      font-size: 3rem; 
+    }
+    
+    .image-gallery { 
+      display: grid; 
+      grid-template-columns: 1fr 1fr; 
+      gap: 2.5rem; 
+    }
+    
+    .image-gallery img { 
+      width: 100%; 
+      height: 450px;
+      object-fit: cover;
+      border: 1px solid var(--border); 
+      filter: grayscale(0.4); 
+      transition: all 0.5s ease; 
+    }
+    
+    .image-gallery img:hover { 
+      filter: grayscale(0); 
+      border-color: var(--cyan);
+    }
+
+    @media (max-width: 900px) {
+      .grid-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-title { font-size: 4rem; }
+      .image-gallery { grid-template-columns: 1fr; }
+    }
+    
+    .reveal { 
+      opacity: 0; 
+      transform: translateY(30px); 
+      transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1); 
+    }
+    
+    .reveal.active { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+
+    footer {
+      padding: 5rem var(--container-pad);
+      text-align: center;
+      background: #000;
+    }
+  </style>
+</head>
+<body>
+  
+  <nav class="nav-minimal">
+    <a href="index.html" class="nav-logo">AW</a>
+    <a href="index.html#projects" class="nav-back">← PROJECTS</a>
+  </nav>
+
+  <main>
+    <section class="hero-section">
+      <h1 class="hero-title">AUTONOMOUS<br>DRONE (LEVEL 4)</h1>
+      <div class="tag-pills">
+        <span class="tag-pill">ROS</span>
+        <span class="tag-pill">PIXHAWK</span>
+        <span class="tag-pill">ROBOTICS</span>
+        <span class="tag-pill">MISSION PLANNING</span>
+      </div>
+      <div class="hero-btns">
+        <a href="https://drive.google.com/drive/folders/1TU1MUxs9fD0HM1WyBOQlgMvs37i7uxwo?usp=sharing" target="_blank" rel="noopener" class="btn-hero btn-olive">RESOURCES ↗</a>
+        <a href="index.html#projects" class="btn-hero btn-secondary-back">← BACK TO PROJECTS</a>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="grid-layout">
+        <div class="section-label">OVERVIEW</div>
+        <div class="content-block">
+          <p>This project focused on developing an aerial platform capable of Level 4 autonomy, meaning the system can handle all aspects of flight within a defined mission area without human intervention. The core architecture integrates mission planning software with hardware-level flight control.</p>
+          <p>[Project overview goes here — replace with real content. The drone was designed for autonomous surveying and delivery tasks. Using an onboard companion computer (Jetson Nano/Raspberry Pi), the system processes real-time sensor data to navigate through waypoints while maintaining high-altitude stability and safety protocols.]</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="grid-layout">
+        <div class="section-label">TECH STACK &<br>APPROACH</div>
+        <div class="content-block">
+          <div class="tech-item">
+            <span class="tech-name">Flight Controller & Firmware</span>
+            <p>Utilized the Pixhawk flight controller with ArduPilot/PX4 firmware, configured for MAVLink communication. This provided the low-level stabilization and telemetry required for complex maneuvers.</p>
+          </div>
+          <div class="tech-item">
+            <span class="tech-name">Mission Control & Path Planning</span>
+            <p>Developed autonomous mission planning scripts using ROS and DroneKit, enabling dynamic waypoint generation and obstacle avoidance logic based on ultrasonic and Lidar sensors.</p>
+          </div>
+          <div class="tech-item">
+            <span class="tech-name">Hardware Configuration</span>
+            <p>[Hardware used placeholder — replace with real content. Examples: Carbon fiber quadcopter frame, BLDC motors with ESCs, GPS/Compass modules, and custom power distribution boards.]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="section-container" style="max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-pad);">
+        <div class="section-label" style="margin-bottom: 3rem;">DOCUMENTATION & RESOURCES</div>
+        
+        <div class="resource-card">
+          <div class="resource-header">
+            <span class="icon-folder">📁</span>
+            <div>
+              <div style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text);">Project Report, PPT & Supporting Files</div>
+              <div style="color: var(--text-muted); font-size: 0.85rem;">Complete flight logs, circuit diagrams, and mission parameters.</div>
+            </div>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1TU1MUxs9fD0HM1WyBOQlgMvs37i7uxwo?usp=sharing" target="_blank" rel="noopener" class="btn-hero btn-olive">OPEN DRIVE FOLDER ↗</a>
+        </div>
+        
+        <div class="image-gallery">
+          <img src="assets/images/projects/drone-1.jpg" alt="Drone Detail 1" onerror="this.src='assets/images/projects/placeholder.jpg'">
+          <img src="assets/images/projects/drone-2.jpg" alt="Drone Detail 2" onerror="this.src='assets/images/projects/placeholder.jpg'">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p style="color: #4a4a3a; font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em;">© 2026 ANISH WAGH. ALL RIGHTS RESERVED.</p>
+  </footer>
+
+  <script>
+    const observerOptions = { threshold: 0.1 };
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  </script>
+</body>
+</html>

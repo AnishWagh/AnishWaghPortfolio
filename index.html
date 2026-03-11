@@ -366,7 +366,6 @@
 
   <header class="site-nav" id="site-nav">
     <nav class="nav-container" aria-label="Main navigation">
-
       <!-- Logo -->
       <a href="#hero" class="nav-logo" aria-label="Anish Wagh — home">
         <span class="nav-logo-text">AW</span>
@@ -383,12 +382,8 @@
         <li><a href="blog.html"   class="nav-link nav-link--blog">Blog</a></li>
       </ul>
 
-      <!-- Hire Me CTA -->
-      <a href="#contact" class="nav-cta btn-primary">Hire Me</a>
-
       <!-- Mobile menu toggle (CSS-only) -->
-      <input type="checkbox" id="nav-toggle" class="nav-toggle-input"
-             aria-label="Toggle mobile menu">
+      <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-label="Toggle mobile menu">
       <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true">
         <span></span><span></span><span></span>
       </label>
@@ -404,58 +399,37 @@
           <li><a href="blog.html"   class="nav-link">Blog</a></li>
         </ul>
       </div>
-
     </nav>
   </header>
 
   <main>
     <section id="hero">
       <div class="hero-container">
-
         <!-- Left: Text content -->
         <div class="hero-content">
-
           <div class="hero-badge">
             <span class="badge-dot"></span>
             <span class="badge-text">Available for Work · 2026</span>
           </div>
 
-          <h1 class="hero-name">
-            <!-- Each letter in its own span for GSAP stagger -->
-            <span class="name-line">
-              <span>A</span><span>N</span><span>I</span><span>S</span><span>H</span>
-            </span>
-            <span class="name-line">
-              <span>W</span><span>A</span><span>G</span><span>H</span>
-            </span>
-          </h1>
-
+          <h1 class="hero-name">ANISH WAGH</h1>
           <p class="hero-role">Senior Software Engineer</p>
           <p class="hero-tagline">
-            Mechatronics Precision. High-Performance Architecture. Software That Doesn't Break.
+            Systems thinker. Software builder. Zero compromises.<br>
+            Engineering the full stack. Silicon to software.
           </p>
 
           <div class="hero-cta">
             <a href="#projects" class="btn-primary">See My Work</a>
-            <a href="#contact" class="btn-ghost">Hire Me</a>
           </div>
-
         </div>
 
         <!-- Right: Hero photo -->
         <div class="hero-photo-wrapper">
-          <img
-            src="assets/images/hero-photo.png"
-            alt="Anish Wagh — Senior Software Engineer"
-            class="hero-photo"
-            width="480"
-            height="600"
-            loading="eager"
-            fetchpriority="high"
-            onerror="this.parentElement.classList.add('photo-error')"
-          />
-          <!-- Pop Art Mechatronics offset frame -->   
-          <div class="hero-photo-frame" aria-hidden="true"></div>
+          <div class="hero-photo-container">
+            <img src="assets/images/hero-photo.png" alt="Anish Wagh" class="hero-photo" onerror="this.src='assets/images/projects/placeholder.jpg'">
+            <div class="photo-glare"></div>
+          </div>
         </div>
       </div>
 
@@ -517,57 +491,83 @@
         <span class="section-label text-label">What I've Built</span>
         <h2 class="section-title text-h2">PROJECTS</h2>
 
-        <div class="projects-grid">
-          <!-- Change 2: Clean uniform gallery grid (no placeholder) -->
-          <article class="project-card card animate-on-scroll">
-            <div class="project-content">
-              <div class="project-tags">
+        <div class="projects-grid tall-cards">
+          <!-- Card 1: Walking Robot -->
+          <article class="project-card portrait-card animate-on-scroll" data-tilt>
+            <div class="card-image-wrapper">
+              <img src="assets/images/projects/underactuated-walking-robot.png" 
+                   alt="Underactuated Walking Robot" 
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="image-fallback" style="display:none;">[ NO IMAGE ]</div>
+              <div class="image-overlay"></div>
+            </div>
+            <div class="card-content">
+              <div class="tech-tags">
+                <span class="tag">MECHATRONICS</span>
+                <span class="tag">KINEMATICS</span>
+                <span class="tag">3D PRINTING</span>
+                <span class="tag">EMBEDDED C</span>
+              </div>
+              <h3 class="card-title">Underactuated Walking Robot</h3>
+              <p class="card-description">Designed and built an underactuated walking robot using passive dynamic principles, custom 3D printed parts, and embedded C for gait control.</p>
+              <div class="card-actions">
+                <a href="https://drive.google.com/drive/folders/1GZqXJfBOmhBPY07gLT5k3iAwEM_2hBuf?usp=sharing" target="_blank" rel="noopener" class="btn-resources" data-cursor>RESOURCES ↗</a>
+                <a href="project-walking-robot.html" class="btn-explore" data-cursor>EXPLORE PROJECT →</a>
+              </div>
+            </div>
+            <div class="card-glare"></div>
+          </article>
+
+          <!-- Card 2: Robotic Arm -->
+          <article class="project-card portrait-card animate-on-scroll" data-tilt>
+            <div class="card-image-wrapper">
+              <img src="assets/images/projects/robotic-arm-simulation.png" 
+                   alt="6 D.O.F Robotic Arm Simulation" 
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="image-fallback" style="display:none;">[ NO IMAGE ]</div>
+              <div class="image-overlay"></div>
+            </div>
+            <div class="card-content">
+              <div class="tech-tags">
                 <span class="tag">ROS</span>
                 <span class="tag">GAZEBO</span>
-                <span class="tag">MoveIt</span>
-                <span class="tag">Kinematics</span>
+                <span class="tag">MOVEIT</span>
+                <span class="tag">KINEMATICS</span>
               </div>
-              <h3 class="project-title">6 D.O.F Robotic Arm Simulation</h3>
-              <p class="project-desc">Simulated a Franka's Panda articulated robotic arm for pick-and-place operations using ROS, GAZEBO, and MoveIt motion planning framework.</p>
-              <div class="project-links">
-                <a href="#" class="btn-ghost btn-sm" data-cursor>Live Demo</a>
-                <a href="#" class="btn-ghost btn-sm" data-cursor>GitHub</a>
+              <h3 class="card-title">6 D.O.F Robotic Arm Simulation</h3>
+              <p class="card-description">Simulated a Franka's Panda articulated robotic arm for pick-and-place operations using ROS, GAZEBO, and MoveIt motion planning framework.</p>
+              <div class="card-actions">
+                <a href="https://drive.google.com/drive/folders/1muGfu-YIGMGF6OhXZot2rcTDMWnEJQaf?usp=sharing" target="_blank" rel="noopener" class="btn-resources" data-cursor>RESOURCES ↗</a>
+                <a href="project-robotic-arm.html" class="btn-explore" data-cursor>EXPLORE PROJECT →</a>
               </div>
             </div>
+            <div class="card-glare"></div>
           </article>
 
-          <article class="project-card card animate-on-scroll">
-            <div class="project-content">
-              <div class="project-tags">
+          <!-- Card 3: Autonomous Drone -->
+          <article class="project-card portrait-card animate-on-scroll" data-tilt>
+            <div class="card-image-wrapper">
+              <img src="assets/images/projects/drone.jpeg" 
+                   alt="Autonomous Drone (Level 4)" 
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="image-fallback" style="display:none;">[ NO IMAGE ]</div>
+              <div class="image-overlay"></div>
+            </div>
+            <div class="card-content">
+              <div class="tech-tags">
                 <span class="tag">ROS</span>
-                <span class="tag">Pixhawk</span>
-                <span class="tag">Robotics</span>
-                <span class="tag">Mission Planning</span>
+                <span class="tag">PIXHAWK</span>
+                <span class="tag">ROBOTICS</span>
+                <span class="tag">MISSION PLANNING</span>
               </div>
-              <h3 class="project-title">Autonomous Drone (Level 4)</h3>
-              <p class="project-desc">Engineered an autonomous drone with level 4 autonomy, implementing autopilot software on a Pixhawk flight controller for mission planning.</p>
-              <div class="project-links">
-                <a href="#" class="btn-ghost btn-sm" data-cursor>Live Demo</a>
-                <a href="#" class="btn-ghost btn-sm" data-cursor>GitHub</a>
+              <h3 class="card-title">Autonomous Drone (Level 4)</h3>
+              <p class="card-description">Engineered an autonomous drone with level 4 autonomy, implementing autopilot software on a Pixhawk flight controller for mission planning.</p>
+              <div class="card-actions">
+                <a href="https://drive.google.com/drive/folders/1TU1MUxs9fD0HM1WyBOQlgMvs37i7uxwo?usp=sharing" target="_blank" rel="noopener" class="btn-resources" data-cursor>RESOURCES ↗</a>
+                <a href="project-drone.html" class="btn-explore" data-cursor>EXPLORE PROJECT →</a>
               </div>
             </div>
-          </article>
-
-          <article class="project-card card animate-on-scroll">
-            <div class="project-content">
-              <div class="project-tags">
-                <span class="tag">ROS</span>
-                <span class="tag">SLAM</span>
-                <span class="tag">Mobile Robotics</span>
-                <span class="tag">Algorithms</span>
-              </div>
-              <h3 class="project-title">Autonomous Cleaning Robot</h3>
-              <p class="project-desc">Developed a navigation stack and implemented SLAM techniques within the ROS framework for autonomous indoor cleaning operations.</p>
-              <div class="project-links">
-                <a href="#" class="btn-ghost btn-sm" data-cursor>Live Demo</a>
-                <a href="#" class="btn-ghost btn-sm" data-cursor>GitHub</a>
-              </div>
-            </div>
+            <div class="card-glare"></div>
           </article>
         </div>
 
@@ -822,35 +822,66 @@
         <h2 class="section-title text-h2">Get In Touch</h2>
 
         <div class="contact-grid">
-          <div class="contact-info animate-on-scroll">
-            <p class="text-h3">Let's build something exceptional.</p>
-            <ul class="text-body">
-              <li><a href="https://github.com/AnishWagh" target="_blank" rel="noopener">GitHub</a></li>
-              <li><a href="https://linkedin.com/in/anishwagh" target="_blank" rel="noopener">LinkedIn</a></li>
-              <li><a href="https://discordapp.com/users/700930455398252634" target="_blank" rel="noopener">Discord</a></li>
-              <li><a href="mailto:anish.wagh2002@example.com">Email</a></li>
-            </ul>
+          <!-- LEFT COLUMN: Availability, Tagline, Stats, Socials -->
+          <div class="contact-left animate-on-scroll">
+            <div class="availability-badge">
+              <span class="pulse-dot"></span>
+              <span class="badge-text">AVAILABLE FOR WORK</span>
+            </div>
+
+            <h3 class="contact-tagline scramble-text" data-text="Let's build something\nexceptional.">
+              Let's build something<br>exceptional.
+            </h3>
+
+            <div class="contact-stats">
+              <div class="stat-row">
+                <span class="stat-label">RESPONSE TIME</span>
+                <span class="stat-value">< 24 HOURS</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-label">TIMEZONE</span>
+                <span class="stat-value">IST · UTC +5:30</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-label">STATUS</span>
+                <span class="stat-value"><span class="pulse-dot"></span> OPEN TO OPPORTUNITIES</span>
+              </div>
+            </div>
+
+            <div class="social-grid">
+              <a href="https://github.com/AnishWagh" target="_blank" rel="noopener" class="social-box">GH_ GITHUB</a>
+              <a href="https://linkedin.com/in/anishwagh" target="_blank" rel="noopener" class="social-box">LI_ LINKEDIN</a>
+              <a href="https://discordapp.com/users/700930455398252634" target="_blank" rel="noopener" class="social-box">DC_ DISCORD</a>
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=anish.wagh2002@gmail.com&su=Inquiry%20from%20Portfolio&body=Hi%20Anish,%0D%0A%0D%0AI%20saw%20your%20portfolio%20and%20would%20like%20to%20connect%20regarding..." target="_blank" rel="noopener" class="social-box">EM_ EMAIL</a>
+            </div>
           </div>
-          <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="animate-on-scroll">
-            <input type="text" name="name" placeholder="Name" required class="text-body">
-            <input type="email" name="email" placeholder="Email" required class="text-body">
-            <select name="budget" class="text-body" required>
-              <option value="" disabled selected>Budget Range</option>
-              <option value="<$5k">&lt;$5k</option>
-              <option value="$5k-$10k">$5k - $10k</option>
-              <option value=">$10k">&gt;$10k</option>
-            </select>
-            <textarea name="message" placeholder="Message" required class="text-body"></textarea>
-            <button type="submit" class="btn-primary">Send It</button>
-          </form>
+
+          <!-- RIGHT COLUMN: Form with Flip Wrapper -->
+          <div class="contact-right-wrapper animate-on-scroll">
+            <div class="flip-card" id="contact-flip-card">
+              <div class="flip-front">
+                <!-- Formspree Endpoint for anish.wagh2002@gmail.com -->
+                <form action="https://formspree.io/f/xjgawerb" method="POST" id="contact-form">
+                  <input type="text" name="name" placeholder="Name" required>
+                  <input type="email" name="_replyto" placeholder="Email" required>
+                  <textarea name="message" placeholder="Message" required></textarea>
+                  <button type="submit" class="btn-primary">SEND IT</button>
+                </form>
+              </div>
+              <div class="flip-back" id="success-state">
+                <!-- Content injected via JS on success -->
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <p class="text-label">© 2025 Anish Wagh. Built in the open.</p>
-    <a href="https://github.com/anishwagh" class="text-label">Source Code</a>
+  <footer style="width: 100%; display: flex; justify-content: center; align-items: center; padding: 40px 0; border-top: 1px solid var(--border, #252518);">
+    <p style="font-family: 'Space Mono', monospace; color: #9a9a8a; font-size: 0.75rem; letter-spacing: 2px; text-align: center; margin: 0;">
+      [ SYSTEM ONLINE ] — ANISH WAGH · 2025
+    </p>
   </footer>
 
   <script src="assets/js/cursor.js"></script>

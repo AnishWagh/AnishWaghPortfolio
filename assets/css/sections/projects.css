@@ -1,86 +1,198 @@
-/* PROJECTS SECTION */
-.projects-grid {
-  display: grid;
-  gap: 24px; /* Change 2: gap 24px */
-  grid-template-columns: repeat(3, 1fr); /* Change 2: repeat(3, 1fr) */
-  margin-top: var(--space-lg);
+/* PROJECTS SECTION — PORTRAIT CARDS REDESIGN 2026 */
+
+:root {
+  --bg: #0a0a08;
+  --olive: #8fa822;
+  --cyan: #00d4d4;
+  --text: #e8e8e0;
+  --text-muted: #9a9a8a;
+  --border: #252518;
 }
 
-.project-card {
-  background: var(--color-surface);
-  border: 2px solid var(--color-teal);
+.projects-grid.tall-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3.5rem;
+  align-items: stretch; /* Ensure all cards stretch to equal height */
+}
+
+@media (max-width: 1100px) {
+  .projects-grid.tall-cards { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+}
+@media (max-width: 680px) {
+  .projects-grid.tall-cards { grid-template-columns: 1fr; }
+}
+
+.portrait-card {
+  position: relative;
+  height: 100%; /* Fill grid cell height */
+  background: var(--bg);
+  border: 2px solid var(--border); /* Thickened border */
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  opacity: 1; /* always visible */
-  transition: border-color var(--transition-smooth),
-              box-shadow var(--transition-smooth),
-              transform var(--transition-smooth);
+  transition: transform 0.4s ease, border-color 0.3s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
-.project-card:hover {
-  border-color: var(--color-cyan);
-  box-shadow: var(--shadow-cyan-md);
-  transform: translate(-4px, -4px);
+.portrait-card:hover {
+  border-color: var(--olive);
 }
 
-.project-thumbnail-placeholder {
-  display: none; /* Change 2: Remove placeholder */
+.card-image-wrapper {
+  position: relative;
+  height: 240px; /* Fixed height for consistency */
+  width: 100%;
+  overflow: hidden;
+  background: #000;
 }
 
-.project-thumbnail {
-  display: none; /* Change 2: Remove placeholder */
+.card-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Fill area without stretching */
+  transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.project-content {
-  display: grid; /* Change 2: grid for uniform height */
+.portrait-card:hover .card-image-wrapper img {
+  transform: scale(1.05); /* Zoom scale(1.05) on hover */
+}
+
+.image-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%; /* Taller overlay for smoother blend */
+  background: linear-gradient(to top, var(--bg) 0%, transparent 100%); /* Smooth blend into bg */
+  pointer-events: none;
+}
+
+/* Removed problematic ::after line that caused horizontal dividing line */
+
+.image-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Space Mono', monospace;
+  color: var(--cyan);
+  background: #111;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.card-content {
+  padding: 24px; /* Consistent padding inside cards */
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
-  grid-template-rows: auto auto 1fr auto; /* Change 2: pushes buttons to bottom */
-  padding: var(--space-md);
+  z-index: 2;
+  position: relative;
 }
 
-.project-tags {
+.tech-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: var(--space-sm);
+  margin-top: 16px; /* Gap between image area and tag pills: 16px */
+  margin-bottom: 1rem;
 }
 
-.project-title {
-  color: var(--color-lime);
-  font-family: var(--font-display);
-  font-size: 1.8rem;
-  letter-spacing: 0.04em;
-  line-height: 1.1;
-  margin-bottom: var(--space-xs);
+.tech-tags .tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-.project-desc {
-  color: var(--color-text-secondary);
+.card-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.2rem;
+  color: var(--olive);
+  margin-bottom: 10px; /* Gap between title and description: 10px */
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.card-description {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 20px; /* Gap between description and buttons: 20px */
   flex-grow: 1;
-  font-family: var(--font-body);
-  font-size: 0.9375rem;
-  line-height: 1.7;
-  margin-bottom: var(--space-md);
 }
 
-.project-links {
+.card-actions {
   display: flex;
-  gap: var(--space-sm);
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: auto; /* Buttons sit flush at bottom */
 }
 
-.btn-sm {
-  font-size: 0.7rem;
-  padding: 0.35rem 0.8rem;
+.card-actions a {
+  padding: 12px;
+  text-align: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  width: 100%; /* Consistent width */
+  box-sizing: border-box;
 }
 
-@media (max-width: 1024px) {
-  .projects-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.btn-resources {
+  border: 1px solid var(--olive);
+  color: var(--olive);
 }
 
-@media (max-width: 768px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
+.btn-resources:hover {
+  background: var(--olive);
+  color: var(--bg);
+}
+
+.btn-explore {
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  font-weight: 700;
+}
+
+.btn-explore:hover {
+  background: var(--cyan);
+  color: var(--bg);
+}
+
+.card-glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.15), transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 5;
+  transition: opacity 0.3s ease;
+}
+
+.portrait-card:hover .card-glare {
+  opacity: 1;
+}
+
+/* EXPLORE MORE (Bottom link) */
+.explore-more-wrapper {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
